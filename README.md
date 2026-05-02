@@ -30,8 +30,10 @@ See more at our organization [README](https://github.com/p-to-q).
 
 ## www.
 
-ptoq.io  
-p-to-q.com
+[ptoq.io](https://www.ptoq.io/)
+[p-to-q.com](https://www.p-to-q.com)
+
+
 
 ### Engineering
 
