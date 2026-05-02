@@ -1,6 +1,6 @@
 # site
 
-<h2 align="center">
+<h2>
   Hi. This is the public site for <a href="https://github.com/p-to-q">p-to-q</a>.
 </h2>
 
