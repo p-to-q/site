@@ -9,6 +9,8 @@ const full = `# [p → q] — Full LLM Map
 
 ## Pages
 - ${siteUrl}/
+- ${siteUrl}/work
+- ${siteUrl}/writing
 
 ## Feeds and discovery
 - ${siteUrl}/sitemap.xml

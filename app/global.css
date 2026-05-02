@@ -342,6 +342,8 @@ table {
 .arr {
   display: inline-block;
   vertical-align: middle;
+  /* CamingoMono draws → ~0.12em above lowercase optical center; nudge it down. */
+  transform: translateY(0.12em);
 }
 
 .label-text {

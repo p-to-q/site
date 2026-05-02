@@ -11,6 +11,8 @@ const nextConfig = {
   transpilePackages: ['geist'],
   async redirects() {
     return [
+      { source: '/works', destination: '/work', permanent: true },
+      { source: '/writings', destination: '/writing', permanent: true },
       { source: '/community-activist', destination: '/', permanent: true },
       { source: '/cv', destination: '/', permanent: true },
       { source: '/resume', destination: '/', permanent: true },

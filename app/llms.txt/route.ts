@@ -8,6 +8,10 @@ const llms = `# [p → q]
 ## Preferred entry
 - ${siteUrl}/
 
+## Pages
+- ${siteUrl}/work
+- ${siteUrl}/writing
+
 ## Machine-readable endpoints
 - Sitemap: ${siteUrl}/sitemap.xml
 - RSS: ${siteUrl}/rss

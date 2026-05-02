@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
-import Image from 'next/image'
 import { SiteDivider } from '@/components/layout/site-divider'
+import { SiteHeader } from '@/components/layout/site-header'
 
 /** `absolute` bypasses root `title.template` so the tab is exactly `[p → q]`. */
 export const metadata: Metadata = {
@@ -9,13 +9,25 @@ export const metadata: Metadata = {
     'experimental craft and research over scale. we study the layer between language and consequence.',
 }
 
-const BULLETS = [
-  "Today's AI is still bad in many ordinary ways; tomorrow's technology will be better.",
-  "The bitter lesson we learn from it is that real-world data is continuous, high-dimensional, and noisy.",
-  "Consistently, the most successful implementations use simple, composable patterns rather than giant complex frameworks.",
-  "Like software in the 80s, there is a tremendous opportunity to build things that are not upgrades, but something completely different.",
-  "Above all, we think there is a responsibility to recognize and create new things, and to take part in the strange, interesting, and sacred practice.",
-  "Our first proof is Wittgenstein, a modality harness for text-first LLMs.",
+const BELIEF = [
+  "Today's AI is still bad in ordinary ways; tomorrow's will be better.",
+  "The bitter lesson: real-world data is continuous, high-dimensional, noisy.",
+  "The most successful implementations use simple, composable patterns, not giant frameworks.",
+  "Like software in the 80s, the opportunity isn't to build upgrades, but something completely different.",
+  "There is a responsibility to recognize and create new things — to take part in the strange, sacred practice.",
+]
+
+const TASTE = [
+  "Flat is better than nested.",
+  "Printability is a great feature.",
+  "Human-readable interfaces for machine-produced things.",
+  "Overly abstract means narcissism.",
+  "Programming is a way of thinking, not a rote skill.",
+  "Long variable names don't hurt anyone.",
+  "Perception varies; people understand what they can see.",
+  "Humans' needs and taste are important.",
+  "AI should be the connective tissue that strengthens humans.",
+  "To sincerely elevate the species.",
 ]
 
 const ARROW_ROWS: [string, string][] = [
@@ -27,26 +39,13 @@ const ARROW_ROWS: [string, string][] = [
 export default function Page() {
   return (
     <>
+      <SiteHeader />
+
       <section className="overflow-x-clip">
+
+        {/* Hero copy */}
         <div className="flex flex-col gap-6">
-          <div
-            className="flex flex-col gap-[calc(1.45rem*3)]"
-            style={{ paddingTop: 'max(0.75rem, calc(100dvh / 3 - var(--home-logo-viewport-offset, 3.5rem)))' }}
-          >
-            <div style={{ width: 'min(80vw, 18rem)' }}>
-              <Image
-                src="/resources/pictures/home/p-to-q_logo.png"
-                alt="[p → q]"
-                width={726}
-                height={235}
-                className="block h-auto w-full max-w-full"
-                sizes="(max-width: 640px) 80vw, 18rem"
-                priority
-                unoptimized
-              />
-            </div>
-            <p className="body-text">if p, then q</p>
-          </div>
+          <p className="body-text">if p, then q</p>
 
           <div className="flex flex-col gap-1">
             <p className="body-text">Experimental craft and research over scale.</p>
@@ -57,7 +56,12 @@ export default function Page() {
           <div className="flex flex-col">
             {ARROW_ROWS.map(([sym, desc]) => (
               <div key={sym} className="flex gap-6 items-center">
-                <span className="body-text arr" style={{ minWidth: '1.25rem' }}>{sym}</span>
+                <span
+                  className={sym === '→' ? 'body-text arr' : 'body-text'}
+                  style={{ minWidth: '1.25rem' }}
+                >
+                  {sym}
+                </span>
                 <span className="body-text" style={{ color: 'var(--site-link)' }}>{desc}</span>
               </div>
             ))}
@@ -66,10 +70,11 @@ export default function Page() {
 
         <SiteDivider />
 
+        {/* Belief */}
         <div className="flex flex-col gap-3">
-          <p className="body-text">Right now that means:</p>
+          <p className="body-text">Belief</p>
           <div className="flex flex-col gap-2">
-            {BULLETS.map((b, i) => (
+            {BELIEF.map((b, i) => (
               <p key={i} className="body-text">{b}</p>
             ))}
           </div>
@@ -77,20 +82,43 @@ export default function Page() {
 
         <SiteDivider />
 
+        {/* Scope */}
         <div className="flex flex-col gap-3">
           <p className="body-text">Scope</p>
           <p className="body-text">Seminal work in reasoning, behavioral training, agents, and alignment matters.</p>
+          <p className="body-text">Singular focus, no management overhead, no product cycles. A research question before a category.</p>
         </div>
 
         <SiteDivider />
 
+        {/* Taste */}
         <div className="flex flex-col gap-3">
-          <p className="body-text">Our singular focus means no distraction by management overhead or product cycles, this is a research question before it is a category.</p>
-          <p className="body-text">We won&apos;t conceal any risk from you at [p <span className="arr">→</span> q], but nor are we in the game of trying to make you panic. (We have better ways of holding your attention).</p>
+          <p className="body-text">Taste</p>
+          <div className="flex flex-col gap-1">
+            {TASTE.map((t, i) => (
+              <p key={i} className="body-text">{t}</p>
+            ))}
+          </div>
+        </div>
+
+        <SiteDivider />
+
+        {/* Work */}
+        <div className="flex flex-col gap-3">
+          <p className="body-text">Work</p>
+          <p className="body-text">Our first proof is Wittgenstein, a modality harness for text-first LLMs.</p>
+        </div>
+
+        <SiteDivider />
+
+        {/* Closing */}
+        <div className="flex flex-col gap-3">
+          <p className="body-text">At [p <span className="arr">→</span> q] we won&apos;t hide risk from you, but we won&apos;t manufacture panic either. (We have better ways of holding your attention.)</p>
           <p className="body-text">
             or talk to us if you are interested in the arrow <span className="arr">→</span>
           </p>
         </div>
+
       </section>
 
       <SiteDivider />

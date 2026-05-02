@@ -2,13 +2,13 @@ import { siteUrl } from '@/lib/site'
 import { SITE_LAST_UPDATED_ISO } from '@/lib/build-info'
 import type { MetadataRoute } from 'next'
 
-const ROUTES = ['/'] as const
+const ROUTES = ['/', '/work', '/writing'] as const
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return ROUTES.map((route) => ({
     url: `${siteUrl}${route}`,
     lastModified: SITE_LAST_UPDATED_ISO,
-    changeFrequency: 'weekly',
-    priority: 1,
+    changeFrequency: route === '/' ? 'weekly' : 'monthly',
+    priority: route === '/' ? 1 : 0.8,
   }))
 }
