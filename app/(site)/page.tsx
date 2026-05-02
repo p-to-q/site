@@ -54,7 +54,13 @@ export default function Page() {
         {/* Work */}
         <div className="flex flex-col gap-3">
           <p className="body-text">Work</p>
-          <p className="body-text">Our first proof is Wittgenstein, a modality harness for text-first LLMs.</p>
+          <p className="body-text">
+            Our first proof is{' '}
+            <a href="https://github.com/p-to-q/wittgenstein" target="_blank" rel="noopener noreferrer">
+              Wittgenstein
+            </a>
+            , a modality harness for text-first LLMs.
+          </p>
         </div>
 
         <SiteDivider />
