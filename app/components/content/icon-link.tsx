@@ -19,13 +19,13 @@ export function IconLink({ href, icon, children, external = false, className = '
   return (
     <Link
       href={href}
-      className={`inline-flex min-w-0 max-w-full flex-wrap items-start text-[var(--site-link)] transition-all hover:text-[var(--site-link-hover)] ${className}`}
+      className={`inline-flex min-w-0 max-w-full flex-wrap items-baseline text-[var(--site-link)] transition-all hover:text-[var(--site-link-hover)] ${className}`}
       aria-label={ariaLabel}
       {...linkProps}
     >
       <span className="link-text min-w-0 break-words leading-[1.45]">{children}</span>
       {external ? (
-        <span className="inline-flex shrink-0" aria-hidden="true">
+        <span className="icon-arrow-wrap shrink-0 leading-none" aria-hidden="true">
           {icon}
         </span>
       ) : null}

@@ -6,7 +6,7 @@ export async function GET() {
     <channel>
         <title>Yiming Sun</title>
         <link>${siteUrl}</link>
-        <description>experimental craft and research over scale.</description>
+        <description>We study the layer between language and consequence.</description>
     </channel>
   </rss>`
 

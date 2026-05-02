@@ -339,10 +339,28 @@ table {
   font-style: normal;
 }
 
+/* Inline → in prose: no translateY — it interacts badly with line boxes at line end. */
 .arr {
   display: inline-block;
-  vertical-align: middle;
-  /* CamingoMono draws → ~0.12em above lowercase optical center; nudge it down. */
+  vertical-align: baseline;
+}
+
+/* Only the p / → / q prefix column keeps a slight optical nudge vs the description column */
+.sym-col.arr {
+  transform: translateY(0.12em);
+}
+
+/* Prefix column: p, →, q left-aligned; width fits monospace arrow + neighbors */
+.sym-col {
+  flex-shrink: 0;
+  width: 3ch;
+  min-width: 3ch;
+  text-align: left;
+}
+
+/* External link SVG: same nudge as before, without touching prose .arr */
+.icon-arrow-wrap {
+  display: inline-flex;
   transform: translateY(0.12em);
 }
 

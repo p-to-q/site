@@ -3,20 +3,21 @@ import { SiteHeader } from '@/components/layout/site-header'
 
 export const metadata: Metadata = {
   title: 'Work',
-  description: 'Wittgenstein — a modality harness for text-first LLMs.',
+  description: 'Wittgenstein - a modality harness for text-first LLMs.',
 }
 
 export default function WorkPage() {
   return (
     <>
       <SiteHeader />
-      <section className="flex flex-col gap-1">
+      <section>
         <p className="body-text">
-          <a href="https://www.wittgenstein.wtf/" target="_blank" rel="noreferrer">
+          <a href="https://github.com/p-to-q/wittgenstein" target="_blank" rel="noopener noreferrer">
             Wittgenstein
           </a>
+          {' - '}
+          a modality harness for text-first LLMs.
         </p>
-        <p className="body-text">a modality harness for text-first LLMs.</p>
       </section>
     </>
   )

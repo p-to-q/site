@@ -3,7 +3,7 @@ import { SITE_LAST_UPDATED_ISO } from '@/lib/build-info'
 
 const llms = `# [p → q]
 
-> Experimental craft and research over scale.
+> We study the layer between language and consequence.
 
 ## Preferred entry
 - ${siteUrl}/
