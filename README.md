@@ -40,7 +40,7 @@ Craft over scale.
 https://www.ptoq.io  
 https://p-to-q.com
 
-#### Engineering
+### Engineering
 
 Install dependencies:
 
@@ -54,7 +54,7 @@ Run locally:
 pnpm dev
 ```
 
-#### Clone
+### Clone
 
 Clone it to the cloud with Vercel:
 
