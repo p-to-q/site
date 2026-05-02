@@ -1,0 +1,182 @@
+@font-face {
+    font-family: 'CamingoMono';
+    src: url('CamingoMono-BlackItalic.eot');
+    src: local('CamingoMono Black Italic'), local('CamingoMono-BlackItalic'),
+        url('CamingoMono-BlackItalic.eot?#iefix') format('embedded-opentype'),
+        url('CamingoMono-BlackItalic.woff2') format('woff2'),
+        url('CamingoMono-BlackItalic.woff') format('woff'),
+        url('CamingoMono-BlackItalic.ttf') format('truetype');
+    font-weight: 900;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'CamingoMono';
+    src: url('CamingoMono-ExtraBold.eot');
+    src: local('CamingoMono ExtraBold'), local('CamingoMono-ExtraBold'),
+        url('CamingoMono-ExtraBold.eot?#iefix') format('embedded-opentype'),
+        url('CamingoMono-ExtraBold.woff2') format('woff2'),
+        url('CamingoMono-ExtraBold.woff') format('woff'),
+        url('CamingoMono-ExtraBold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'CamingoMono';
+    src: url('CamingoMono-ExtraBoldItalic.eot');
+    src: local('CamingoMono ExtraBold Itali'), local('CamingoMono-ExtraBoldItalic'),
+        url('CamingoMono-ExtraBoldItalic.eot?#iefix') format('embedded-opentype'),
+        url('CamingoMono-ExtraBoldItalic.woff2') format('woff2'),
+        url('CamingoMono-ExtraBoldItalic.woff') format('woff'),
+        url('CamingoMono-ExtraBoldItalic.ttf') format('truetype');
+    font-weight: bold;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'CamingoMono';
+    src: url('CamingoMono-Bold.eot');
+    src: local('CamingoMono Bold'), local('CamingoMono-Bold'),
+        url('CamingoMono-Bold.eot?#iefix') format('embedded-opentype'),
+        url('CamingoMono-Bold.woff2') format('woff2'),
+        url('CamingoMono-Bold.woff') format('woff'),
+        url('CamingoMono-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'CamingoMono';
+    src: url('CamingoMono-Black.eot');
+    src: local('CamingoMono Black'), local('CamingoMono-Black'),
+        url('CamingoMono-Black.eot?#iefix') format('embedded-opentype'),
+        url('CamingoMono-Black.woff2') format('woff2'),
+        url('CamingoMono-Black.woff') format('woff'),
+        url('CamingoMono-Black.ttf') format('truetype');
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'CamingoMono';
+    src: url('CamingoMono-BoldItalic.eot');
+    src: local('CamingoMono Bold Italic'), local('CamingoMono-BoldItalic'),
+        url('CamingoMono-BoldItalic.eot?#iefix') format('embedded-opentype'),
+        url('CamingoMono-BoldItalic.woff2') format('woff2'),
+        url('CamingoMono-BoldItalic.woff') format('woff'),
+        url('CamingoMono-BoldItalic.ttf') format('truetype');
+    font-weight: bold;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'CamingoMono';
+    src: url('CamingoMono-ExtraLight.eot');
+    src: local('CamingoMono ExtraLight'), local('CamingoMono-ExtraLight'),
+        url('CamingoMono-ExtraLight.eot?#iefix') format('embedded-opentype'),
+        url('CamingoMono-ExtraLight.woff2') format('woff2'),
+        url('CamingoMono-ExtraLight.woff') format('woff'),
+        url('CamingoMono-ExtraLight.ttf') format('truetype');
+    font-weight: 200;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'CamingoMono';
+    src: url('CamingoMono-SemiBold.eot');
+    src: local('CamingoMono SemiBold'), local('CamingoMono-SemiBold'),
+        url('CamingoMono-SemiBold.eot?#iefix') format('embedded-opentype'),
+        url('CamingoMono-SemiBold.woff2') format('woff2'),
+        url('CamingoMono-SemiBold.woff') format('woff'),
+        url('CamingoMono-SemiBold.ttf') format('truetype');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'CamingoMono';
+    src: url('CamingoMono-Light.eot');
+    src: local('CamingoMono Light'), local('CamingoMono-Light'),
+        url('CamingoMono-Light.eot?#iefix') format('embedded-opentype'),
+        url('CamingoMono-Light.woff2') format('woff2'),
+        url('CamingoMono-Light.woff') format('woff'),
+        url('CamingoMono-Light.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'CamingoMono';
+    src: url('CamingoMono-ExtraLightItalic.eot');
+    src: local('CamingoMono ExtraLight Ital'), local('CamingoMono-ExtraLightItalic'),
+        url('CamingoMono-ExtraLightItalic.eot?#iefix') format('embedded-opentype'),
+        url('CamingoMono-ExtraLightItalic.woff2') format('woff2'),
+        url('CamingoMono-ExtraLightItalic.woff') format('woff'),
+        url('CamingoMono-ExtraLightItalic.ttf') format('truetype');
+    font-weight: 200;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'CamingoMono';
+    src: url('CamingoMono-RegularItalic.eot');
+    src: local('CamingoMono Regular Italic'), local('CamingoMono-RegularItalic'),
+        url('CamingoMono-RegularItalic.eot?#iefix') format('embedded-opentype'),
+        url('CamingoMono-RegularItalic.woff2') format('woff2'),
+        url('CamingoMono-RegularItalic.woff') format('woff'),
+        url('CamingoMono-RegularItalic.ttf') format('truetype');
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'CamingoMono';
+    src: url('CamingoMono-Regular.eot');
+    src: local('CamingoMono Regular'), local('CamingoMono-Regular'),
+        url('CamingoMono-Regular.eot?#iefix') format('embedded-opentype'),
+        url('CamingoMono-Regular.woff2') format('woff2'),
+        url('CamingoMono-Regular.woff') format('woff'),
+        url('CamingoMono-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'CamingoMono';
+    src: url('CamingoMono-SemiBoldItalic.eot');
+    src: local('CamingoMono SemiBold Italic'), local('CamingoMono-SemiBoldItalic'),
+        url('CamingoMono-SemiBoldItalic.eot?#iefix') format('embedded-opentype'),
+        url('CamingoMono-SemiBoldItalic.woff2') format('woff2'),
+        url('CamingoMono-SemiBoldItalic.woff') format('woff'),
+        url('CamingoMono-SemiBoldItalic.ttf') format('truetype');
+    font-weight: 600;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'CamingoMono';
+    src: url('CamingoMono-LightItalic.eot');
+    src: local('CamingoMono Light Italic'), local('CamingoMono-LightItalic'),
+        url('CamingoMono-LightItalic.eot?#iefix') format('embedded-opentype'),
+        url('CamingoMono-LightItalic.woff2') format('woff2'),
+        url('CamingoMono-LightItalic.woff') format('woff'),
+        url('CamingoMono-LightItalic.ttf') format('truetype');
+    font-weight: 300;
+    font-style: italic;
+    font-display: swap;
+}
+

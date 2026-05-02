@@ -1,0 +1,490 @@
+@import 'tailwindcss';
+
+@font-face {
+  font-family: 'CamingoMono';
+  src: url('/fonts/CamingoMono Font/CamingoMono-Light.woff2') format('woff2'),
+       url('/fonts/CamingoMono Font/CamingoMono-Light.woff') format('woff'),
+       url('/fonts/CamingoMono Font/CamingoMono-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'CamingoMono';
+  src: url('/fonts/CamingoMono Font/CamingoMono-SemiBold.woff2') format('woff2'),
+       url('/fonts/CamingoMono Font/CamingoMono-SemiBold.woff') format('woff'),
+       url('/fonts/CamingoMono Font/CamingoMono-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'CamingoMono';
+  src: url('/fonts/CamingoMono Font/CamingoMono-SemiBoldItalic.woff2') format('woff2'),
+       url('/fonts/CamingoMono Font/CamingoMono-SemiBoldItalic.woff') format('woff'),
+       url('/fonts/CamingoMono Font/CamingoMono-SemiBoldItalic.ttf') format('truetype');
+  font-weight: 600;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'CamingoMono';
+  src: url('/fonts/CamingoMono Font/CamingoMono-Bold.woff2') format('woff2'),
+       url('/fonts/CamingoMono Font/CamingoMono-Bold.woff') format('woff'),
+       url('/fonts/CamingoMono Font/CamingoMono-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'CamingoMono';
+  src: url('/fonts/CamingoMono Font/CamingoMono-Regular.woff2') format('woff2'),
+       url('/fonts/CamingoMono Font/CamingoMono-Regular.woff') format('woff'),
+       url('/fonts/CamingoMono Font/CamingoMono-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'CamingoMono';
+  src: url('/fonts/CamingoMono Font/CamingoMono-ExtraLightItalic.woff2') format('woff2'),
+       url('/fonts/CamingoMono Font/CamingoMono-ExtraLightItalic.woff') format('woff'),
+       url('/fonts/CamingoMono Font/CamingoMono-ExtraLightItalic.ttf') format('truetype');
+  font-weight: 200;
+  font-style: italic;
+  font-display: swap;
+}
+
+::selection {
+  background-color: var(--site-selection-bg);
+  color: var(--site-selection-text);
+}
+
+:root {
+  --site-bg: #222222;
+  --site-text: #ffffff;
+  --site-link: #aaaaaa;
+  --site-link-hover: #cccccc;
+  --site-link-underline: rgba(170, 170, 170, 0.55);
+  --site-link-underline-hover: rgba(204, 204, 204, 0.65);
+  --site-selection-bg: #444444;
+  --site-selection-text: #ffffff;
+  --site-code-bg: #2a2a2a;
+  --site-code-border: #3a3a3a;
+  --site-card-bg: #2a2a2a;
+  --site-hr: #555555;
+  --sh-class: #2d5e9d;
+  --sh-identifier: #354150;
+  --sh-sign: #8996a3;
+  --sh-string: #007f7a;
+  --sh-keyword: #e02518;
+  --sh-comment: #a19595;
+  --sh-jsxliterals: #6266d1;
+  --sh-property: #e25a1c;
+  --sh-entity: #e25a1c;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --sh-class: #4c97f8;
+    --sh-identifier: white;
+    --sh-keyword: #f47067;
+    --sh-string: #0fa295;
+  }
+}
+
+html {
+  min-width: 360px;
+  font-size: 16px;
+  color-scheme: dark;
+  color: var(--site-text);
+  background-color: var(--site-bg);
+}
+
+html[data-theme='light'] {
+  color-scheme: light;
+  --site-bg: #dddddd;
+  --site-text: #333333;
+  --site-link: #555555;
+  --site-link-hover: #333333;
+  --site-link-underline: rgba(85, 85, 85, 0.55);
+  --site-link-underline-hover: rgba(51, 51, 51, 0.65);
+  --site-selection-bg: #bbbbbb;
+  --site-selection-text: #333333;
+  --site-code-bg: #e6e6e6;
+  --site-code-border: #cccccc;
+  --site-card-bg: #e6e6e6;
+  --site-hr: #333333;
+}
+
+body {
+  font-size: 16px;
+  line-height: 1.45;
+  font-weight: 400;
+  background-color: var(--site-bg);
+  color: var(--site-text);
+}
+
+a {
+  color: var(--site-link);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-thickness: 0.1rem;
+  text-decoration-color: var(--site-link-underline);
+  transition: color 150ms ease, text-decoration-color 150ms ease;
+}
+
+a:hover {
+  color: var(--site-link-hover);
+  text-decoration-color: var(--site-link-underline-hover);
+  font-weight: 600 !important;
+}
+
+.prose .anchor {
+  @apply absolute invisible no-underline;
+
+  margin-left: -1rem;
+  padding-right: 0.5rem;
+  width: 80%;
+  max-width: 700px;
+  cursor: pointer;
+}
+
+.anchor:hover {
+  @apply visible;
+}
+
+.prose a {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-thickness: 0.1rem;
+  text-decoration-color: var(--site-link-underline);
+}
+
+.prose .anchor:after {
+  color: rgba(255, 255, 255, 0.35);
+  content: '#';
+}
+
+.prose *:hover > .anchor {
+  @apply visible;
+}
+
+.prose pre {
+  @apply rounded-lg overflow-x-auto py-2 px-3;
+  background-color: var(--site-code-bg);
+  border: 1px solid var(--site-code-border);
+  color: var(--site-text);
+  font-size: 16px !important;
+  line-height: 1.45 !important;
+}
+
+.prose code {
+  @apply px-1 py-0.5 rounded-lg;
+}
+
+.prose pre code {
+  @apply p-0;
+  border: initial;
+  line-height: 1.5;
+}
+
+.prose code span {
+  @apply font-normal;
+}
+
+.prose img {
+  /* Don't apply styles to next/image */
+  @apply m-0;
+}
+
+.prose p {
+  @apply mt-0 mb-4;
+  color: var(--site-text);
+  font-size: 16px !important;
+  line-height: 1.45 !important;
+}
+
+.prose p:last-child {
+  @apply mb-0;
+}
+
+.prose h1 {
+  @apply text-4xl font-normal tracking-tight mt-6 mb-2;
+}
+
+.prose h2 {
+  @apply text-xl font-normal tracking-tight mt-6 mb-2;
+}
+
+.prose h3 {
+  @apply text-xl font-normal tracking-tight mt-6 mb-2;
+}
+
+.prose h4 {
+  @apply text-lg font-normal tracking-tight mt-6 mb-2;
+}
+
+.prose strong {
+  @apply font-normal;
+}
+
+.prose ul {
+  @apply list-disc pl-6;
+}
+
+.prose ol {
+  @apply list-decimal pl-6;
+}
+
+.prose > :first-child {
+  /* Override removing top margin, causing layout shift */
+  margin-top: 1.25rem !important;
+  margin-bottom: 1.25rem !important;
+}
+
+pre::-webkit-scrollbar {
+  display: none;
+}
+
+pre {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+/* Remove Safari input shadow on mobile */
+input[type='text'],
+input[type='email'] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+table {
+  display: block;
+  max-width: fit-content;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.title {
+  text-wrap: balance;
+}
+
+.description-text {
+  font-family: 'CamingoMono', monospace;
+  font-weight: 400;
+}
+
+.subtitle-text {
+  font-family: 'CamingoMono', monospace;
+  font-weight: 400;
+  font-style: normal;
+  letter-spacing: -0.65px;
+  text-transform: lowercase;
+}
+
+.body-text {
+  font-family: 'CamingoMono', monospace;
+  font-weight: 400;
+  letter-spacing: 0px;
+}
+
+.download-text {
+  font-family: 'CamingoMono', monospace;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.link-text {
+  font-family: 'CamingoMono', monospace;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.title-text {
+  font-family: 'CamingoMono', monospace;
+  font-weight: 400;
+  font-style: normal;
+  text-transform: uppercase;
+}
+
+.title-bold-text {
+  font-family: 'CamingoMono', monospace;
+  font-weight: 400;
+  font-style: normal;
+  text-transform: uppercase;
+}
+
+.title-bold-text.normal-case {
+  text-transform: lowercase !important;
+}
+
+.title-text.normal-case {
+  text-transform: lowercase !important;
+}
+
+.caption-text {
+  font-family: 'CamingoMono', monospace;
+  font-weight: 400;
+  font-style: italic;
+  text-align: left;
+  font-size: 0.75rem;
+  line-height: 1.25;
+}
+
+.nav-text {
+  font-family: 'CamingoMono', monospace;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.label-text {
+  font-family: 'CamingoMono', monospace;
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* Unified 16px type — no role-based size steps */
+.body-text,
+.subtitle-text,
+.title-text,
+.title-bold-text,
+.nav-text,
+.link-text,
+.download-text,
+.description-text,
+.label-text {
+  font-size: 16px !important;
+  line-height: 1.45 !important;
+  font-weight: 400 !important;
+}
+
+.text-xs,
+.text-sm,
+.text-base,
+.text-lg,
+.text-xl,
+.text-2xl,
+.text-3xl,
+.text-4xl,
+.font-sm {
+  font-size: 16px !important;
+  line-height: 1.45 !important;
+}
+
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4 {
+  font-size: 16px !important;
+  line-height: 1.45 !important;
+  font-weight: 400 !important;
+}
+
+/* Unified weight 400 — flatten Tailwind font-weight utilities */
+.font-thin,
+.font-extralight,
+.font-light,
+.font-normal,
+.font-medium,
+.font-semibold,
+.font-bold,
+.font-extrabold,
+.font-black {
+  font-weight: 400 !important;
+}
+
+.prose p,
+.prose strong,
+.prose code span,
+.prose pre,
+.prose pre code {
+  font-weight: 400 !important;
+}
+
+/* Captions: original smaller size (overrides unified .text-* on same node) */
+.caption-text,
+.caption-text.text-xs {
+  font-size: 0.75rem !important;
+  line-height: 1.25 !important;
+  font-weight: 400 !important;
+}
+
+/* Title blocks follow primary text token */
+.title-text,
+.title-bold-text,
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4 {
+  color: var(--site-text);
+}
+
+/* Hover title on project/event cards stays legible on dimmed imagery */
+.text-on-media {
+  color: #ffffff;
+}
+
+/* Mobile layout (<640px): 16px root, 1rem / 1.55 body & UI type */
+@media (max-width: 639px) {
+  html {
+    font-size: 16px;
+    min-width: 360px;
+  }
+
+  body {
+    font-size: 1rem;
+    line-height: 1.55;
+  }
+
+  .body-text,
+  .subtitle-text,
+  .title-text,
+  .title-bold-text,
+  .nav-text,
+  .link-text,
+  .download-text,
+  .description-text,
+  .label-text {
+    font-size: 1rem !important;
+    line-height: 1.55 !important;
+  }
+
+  .text-xs,
+  .text-sm,
+  .text-base,
+  .text-lg,
+  .text-xl,
+  .text-2xl,
+  .text-3xl,
+  .text-4xl,
+  .font-sm {
+    font-size: 1rem !important;
+    line-height: 1.55 !important;
+  }
+
+  .prose h1,
+  .prose h2,
+  .prose h3,
+  .prose h4 {
+    font-size: 1rem !important;
+    line-height: 1.55 !important;
+  }
+
+  .prose p {
+    font-size: 1rem !important;
+    line-height: 1.55 !important;
+  }
+
+  .prose pre {
+    font-size: 1rem !important;
+    line-height: 1.55 !important;
+  }
+}
+
