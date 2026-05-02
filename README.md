@@ -1,7 +1,6 @@
 # site
 
-## Hi. This is the public site for <a href="https://github.com/p-to-q">p-to-q</a>.
-
+Hi. This is the public site for <a href="https://github.com/p-to-q">p-to-q</a>.
 
 _if p, then q._
 
