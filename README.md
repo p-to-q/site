@@ -30,8 +30,8 @@ See more at our organization [README](https://github.com/p-to-q).
 
 ## www.
 
-ptoq.io[click](https://www.ptoq.io/)<br/>
-p-to-q.com[click](https://www.p-to-q.com)
+ptoq.io [[click](https://www.ptoq.io/)]<br/>
+p-to-q.com [[click](https://www.p-to-q.com)]
 
 
 
