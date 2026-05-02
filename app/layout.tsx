@@ -53,8 +53,13 @@ export default function RootLayout({
       style={{ backgroundColor: 'var(--site-bg)' }}
     >
       <body
-        className="antialiased mx-4 mt-8 max-w-[36rem] lowercase font-sans sm:mx-6 sm:max-w-2xl lg:mx-auto"
-        style={{ backgroundColor: 'var(--site-bg)', color: 'var(--site-text)' }}
+        className="antialiased mx-4 mt-8 max-w-[36rem] font-sans sm:mx-6 sm:max-w-2xl lg:mx-auto"
+        style={{
+          backgroundColor: 'var(--site-bg)',
+          color: 'var(--site-text)',
+          // body mt-8 (2rem) + SiteChrome main mt-6 (1.5rem) — home logo uses this to sit at 1/3 viewport
+          ['--home-logo-viewport-offset' as string]: '3.5rem',
+        }}
       >
         <SiteChrome>{children}</SiteChrome>
       </body>

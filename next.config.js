@@ -5,6 +5,7 @@ const nextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
   devIndicators: false,
+  turbopack: {},
   outputFileTracingRoot: path.join(__dirname),
   // Geist ships ESM subpaths (`geist/font/sans`); transpiling fixes webpack resolution with Next 16.
   transpilePackages: ['geist'],

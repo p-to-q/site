@@ -66,6 +66,39 @@
 }
 
 :root {
+  --site-bg: #ffffff;
+  --site-text: #333333;
+  --site-link: #555555;
+  --site-link-hover: #333333;
+  --site-link-underline: rgba(85, 85, 85, 0.55);
+  --site-link-underline-hover: rgba(51, 51, 51, 0.65);
+  --site-selection-bg: #bbbbbb;
+  --site-selection-text: #333333;
+  --site-code-bg: #e6e6e6;
+  --site-code-border: #cccccc;
+  --site-card-bg: #e6e6e6;
+  --site-hr: #333333;
+  --sh-class: #2d5e9d;
+  --sh-identifier: #354150;
+  --sh-sign: #8996a3;
+  --sh-string: #007f7a;
+  --sh-keyword: #e02518;
+  --sh-comment: #a19595;
+  --sh-jsxliterals: #6266d1;
+  --sh-property: #e25a1c;
+  --sh-entity: #e25a1c;
+}
+
+html {
+  min-width: 360px;
+  font-size: 16px;
+  color-scheme: light;
+  color: var(--site-text);
+  background-color: var(--site-bg);
+}
+
+html[data-theme='dark'] {
+  color-scheme: dark;
   --site-bg: #222222;
   --site-text: #ffffff;
   --site-link: #aaaaaa;
@@ -78,48 +111,10 @@
   --site-code-border: #3a3a3a;
   --site-card-bg: #2a2a2a;
   --site-hr: #555555;
-  --sh-class: #2d5e9d;
-  --sh-identifier: #354150;
-  --sh-sign: #8996a3;
-  --sh-string: #007f7a;
-  --sh-keyword: #e02518;
-  --sh-comment: #a19595;
-  --sh-jsxliterals: #6266d1;
-  --sh-property: #e25a1c;
-  --sh-entity: #e25a1c;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --sh-class: #4c97f8;
-    --sh-identifier: white;
-    --sh-keyword: #f47067;
-    --sh-string: #0fa295;
-  }
-}
-
-html {
-  min-width: 360px;
-  font-size: 16px;
-  color-scheme: dark;
-  color: var(--site-text);
-  background-color: var(--site-bg);
-}
-
-html[data-theme='light'] {
-  color-scheme: light;
-  --site-bg: #dddddd;
-  --site-text: #333333;
-  --site-link: #555555;
-  --site-link-hover: #333333;
-  --site-link-underline: rgba(85, 85, 85, 0.55);
-  --site-link-underline-hover: rgba(51, 51, 51, 0.65);
-  --site-selection-bg: #bbbbbb;
-  --site-selection-text: #333333;
-  --site-code-bg: #e6e6e6;
-  --site-code-border: #cccccc;
-  --site-card-bg: #e6e6e6;
-  --site-hr: #333333;
+  --sh-class: #4c97f8;
+  --sh-identifier: white;
+  --sh-keyword: #f47067;
+  --sh-string: #0fa295;
 }
 
 body {
@@ -342,6 +337,11 @@ table {
   font-family: 'CamingoMono', monospace;
   font-weight: 400;
   font-style: normal;
+}
+
+.arr {
+  display: inline-block;
+  vertical-align: middle;
 }
 
 .label-text {

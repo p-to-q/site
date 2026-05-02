@@ -1,122 +1,105 @@
 import Image from 'next/image'
-import { IconLink } from '@/components/content/icon-link'
-import { ArrowIcon } from '@/components/content/icons'
 import { SiteDivider } from '@/components/layout/site-divider'
-import { LastUpdated } from '@/components/layout/last-updated'
-import { ListPageTemplate } from '@/components/templates/list-page-template'
-import { SOCIAL_LINKS } from '@/lib/constants'
-import { ICON_ASSETS } from '@/lib/icon-assets'
-import { SITE_IMAGE_SIZES_FULL_WIDTH } from '@/lib/image-sizes'
-import {
-  PROJECT_LIST_ITEMS,
-  POSTS_LIST_ITEMS,
-  SOUNDS_LIST_ITEMS,
-  EVENTS_LIST_ITEMS,
-} from '@/lib/page-data'
 import { pageMeta } from '@/lib/page-metadata'
 
 export const metadata = pageMeta({
-  title: 'Home',
-  description:
-    'Home page of Yiming Sun — Electronic musical instruments. Applied Mathematics at UC Berkeley, building Ear Modular.',
+  title: '[p → q]',
+  description: 'experimental craft and research over scale. we study the layer between language and consequence.',
 })
+
+const BULLETS = [
+  "Today's AI is still bad in many ordinary ways; tomorrow's technology will be better.",
+  "The bitter lesson we learn from it is that real-world data is continuous, high-dimensional, and noisy.",
+  "Consistently, the most successful implementations use simple, composable patterns rather than giant complex frameworks.",
+  "Like software in the 80s, there is a tremendous opportunity to build things that are not upgrades, but something completely different.",
+  "Above all, we think there is a responsibility to recognize and create new things, and to take part in the strange, interesting, and sacred practice.",
+  "Our first proof is Wittgenstein, a modality harness for text-first LLMs.",
+]
+
+const ARROW_ROWS: [string, string][] = [
+  ['p', 'what can be said'],
+  ['→', 'how it becomes something'],
+  ['q', 'what actually happens'],
+]
 
 export default function Page() {
   return (
     <>
-    <section className="lowercase flex flex-col gap-8">
-      <div className="overflow-hidden">
-        <Image
-          src="/resources/pictures/home/home_banner.jpeg"
-          alt="Home banner"
-          width={1600}
-          height={900}
-          sizes={SITE_IMAGE_SIZES_FULL_WIDTH}
-          className="h-auto w-full object-cover"
-          loading="lazy"
-        />
-      </div>
-      <div className="flex items-start justify-between gap-4">
-        <h1 className="tracking-tighter title-bold-text normal-case" style={{ letterSpacing: '0px' }}>
-          Hi! I&apos;m Yiming!
-        </h1>
-        <div className="flex shrink-0 items-center gap-4 pt-1">
-          <a
-            href={SOCIAL_LINKS.email}
-            aria-label="Email"
-            className="text-[var(--site-link)] transition-colors hover:text-[var(--site-link-hover)]"
+      <section className="overflow-x-clip">
+        <div className="flex flex-col gap-6">
+          <div
+            className="flex flex-col gap-[calc(1.45rem*3)]"
+            style={{ paddingTop: 'max(0.75rem, calc(100dvh / 3 - var(--home-logo-viewport-offset, 3.5rem)))' }}
           >
-            <span
-              className="block h-5 w-5 bg-current"
-              aria-hidden="true"
-              style={{
-                WebkitMaskImage: `url("${ICON_ASSETS.email}")`,
-                maskImage: `url("${ICON_ASSETS.email}")`,
-                WebkitMaskRepeat: 'no-repeat',
-                maskRepeat: 'no-repeat',
-                WebkitMaskPosition: 'center',
-                maskPosition: 'center',
-                WebkitMaskSize: 'contain',
-                maskSize: 'contain',
-              }}
-            />
-          </a>
-          <a
-            href={SOCIAL_LINKS.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="GitHub"
-            className="text-[var(--site-link)] transition-colors hover:text-[var(--site-link-hover)]"
-          >
-            <span
-              className="block h-5 w-5 bg-current"
-              aria-hidden="true"
-              style={{
-                WebkitMaskImage: `url("${ICON_ASSETS.github}")`,
-                maskImage: `url("${ICON_ASSETS.github}")`,
-                WebkitMaskRepeat: 'no-repeat',
-                maskRepeat: 'no-repeat',
-                WebkitMaskPosition: 'center',
-                maskPosition: 'center',
-                WebkitMaskSize: 'contain',
-                maskSize: 'contain',
-              }}
-            />
-          </a>
-        </div>
-      </div>
-      <div>
-        <div className="space-y-2">
-          <p className="body-text">
-            I design and build electronic musical instruments, and think too much about what sound can become
-          </p>
-          <p className="body-text">
-            Currently studying Applied Mathematics at UC Berkeley, building{' '}
-            <IconLink
-              href="https://www.earmodular.com/"
-              icon={<ArrowIcon />}
-              external
-              aria-label="Ear Modular website"
-              className="inline-flex min-w-0 max-w-full items-baseline"
-            >
-              EarModular
-            </IconLink>
-          </p>
+            <div className="overflow-hidden" style={{ width: 'min(80vw, 18rem)' }}>
+              <Image
+                src="/resources/pictures/home/p-to-q_logo.png"
+                alt="[p → q]"
+                width={726}
+                height={235}
+                className="block h-auto w-full"
+                sizes="(max-width: 640px) 80vw, 18rem"
+                style={{
+                  transform: 'translateX(-14.2%)',
+                  marginTop: '-36.9%',
+                  marginBottom: '-39.6%',
+                }}
+                priority
+              />
+            </div>
+            <p className="body-text">if p, then q</p>
+          </div>
+
+          <div className="flex flex-col gap-1">
+            <p className="body-text">Experimental craft and research over scale.</p>
+            <p className="body-text">We&apos;re interested in the arrow.</p>
+            <p className="body-text">We study the layer between language and consequence.</p>
+          </div>
+
+          <div className="flex flex-col">
+            {ARROW_ROWS.map(([sym, desc]) => (
+              <div key={sym} className="flex gap-6 items-center">
+                <span className="body-text arr" style={{ minWidth: '1.25rem' }}>{sym}</span>
+                <span className="body-text" style={{ color: 'var(--site-link)' }}>{desc}</span>
+              </div>
+            ))}
+          </div>
         </div>
 
         <SiteDivider />
-        <ListPageTemplate title="Projects" items={PROJECT_LIST_ITEMS} />
-      </div>
-      <ListPageTemplate title="Posts" items={POSTS_LIST_ITEMS} />
-      <ListPageTemplate title="Sounds" items={SOUNDS_LIST_ITEMS} />
-      <ListPageTemplate title="Events" items={EVENTS_LIST_ITEMS} />
-    </section>
-    <SiteDivider />
-    <footer className="flex items-center gap-2">
-      <p className="body-text">Yiming Sun</p>
-      <span className="body-text">-</span>
-      <LastUpdated />
-    </footer>
+
+        <div className="flex flex-col gap-3">
+          <p className="body-text">Right now that means:</p>
+          <div className="flex flex-col gap-2">
+            {BULLETS.map((b, i) => (
+              <p key={i} className="body-text">{b}</p>
+            ))}
+          </div>
+        </div>
+
+        <SiteDivider />
+
+        <div className="flex flex-col gap-3">
+          <p className="body-text">Scope</p>
+          <p className="body-text">Seminal work in reasoning, behavioral training, agents, and alignment matters.</p>
+        </div>
+
+        <SiteDivider />
+
+        <div className="flex flex-col gap-3">
+          <p className="body-text">Our singular focus means no distraction by management overhead or product cycles, this is a research question before it is a category.</p>
+          <p className="body-text">We won&apos;t conceal any risk from you at [p <span className="arr">→</span> q], but nor are we in the game of trying to make you panic. (We have better ways of holding your attention).</p>
+          <p className="body-text">
+            or talk to us if you are interested in the arrow <span className="arr">→</span>
+          </p>
+        </div>
+      </section>
+
+      <SiteDivider />
+
+      <footer>
+        <p className="body-text">Q.E.D.</p>
+      </footer>
     </>
   )
 }
