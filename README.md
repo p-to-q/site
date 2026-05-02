@@ -25,6 +25,7 @@ Our first proof is [Wittgenstein](https://github.com/p-to-q/wittgenstein),a moda
 See more at our [organization README](https://github.com/p-to-q).
 
 Craft over scale.
+
 We
 
 <a href="https://github.com/p-to-q/.github/graphs/contributors">
@@ -37,7 +38,7 @@ We
 https://www.ptoq.io  
 https://p-to-q.com
 
-# Engineering
+### Engineering
 
 Install dependencies:
 
@@ -51,7 +52,7 @@ Run locally:
 pnpm dev
 ```
 
-# Clone
+### Clone
 
 Clone it to the cloud with Vercel:
 
