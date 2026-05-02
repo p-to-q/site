@@ -70,7 +70,7 @@ export default function Page() {
           <p className="body-text">At [p <span className="arr">→</span> q] we won&apos;t hide risk from you, but we won&apos;t manufacture panic either. (We have better ways of holding your attention.)</p>
           <p className="body-text">
             or talk to us if you are interested in the arrow <span className="arr">→</span>{' '}
-            <a href="mailto:hi@p-to-q.com">hi@p-to-q.com</a>
+            <a href="mailto:hi@ptoq.io">hi@ptoq.io</a>
           </p>
         </div>
 
