@@ -1,11 +1,13 @@
+import type { Metadata } from 'next'
 import Image from 'next/image'
 import { SiteDivider } from '@/components/layout/site-divider'
-import { pageMeta } from '@/lib/page-metadata'
 
-export const metadata = pageMeta({
-  title: '[p → q]',
-  description: 'experimental craft and research over scale. we study the layer between language and consequence.',
-})
+/** `absolute` bypasses root `title.template` so the tab is exactly `[p → q]`. */
+export const metadata: Metadata = {
+  title: { absolute: '[p → q]' },
+  description:
+    'experimental craft and research over scale. we study the layer between language and consequence.',
+}
 
 const BULLETS = [
   "Today's AI is still bad in many ordinary ways; tomorrow's technology will be better.",
@@ -31,20 +33,16 @@ export default function Page() {
             className="flex flex-col gap-[calc(1.45rem*3)]"
             style={{ paddingTop: 'max(0.75rem, calc(100dvh / 3 - var(--home-logo-viewport-offset, 3.5rem)))' }}
           >
-            <div className="overflow-hidden" style={{ width: 'min(80vw, 18rem)' }}>
+            <div style={{ width: 'min(80vw, 18rem)' }}>
               <Image
                 src="/resources/pictures/home/p-to-q_logo.png"
                 alt="[p → q]"
                 width={726}
                 height={235}
-                className="block h-auto w-full"
+                className="block h-auto w-full max-w-full"
                 sizes="(max-width: 640px) 80vw, 18rem"
-                style={{
-                  transform: 'translateX(-14.2%)',
-                  marginTop: '-36.9%',
-                  marginBottom: '-39.6%',
-                }}
                 priority
+                unoptimized
               />
             </div>
             <p className="body-text">if p, then q</p>

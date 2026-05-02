@@ -12,31 +12,34 @@ const nextConfig = {
   async redirects() {
     return [
       { source: '/community-activist', destination: '/', permanent: true },
-      { source: '/latent_electone', destination: '/latent-electone', permanent: true },
-      { source: '/motion_shaper', destination: '/motion-shaper', permanent: true },
-      { source: '/low_light', destination: '/low-light', permanent: true },
-      { source: '/capricho_arabe', destination: '/capricho-arabe', permanent: true },
-      { source: '/trigger_tutorial', destination: '/trigger-tutorial', permanent: true },
       { source: '/cv', destination: '/', permanent: true },
       { source: '/resume', destination: '/', permanent: true },
-      { source: '/polymer4', destination: '/polymer', permanent: true },
-      { source: '/emochine3', destination: '/emochine', permanent: true },
       { source: '/logs', destination: '/', permanent: true },
       { source: '/blogs', destination: '/', permanent: true },
-      { source: '/posts/down_to_earth', destination: '/posts/down-to-earth', permanent: true },
       { source: '/track-recommendation', destination: '/', permanent: true },
-      {
-        source: '/resources/videos/Capricho%20Arabe.mp4',
-        destination: '/resources/videos/capricho-arabe.mp4',
-        permanent: true,
-      },
-      {
-        source: '/resources/videos/Low%20Lamp.mp4',
-        destination: '/resources/videos/low-light.mp4',
-        permanent: true,
-      },
       { source: '/modular-commune-24', destination: '/', permanent: true },
       { source: '/modular-commune-25', destination: '/', permanent: true },
+      // Legacy slugs → home (pages removed)
+      { source: '/latent_electone', destination: '/', permanent: true },
+      { source: '/latent-electone', destination: '/', permanent: true },
+      { source: '/motion_shaper', destination: '/', permanent: true },
+      { source: '/motion-shaper', destination: '/', permanent: true },
+      { source: '/low_light', destination: '/', permanent: true },
+      { source: '/low-light', destination: '/', permanent: true },
+      { source: '/capricho_arabe', destination: '/', permanent: true },
+      { source: '/capricho-arabe', destination: '/', permanent: true },
+      { source: '/trigger_tutorial', destination: '/', permanent: true },
+      { source: '/trigger-tutorial', destination: '/', permanent: true },
+      { source: '/polymer4', destination: '/', permanent: true },
+      { source: '/polymer', destination: '/', permanent: true },
+      { source: '/emochine3', destination: '/', permanent: true },
+      { source: '/emochine', destination: '/', permanent: true },
+      { source: '/posts/down_to_earth', destination: '/', permanent: true },
+      { source: '/posts/down-to-earth', destination: '/', permanent: true },
+      { source: '/posts/papa-james-workshop', destination: '/', permanent: true },
+      { source: '/earmodular', destination: '/', permanent: true },
+      { source: '/foosball', destination: '/', permanent: true },
+      { source: '/superbooth-25', destination: '/', permanent: true },
     ]
   },
   images: {
@@ -58,5 +61,3 @@ const nextConfig = {
 }
 
 module.exports = nextConfig
-
-

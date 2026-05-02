@@ -21,8 +21,3 @@ export const SITE_CONFIG = {
     'experimental craft and research over scale. we study the layer between language and consequence.',
   url: resolveSiteUrl(),
 } as const
-
-export const SOCIAL_LINKS = {
-  email: 'mailto:simon.sun.yiming@gmail.com',
-  github: 'https://github.com/Moapacha',
-} as const
