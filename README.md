@@ -17,8 +17,9 @@ We study the layer between language and consequence.
 > `→` how it becomes something  
 > `q` what actually happens
 
-This [site](https://www.ptoq.io) is a public surface for that work.<br/>
-Our first proof is [Wittgenstein](https://github.com/p-to-q/wittgenstein),a modality harness for text-first LLMs.
+This [site](https://www.ptoq.io) is a public surface for that work.
+
+Our first proof is [Wittgenstein](https://github.com/p-to-q/wittgenstein),a modality harness for text-first LLMs.<br/>
 See more at our [organization README](https://github.com/p-to-q).
 
 Craft over scale.
