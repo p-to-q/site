@@ -3,14 +3,12 @@ import { SITE_LAST_UPDATED_ISO } from '@/lib/build-info'
 
 const llms = `# [p → q]
 
-> We study the layer between language and consequence.
-
-## Preferred entry
-- ${siteUrl}/
+> An independent research practice working on the gap between what language models can express and what happens because of it.
 
 ## Pages
-- ${siteUrl}/work
-- ${siteUrl}/writing
+- About: ${siteUrl}/
+- Work: ${siteUrl}/work
+- Writing: ${siteUrl}/writing
 
 ## Machine-readable endpoints
 - Sitemap: ${siteUrl}/sitemap.xml

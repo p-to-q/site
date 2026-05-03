@@ -4,7 +4,7 @@ import { SiteHeader } from '@/components/layout/site-header'
 /** Work / Writing: sticky bottom block matches About (`SiteDivider` + Q.E.D.); spacer preserves divider spacing. */
 export function SiteStickyQedPage({ children }: { children: React.ReactNode }) {
   return (
-    <div className="flex min-h-[calc(100dvh-7rem)] flex-col">
+    <div className="flex min-h-[calc(100dvh-5.5rem)] flex-col">
       <SiteHeader />
       {children}
       <div className="min-h-0 w-full flex-1" aria-hidden="true" />

@@ -26,10 +26,7 @@ export default function Page() {
         <div className="flex flex-col gap-6">
           <p className="heading-text home-page-heading home-page-tagline">if p, then q</p>
 
-          <div className="flex flex-col gap-1">
-            <p className="body-text">We&apos;re interested in the arrow.</p>
-            <p className="body-text">We study the layer between language and consequence.</p>
-          </div>
+          <p className="body-text">We&apos;re interested in the arrow.</p>
 
           <div className="flex flex-col">
             {ARROW_ROWS.map(([sym, desc]) => (
@@ -43,20 +40,11 @@ export default function Page() {
 
         <SiteDivider />
 
-        {/* Scope */}
+        {/* About */}
         <div className="flex flex-col gap-3">
-          <p className="heading-text home-page-heading">Scope</p>
-          <p className="body-text">Seminal work in reasoning, behavioral training, agents, and alignment matters.</p>
-          <p className="body-text">Singular focus, no management overhead, no product cycles. A research question before a category.</p>
-        </div>
-
-        <SiteDivider />
-
-        {/* Work */}
-        <div className="flex flex-col gap-3">
-          <p className="heading-text home-page-heading">Work</p>
+          <p className="body-text">An independent research practice working on the gap between what language models can express and what happens because of it.</p>
           <p className="body-text">
-            Our first proof is{' '}
+            Current focus: structured representations as an alternative to scaling. The first project is{' '}
             <ExternalLink href="https://github.com/p-to-q/wittgenstein">Wittgenstein</ExternalLink>
             , a modality harness for text-first LLMs.
           </p>
@@ -66,9 +54,8 @@ export default function Page() {
 
         {/* Closing */}
         <div className="flex flex-col gap-3">
-          <p className="body-text">At [p <span className="arr">→</span> q] we won&apos;t hide risk from you, but we won&apos;t manufacture panic either. (We have better ways of holding your attention.)</p>
           <p className="body-text">
-            or talk to us if you are interested in the arrow <span className="arr">→</span>{' '}
+            Talk to us if you are interested in the arrow <span className="arr">→</span>{' '}
             <ExternalLink href="mailto:hi@ptoq.io">hi@ptoq.io</ExternalLink>
           </p>
         </div>

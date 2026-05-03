@@ -1,8 +1,20 @@
+'use client'
+
 import Image from 'next/image'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { ExternalLink } from '@/components/content/external-link'
 
 export function SiteHeader() {
+  const pathname = usePathname()
+  const navClass = (href: string) => {
+    const active = href === '/' ? pathname === '/' : pathname === href || pathname.startsWith(`${href}/`)
+    return `body-text${active ? ' is-active' : ''}`
+  }
+  const ariaCurrent = (href: string) => {
+    const active = href === '/' ? pathname === '/' : pathname === href || pathname.startsWith(`${href}/`)
+    return active ? ('page' as const) : undefined
+  }
   return (
     <header
       className="overflow-x-clip flex flex-col"
@@ -26,13 +38,13 @@ export function SiteHeader() {
       </Link>
       <div className="flex w-full flex-col gap-4">
         <nav className="flex flex-wrap gap-6">
-          <Link href="/" className="body-text">
+          <Link href="/" className={navClass('/')} aria-current={ariaCurrent('/')}>
             About
           </Link>
-          <Link href="/work" className="body-text">
+          <Link href="/work" className={navClass('/work')} aria-current={ariaCurrent('/work')}>
             Work
           </Link>
-          <Link href="/writing" className="body-text">
+          <Link href="/writing" className={navClass('/writing')} aria-current={ariaCurrent('/writing')}>
             Writing
           </Link>
         <ExternalLink href="https://github.com/p-to-q" className="body-text">

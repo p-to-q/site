@@ -8,9 +8,9 @@ const full = `# [p → q] — Full LLM Map
 - Last update: ${SITE_LAST_UPDATED_ISO}
 
 ## Pages
-- ${siteUrl}/
-- ${siteUrl}/work
-- ${siteUrl}/writing
+- About: ${siteUrl}/
+- Work: ${siteUrl}/work
+- Writing: ${siteUrl}/writing
 
 ## Feeds and discovery
 - ${siteUrl}/sitemap.xml
