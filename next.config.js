@@ -1,11 +1,26 @@
 const path = require('path')
 
+// Force React from this repo (avoids mixing with e.g. ~/node_modules/react).
+const reactAbsolute = path.join(__dirname, 'node_modules/react')
+const reactDomAbsolute = path.join(__dirname, 'node_modules/react-dom')
+const reactJsxRuntime = path.join(reactAbsolute, 'jsx-runtime.js')
+const reactJsxDevRuntime = path.join(reactAbsolute, 'jsx-dev-runtime.js')
+const reactTurbopack = './node_modules/react'
+const reactDomTurbopack = './node_modules/react-dom'
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
   devIndicators: false,
-  turbopack: {},
+  turbopack: {
+    resolveAlias: {
+      react: reactTurbopack,
+      'react-dom': reactDomTurbopack,
+      'react/jsx-runtime': `${reactTurbopack}/jsx-runtime.js`,
+      'react/jsx-dev-runtime': `${reactTurbopack}/jsx-dev-runtime.js`,
+    },
+  },
   outputFileTracingRoot: path.join(__dirname),
   // Geist ships ESM subpaths (`geist/font/sans`); transpiling fixes webpack resolution with Next 16.
   transpilePackages: ['geist'],
@@ -57,6 +72,13 @@ const nextConfig = {
         poll: 1000,
         aggregateTimeout: 300,
       }
+    }
+    config.resolve.alias = {
+      ...(config.resolve.alias || {}),
+      react: reactAbsolute,
+      'react-dom': reactDomAbsolute,
+      'react/jsx-runtime': reactJsxRuntime,
+      'react/jsx-dev-runtime': reactJsxDevRuntime,
     }
     return config
   },

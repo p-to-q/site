@@ -66,7 +66,7 @@
 }
 
 :root {
-  --site-bg: #ffffff;
+  --site-bg: #DDDDDD;
   --site-text: #333333;
   --site-link: #555555;
   --site-link-hover: #333333;
@@ -278,7 +278,7 @@ table {
 
 .subtitle-text {
   font-family: 'CamingoMono', monospace;
-  font-weight: 400;
+  font-weight: 500;
   font-style: normal;
   letter-spacing: -0.65px;
   text-transform: lowercase;
@@ -287,6 +287,13 @@ table {
 .body-text {
   font-family: 'CamingoMono', monospace;
   font-weight: 400;
+  letter-spacing: 0px;
+}
+
+/* Section / page titles (same rhythm as body-text, slightly heavier) */
+.heading-text {
+  font-family: 'CamingoMono', monospace;
+  font-weight: 500;
   letter-spacing: 0px;
 }
 
@@ -304,14 +311,14 @@ table {
 
 .title-text {
   font-family: 'CamingoMono', monospace;
-  font-weight: 400;
+  font-weight: 500;
   font-style: normal;
   text-transform: uppercase;
 }
 
 .title-bold-text {
   font-family: 'CamingoMono', monospace;
-  font-weight: 400;
+  font-weight: 500;
   font-style: normal;
   text-transform: uppercase;
 }
@@ -372,9 +379,6 @@ table {
 
 /* Unified 16px type — no role-based size steps */
 .body-text,
-.subtitle-text,
-.title-text,
-.title-bold-text,
 .nav-text,
 .link-text,
 .download-text,
@@ -383,6 +387,24 @@ table {
   font-size: 16px !important;
   line-height: 1.45 !important;
   font-weight: 400 !important;
+}
+
+.subtitle-text,
+.title-text,
+.title-bold-text,
+.heading-text {
+  font-size: 16px !important;
+  line-height: 1.45 !important;
+  font-weight: 500 !important;
+}
+
+/* Home: named section lines (if p then q, Scope, Work, Q.E.D.) — true bold */
+.heading-text.home-page-heading {
+  font-weight: 700 !important;
+}
+
+.heading-text.home-page-heading.home-page-tagline {
+  font-style: italic !important;
 }
 
 .text-xs,
@@ -404,7 +426,7 @@ table {
 .prose h4 {
   font-size: 16px !important;
   line-height: 1.45 !important;
-  font-weight: 400 !important;
+  font-weight: 500 !important;
 }
 
 /* Unified weight 400 — flatten Tailwind font-weight utilities */
@@ -464,9 +486,6 @@ table {
   }
 
   .body-text,
-  .subtitle-text,
-  .title-text,
-  .title-bold-text,
   .nav-text,
   .link-text,
   .download-text,
@@ -474,6 +493,15 @@ table {
   .label-text {
     font-size: 1rem !important;
     line-height: 1.55 !important;
+  }
+
+  .subtitle-text,
+  .title-text,
+  .title-bold-text,
+  .heading-text {
+    font-size: 1rem !important;
+    line-height: 1.55 !important;
+    font-weight: 500 !important;
   }
 
   .text-xs,
@@ -495,6 +523,7 @@ table {
   .prose h4 {
     font-size: 1rem !important;
     line-height: 1.55 !important;
+    font-weight: 500 !important;
   }
 
   .prose p {

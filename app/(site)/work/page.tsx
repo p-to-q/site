@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
-import { SiteHeader } from '@/components/layout/site-header'
+import { ExternalLink } from '@/components/content/external-link'
+import { SiteStickyQedPage } from '@/components/layout/site-sticky-qed-page'
 
 export const metadata: Metadata = {
   title: 'Work',
@@ -8,17 +9,14 @@ export const metadata: Metadata = {
 
 export default function WorkPage() {
   return (
-    <>
-      <SiteHeader />
+    <SiteStickyQedPage>
       <section>
         <p className="body-text">
-          <a href="https://github.com/p-to-q/wittgenstein" target="_blank" rel="noopener noreferrer">
-            Wittgenstein
-          </a>
+          <ExternalLink href="https://github.com/p-to-q/wittgenstein">Wittgenstein</ExternalLink>
           {' - '}
           a modality harness for text-first LLMs.
         </p>
       </section>
-    </>
+    </SiteStickyQedPage>
   )
 }

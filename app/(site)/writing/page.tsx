@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { SiteHeader } from '@/components/layout/site-header'
+import { SiteStickyQedPage } from '@/components/layout/site-sticky-qed-page'
 
 export const metadata: Metadata = {
   title: 'Writing',
@@ -8,11 +8,10 @@ export const metadata: Metadata = {
 
 export default function WritingPage() {
   return (
-    <>
-      <SiteHeader />
-      <section>
-        <p className="body-text">Continuously Updating</p>
+    <SiteStickyQedPage>
+      <section className="flex flex-col gap-3">
+        <p className="heading-text">Continuously Updating</p>
       </section>
-    </>
+    </SiteStickyQedPage>
   )
 }

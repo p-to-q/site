@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import { ExternalLink } from '@/components/content/external-link'
 
 export function SiteHeader() {
   return (
@@ -23,17 +24,30 @@ export function SiteHeader() {
           unoptimized
         />
       </Link>
-      <nav className="flex flex-wrap gap-6">
-        <Link href="/" className="body-text">
-          About
-        </Link>
-        <Link href="/work" className="body-text">
-          Work
-        </Link>
-        <Link href="/writing" className="body-text">
-          Writing
-        </Link>
-      </nav>
+      <div className="flex w-full flex-col gap-4">
+        <nav className="flex flex-wrap gap-6">
+          <Link href="/" className="body-text">
+            About
+          </Link>
+          <Link href="/work" className="body-text">
+            Work
+          </Link>
+          <Link href="/writing" className="body-text">
+            Writing
+          </Link>
+        <ExternalLink href="https://github.com/p-to-q" className="body-text">
+          GitHub
+        </ExternalLink>
+        </nav>
+        <hr
+          className="m-0 w-full border-0 p-0"
+          style={{
+            backgroundColor: 'var(--site-hr)',
+            height: '1px',
+          }}
+          aria-hidden="true"
+        />
+      </div>
     </header>
   )
 }

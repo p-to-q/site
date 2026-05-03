@@ -2,10 +2,10 @@
   "private": true,
   "scripts": {
     "clean": "rm -rf .next",
-    "dev": "WATCHPACK_POLLING=true next dev",
+    "dev": "env -u NODE_PATH WATCHPACK_POLLING=true node ./node_modules/next/dist/bin/next dev",
     "prebuild": "node scripts/generate-build-info.mjs",
-    "build": "next build",
-    "start": "next start",
+    "build": "env -u NODE_PATH node ./node_modules/next/dist/bin/next build",
+    "start": "env -u NODE_PATH node ./node_modules/next/dist/bin/next start",
     "test": "vitest run",
     "push:retry": "./scripts/push-with-retry.sh"
   },
@@ -22,6 +22,10 @@
     "react": "^19.2.5",
     "react-dom": "^19.2.5",
     "tailwindcss": "^4.2.4"
+  },
+  "overrides": {
+    "react": "$react",
+    "react-dom": "$react-dom"
   },
   "devDependencies": {
     "@types/node": "25.6.0",
