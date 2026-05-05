@@ -1,5 +1,10 @@
 @import 'tailwindcss';
 
+@theme {
+  /* Default UI font: Camingo Mono (files in /public/fonts/…) */
+  --font-sans: 'CamingoMono', ui-monospace, monospace;
+}
+
 @font-face {
   font-family: 'CamingoMono';
   src: url('/fonts/CamingoMono Font/CamingoMono-Light.woff2') format('woff2'),
@@ -92,6 +97,7 @@
 html {
   min-width: 360px;
   font-size: 16px;
+  font-family: 'CamingoMono', ui-monospace, monospace;
   color-scheme: light;
   color: var(--site-text);
   background-color: var(--site-bg);

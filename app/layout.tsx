@@ -1,6 +1,5 @@
 import './global.css'
 import type { Metadata } from 'next'
-import { GeistSans } from 'geist/font/sans'
 import SiteChrome from '@/components/layout/site-chrome'
 import { SITE_CONFIG } from '@/lib/constants'
 import { siteUrl } from '@/lib/site'
@@ -39,7 +38,15 @@ export const metadata: Metadata = {
   },
 }
 
-const cx = (...classes: (string | undefined | null | false)[]): string => classes.filter(Boolean).join(' ')
+/** Preload first-paint Camingo Mono cuts (paths under /public/fonts/…). */
+const CAMINGO_PRELOAD_WOFF2 = [
+  'CamingoMono-Regular.woff2',
+  'CamingoMono-SemiBold.woff2',
+  'CamingoMono-Bold.woff2',
+  'CamingoMono-SemiBoldItalic.woff2',
+] as const
+
+const CAMINGO_FONT_DIR = '/fonts/CamingoMono%20Font/'
 
 export default function RootLayout({
   children,
@@ -47,11 +54,20 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html
-      lang="en"
-      className={cx(GeistSans.variable)}
-      style={{ backgroundColor: 'var(--site-bg)' }}
-    >
+    <html lang="en" style={{ backgroundColor: 'var(--site-bg)' }}>
+      <head>
+        {CAMINGO_PRELOAD_WOFF2.map((file, index) => (
+          <link
+            key={file}
+            rel="preload"
+            href={`${CAMINGO_FONT_DIR}${file}`}
+            as="font"
+            type="font/woff2"
+            crossOrigin="anonymous"
+            fetchPriority={index === 0 ? 'high' : undefined}
+          />
+        ))}
+      </head>
       <body
         className="antialiased mx-4 mt-8 max-w-[36rem] font-sans sm:mx-6 sm:max-w-2xl lg:mx-auto"
         style={{
