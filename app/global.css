@@ -1,11 +1,10 @@
 @import 'tailwindcss';
 
 @theme {
-  /* Courier metrics are closer to Camingo Mono than generic ui-monospace → less swap jump */
-  --font-sans: 'CamingoMono', 'Courier New', Courier, ui-monospace, monospace;
+  /* Only Camingo Mono; generic `monospace` is required as last-resort UA fallback. */
+  --font-sans: 'CamingoMono', monospace;
 }
 
-/* Primary cuts: `optional` avoids swap reflow when preload wins (typical first paint). */
 @font-face {
   font-family: 'CamingoMono';
   src: url('/fonts/CamingoMono Font/CamingoMono-Regular.woff2') format('woff2'),
@@ -13,7 +12,7 @@
        url('/fonts/CamingoMono Font/CamingoMono-Regular.ttf') format('truetype');
   font-weight: 400;
   font-style: normal;
-  font-display: optional;
+  font-display: swap;
 }
 
 @font-face {
@@ -23,7 +22,7 @@
        url('/fonts/CamingoMono Font/CamingoMono-SemiBold.ttf') format('truetype');
   font-weight: 600;
   font-style: normal;
-  font-display: optional;
+  font-display: swap;
 }
 
 @font-face {
@@ -33,7 +32,7 @@
        url('/fonts/CamingoMono Font/CamingoMono-SemiBoldItalic.ttf') format('truetype');
   font-weight: 600;
   font-style: italic;
-  font-display: optional;
+  font-display: swap;
 }
 
 @font-face {
@@ -43,7 +42,7 @@
        url('/fonts/CamingoMono Font/CamingoMono-Bold.ttf') format('truetype');
   font-weight: 700;
   font-style: normal;
-  font-display: optional;
+  font-display: swap;
 }
 
 @font-face {
@@ -98,7 +97,7 @@
 html {
   min-width: 360px;
   font-size: 16px;
-  font-family: 'CamingoMono', 'Courier New', Courier, ui-monospace, monospace;
+  font-family: 'CamingoMono', monospace;
   color-scheme: light;
   color: var(--site-text);
   background-color: var(--site-bg);
@@ -280,12 +279,12 @@ table {
 }
 
 .description-text {
-  font-family: 'CamingoMono', 'Courier New', Courier, ui-monospace, monospace;
+  font-family: 'CamingoMono', monospace;
   font-weight: 400;
 }
 
 .subtitle-text {
-  font-family: 'CamingoMono', 'Courier New', Courier, ui-monospace, monospace;
+  font-family: 'CamingoMono', monospace;
   font-weight: 500;
   font-style: normal;
   letter-spacing: -0.65px;
@@ -293,39 +292,39 @@ table {
 }
 
 .body-text {
-  font-family: 'CamingoMono', 'Courier New', Courier, ui-monospace, monospace;
+  font-family: 'CamingoMono', monospace;
   font-weight: 400;
   letter-spacing: 0px;
 }
 
 /* Section / page titles (same rhythm as body-text, slightly heavier) */
 .heading-text {
-  font-family: 'CamingoMono', 'Courier New', Courier, ui-monospace, monospace;
+  font-family: 'CamingoMono', monospace;
   font-weight: 500;
   letter-spacing: 0px;
 }
 
 .download-text {
-  font-family: 'CamingoMono', 'Courier New', Courier, ui-monospace, monospace;
+  font-family: 'CamingoMono', monospace;
   font-weight: 400;
   font-style: normal;
 }
 
 .link-text {
-  font-family: 'CamingoMono', 'Courier New', Courier, ui-monospace, monospace;
+  font-family: 'CamingoMono', monospace;
   font-weight: 400;
   font-style: normal;
 }
 
 .title-text {
-  font-family: 'CamingoMono', 'Courier New', Courier, ui-monospace, monospace;
+  font-family: 'CamingoMono', monospace;
   font-weight: 500;
   font-style: normal;
   text-transform: uppercase;
 }
 
 .title-bold-text {
-  font-family: 'CamingoMono', 'Courier New', Courier, ui-monospace, monospace;
+  font-family: 'CamingoMono', monospace;
   font-weight: 500;
   font-style: normal;
   text-transform: uppercase;
@@ -340,7 +339,7 @@ table {
 }
 
 .caption-text {
-  font-family: 'CamingoMono', 'Courier New', Courier, ui-monospace, monospace;
+  font-family: 'CamingoMono', monospace;
   font-weight: 400;
   font-style: italic;
   text-align: left;
@@ -349,7 +348,7 @@ table {
 }
 
 .nav-text {
-  font-family: 'CamingoMono', 'Courier New', Courier, ui-monospace, monospace;
+  font-family: 'CamingoMono', monospace;
   font-weight: 400;
   font-style: normal;
 }
@@ -380,7 +379,7 @@ table {
 }
 
 .label-text {
-  font-family: 'CamingoMono', 'Courier New', Courier, ui-monospace, monospace;
+  font-family: 'CamingoMono', monospace;
   font-weight: 400;
   font-style: normal;
 }
