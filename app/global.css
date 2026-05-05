@@ -1,5 +1,10 @@
 @import 'tailwindcss';
 
+/* Gated by `FontDisplayGate` until `document.fonts.ready` (see app/components/layout/font-display-gate.tsx). */
+.font-gate-pending {
+  visibility: hidden;
+}
+
 @theme {
   /* Only Camingo Mono; generic `monospace` is required as last-resort UA fallback. */
   --font-sans: 'CamingoMono', monospace;
