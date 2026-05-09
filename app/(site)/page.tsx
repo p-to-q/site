@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { ExternalLink } from '@/components/content/external-link'
 import { SiteDivider } from '@/components/layout/site-divider'
 import { SiteHeader } from '@/components/layout/site-header'
+import { SiteQedFooter } from '@/components/layout/site-sticky-qed-page'
 
 /** `absolute` bypasses root `title.template` so the tab is exactly `[p → q]`. */
 export const metadata: Metadata = {
@@ -64,10 +65,7 @@ export default function Page() {
 
       <SiteDivider />
 
-      <footer>
-        <p className="heading-text home-page-heading">Q.E.D.</p>
-        <p className="site-copyright-text">© 2026 Wooden Computer Co., Ltd. All rights reserved.</p>
-      </footer>
+      <SiteQedFooter />
     </>
   )
 }

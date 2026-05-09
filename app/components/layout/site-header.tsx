@@ -3,10 +3,18 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { useLayoutEffect } from 'react'
 import { ExternalLink } from '@/components/content/external-link'
 
 export function SiteHeader() {
   const pathname = usePathname()
+  useLayoutEffect(() => {
+    if ('scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual'
+    }
+    window.scrollTo(0, 0)
+  }, [pathname])
+
   const navClass = (href: string) => {
     const active = href === '/' ? pathname === '/' : pathname === href || pathname.startsWith(`${href}/`)
     return `body-text${active ? ' is-active' : ''}`
