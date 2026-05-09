@@ -8,6 +8,15 @@ const LEAVE_MS = 520
 const HOME_LOGO_MAX_WIDTH_PX = 288
 const HOME_LOGO_VIEWPORT_RATIO = 0.8
 
+/** Bracket split %: ease-out in |parallax| — strong rise after leaving center, marginal gain shrinks near screen edges. */
+const SPLIT_BASE_PCT = 2.15
+const SPLIT_RANGE_PCT = 3.25
+
+function spreadFromParallax(absParallax: number): number {
+  const t = Math.min(1, Math.max(0, absParallax))
+  return 1 - (1 - t) ** 3
+}
+
 /**
  * 404 canvas. Centerpiece is the actual `[p → q]` logo (1:1 with home);
  * the side brackets drift apart with pointer distance, then return to the
@@ -73,7 +82,9 @@ export function NotFoundSection() {
     if (!leaving) setRestored(false)
   }
 
-  const splitDistance = restored ? 0 : 2.2 + Math.abs(parallax) * 2.4
+  const splitDistance = restored
+    ? 0
+    : SPLIT_BASE_PCT + SPLIT_RANGE_PCT * spreadFromParallax(Math.abs(parallax))
   const logoStyle = {
     '--left-split': `${-splitDistance}%`,
     '--right-split': `${splitDistance}%`,
