@@ -1,6 +1,15 @@
 import { SiteDivider } from '@/components/layout/site-divider'
 import { SiteHeader } from '@/components/layout/site-header'
 
+export function SiteQedFooter() {
+  return (
+    <footer className="site-qed-footer" aria-label="Closing">
+      <p className="heading-text home-page-heading">Q.E.D.</p>
+      <p className="site-copyright-text">© 2026 Wooden Computer Co., Ltd. All rights reserved.</p>
+    </footer>
+  )
+}
+
 /** Work / Writing: sticky bottom block matches About (`SiteDivider` + Q.E.D.); spacer preserves divider spacing. */
 export function SiteStickyQedPage({ children }: { children: React.ReactNode }) {
   return (
@@ -9,9 +18,7 @@ export function SiteStickyQedPage({ children }: { children: React.ReactNode }) {
       {children}
       <div className="min-h-0 w-full flex-1" aria-hidden="true" />
       <SiteDivider />
-      <footer aria-label="Closing">
-        <p className="heading-text home-page-heading">Q.E.D.</p>
-      </footer>
+      <SiteQedFooter />
     </div>
   )
 }
