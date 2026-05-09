@@ -82,6 +82,7 @@
   --site-link-hover: #333333;
   --site-link-underline: rgba(85, 85, 85, 0.55);
   --site-link-underline-hover: rgba(51, 51, 51, 0.65);
+  --site-muted: rgba(51, 51, 51, 0.32);
   --site-selection-bg: #bbbbbb;
   --site-selection-text: #333333;
   --site-code-bg: #e6e6e6;
@@ -116,6 +117,7 @@ html[data-theme='dark'] {
   --site-link-hover: #cccccc;
   --site-link-underline: rgba(170, 170, 170, 0.55);
   --site-link-underline-hover: rgba(204, 204, 204, 0.65);
+  --site-muted: rgba(255, 255, 255, 0.3);
   --site-selection-bg: #444444;
   --site-selection-text: #ffffff;
   --site-code-bg: #2a2a2a;
@@ -417,6 +419,18 @@ table {
 
 .heading-text.home-page-heading.home-page-tagline {
   font-style: italic !important;
+}
+
+.site-copyright-text {
+  margin-top: clamp(2.25rem, 8vh, 3.5rem);
+  margin-bottom: clamp(4rem, 12vh, 6rem);
+  color: var(--site-muted);
+  font-family: 'CamingoMono', monospace;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: -0.035em;
+  line-height: 1.35;
+  text-align: center;
 }
 
 .text-xs,
