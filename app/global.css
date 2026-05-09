@@ -421,6 +421,193 @@ table {
   font-style: italic !important;
 }
 
+/* Header logo — same source image as the static logo, split so bracket clicks can breathe. */
+.site-header-logo {
+  position: relative;
+  display: block;
+  width: min(80vw, 18rem);
+  aspect-ratio: 726 / 235;
+  line-height: 0;
+  text-decoration: none;
+  overflow: visible;
+}
+
+.site-header-logo:focus-visible {
+  outline: 2px solid var(--site-text);
+  outline-offset: 6px;
+  border-radius: 2px;
+}
+
+.site-header-logo__piece {
+  position: absolute;
+  inset: 0;
+  display: block;
+  background-image: url('/resources/pictures/home/p-to-q_logo.png');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  will-change: transform;
+}
+
+.site-header-logo__piece--left {
+  clip-path: polygon(0 0, 14% 0, 14% 100%, 0 100%);
+}
+
+.site-header-logo__piece--middle {
+  clip-path: polygon(14% 0, 86% 0, 86% 100%, 14% 100%);
+}
+
+.site-header-logo__piece--right {
+  clip-path: polygon(86% 0, 100% 0, 100% 100%, 86% 100%);
+}
+
+/* Header logo bracket-split animation is driven by Web Animations API in
+   site-header.tsx; CSS keeps only the rest layout. */
+
+/* 404 canvas — the [p → q] logo IS the page; brackets drift apart until restored. */
+.not-found-canvas {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 1rem;
+  min-height: calc(100dvh - 5rem);
+  width: 100%;
+  text-align: left;
+  transition: opacity 240ms ease;
+}
+
+.not-found-canvas.is-leaving {
+  opacity: 1;
+}
+
+.not-found-canvas__logo {
+  position: relative;
+  display: block;
+  width: min(80vw, 18rem);
+  aspect-ratio: 726 / 235;
+  line-height: 0;
+  text-decoration: none;
+  color: inherit;
+  transform-origin: top left;
+  transition: transform 520ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  will-change: transform;
+}
+
+.not-found-canvas.is-leaving .not-found-canvas__logo {
+  transform: translate3d(var(--fly-x, 0), var(--fly-y, 0), 0) scale(var(--fly-scale, 1));
+}
+
+.not-found-canvas__logo:focus-visible {
+  outline: 2px solid var(--site-text);
+  outline-offset: 6px;
+  border-radius: 2px;
+}
+
+.not-found-canvas__piece {
+  position: absolute;
+  inset: 0;
+  display: block;
+  background-image: url('/resources/pictures/home/p-to-q_logo.png');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  transition: transform 320ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  will-change: transform;
+}
+
+.not-found-canvas__piece--left {
+  clip-path: polygon(0 0, 14% 0, 14% 100%, 0 100%);
+  transform: translateX(var(--left-split, -2.2%));
+}
+
+.not-found-canvas__piece--middle {
+  clip-path: polygon(14% 0, 86% 0, 86% 100%, 14% 100%);
+}
+
+.not-found-canvas__piece--right {
+  clip-path: polygon(86% 0, 100% 0, 100% 100%, 86% 100%);
+  transform: translateX(var(--right-split, 2.2%));
+}
+
+.not-found-canvas.is-whole .not-found-canvas__piece--left,
+.not-found-canvas.is-whole .not-found-canvas__piece--right {
+  transform: translateX(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .not-found-canvas,
+  .not-found-canvas__logo,
+  .not-found-canvas__piece {
+    transition: none;
+  }
+}
+
+.not-found-canvas__divider {
+  width: 100%;
+  height: 1px;
+  margin: 2.5rem 0 0;
+  border: 0;
+  background-color: var(--site-hr);
+}
+
+.not-found-canvas__caption {
+  align-self: stretch;
+  margin-top: 0;
+  font-style: italic !important;
+  text-align: left;
+}
+
+.not-found-canvas__sub {
+  align-self: stretch;
+  color: var(--site-link);
+  text-align: left;
+}
+
+.not-found-canvas__return {
+  align-self: flex-start;
+  margin-top: 0.6rem;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  font: inherit;
+  color: var(--site-link);
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-thickness: 0.1rem;
+  text-decoration-color: var(--site-link-underline);
+  transition: color 150ms ease, text-decoration-color 150ms ease;
+}
+
+.not-found-canvas__return:hover,
+.not-found-canvas__return:focus-visible {
+  color: var(--site-link-hover);
+  text-decoration-color: var(--site-link-underline-hover);
+  outline: none;
+}
+
+.not-found-canvas.is-leaving .not-found-canvas__caption,
+.not-found-canvas.is-leaving .not-found-canvas__sub,
+.not-found-canvas.is-leaving .not-found-canvas__return,
+.not-found-canvas.is-leaving .not-found-canvas__divider {
+  opacity: 0;
+  transition: opacity 180ms ease;
+}
+
+.site-copyright-text.not-found-canvas__copyright {
+  position: absolute;
+  right: 0;
+  bottom: clamp(1.5rem, 5vh, 3rem);
+  left: 0;
+  margin: 0;
+  transition: opacity 360ms ease, transform 520ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.not-found-canvas.is-leaving .site-copyright-text.not-found-canvas__copyright {
+  opacity: 0;
+  transform: translateY(clamp(3rem, 10vh, 5rem));
+}
+
 .site-copyright-text {
   margin-top: clamp(2.25rem, 8vh, 3.5rem);
   margin-bottom: clamp(4rem, 12vh, 6rem);
