@@ -19,7 +19,7 @@ export default function WorkPage() {
         <p className="body-text">
           <ExternalLink href="https://github.com/moapacha/sonde">sonde</ExternalLink>
           {' - '}
-          orbital sequencer for low-res earth
+          orbital sequencer for low-res earth.
         </p>
         <p className="body-text">
           <ExternalLink href="https://github.com/Jah-yee/autoclicker">autoclicker</ExternalLink>
