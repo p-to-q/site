@@ -45,7 +45,7 @@ export default function Page() {
         <div className="flex flex-col gap-3">
           <p className="body-text">An independent research practice working on the gap between what language models can express and what happens because of it.</p>
           <p className="body-text">
-            Current focus: structured representations as an alternative to scaling. The first prove is{' '}
+            Current focus: structured representations as an alternative to scaling. Our first proof is{' '}
             <ExternalLink href="https://github.com/p-to-q/wittgenstein">wittgenstein</ExternalLink>
             , a modality harness for text-first LLMs.
           </p>
