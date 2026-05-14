@@ -1,4 +1,4 @@
-# Canonical URL (`NEXT_PUBLIC_BASE_URL`)
+# Base URL (`NEXT_PUBLIC_BASE_URL`)
 
 `sitemap.xml`, `robots.txt`, `metadataBase`, and social preview URLs are built from a single resolved origin:
 
