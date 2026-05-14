@@ -45,6 +45,6 @@ function resolveSiteUrl(): string {
 export const SITE_CONFIG = {
   name: '[p → q]',
   title: '[p → q]',
-  description: 'We study the layer between language and consequence.',
+  description: 'Experimental craft and research over scale.',
   url: resolveSiteUrl(),
 } as const

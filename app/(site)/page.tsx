@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { ExternalLink } from '@/components/content/external-link'
+import { SITE_CONFIG } from '@/lib/constants'
 import { SiteDivider } from '@/components/layout/site-divider'
 import { SiteHeader } from '@/components/layout/site-header'
 import { SiteQedFooter } from '@/components/layout/site-sticky-qed-page'
@@ -7,19 +8,19 @@ import { SiteQedFooter } from '@/components/layout/site-sticky-qed-page'
 /** `absolute` bypasses root `title.template` so the tab is exactly `[p → q]`. */
 export const metadata: Metadata = {
   title: { absolute: '[p → q]' },
-  description: 'We study the layer between language and consequence.',
+  description: SITE_CONFIG.description,
   alternates: {
     canonical: '/',
   },
   openGraph: {
     url: '/',
     title: '[p → q]',
-    description: 'We study the layer between language and consequence.',
+    description: SITE_CONFIG.description,
   },
   twitter: {
     card: 'summary_large_image',
     title: '[p → q]',
-    description: 'We study the layer between language and consequence.',
+    description: SITE_CONFIG.description,
     images: ['/og'],
   },
 }
