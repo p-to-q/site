@@ -49,7 +49,7 @@ export default function WorkPage() {
         <p className="body-text">
           <ExternalLink href="https://github.com/Jah-yee/autoclicker">autoclicker</ExternalLink>
           {' - '}
-          Keyboard cadence for browser stepping games
+          keyboard cadence for browser stepping games
         </p>
         <p className="body-text">
           <ExternalLink href="https://github.com/p-to-q/flatus">flatus</ExternalLink>
