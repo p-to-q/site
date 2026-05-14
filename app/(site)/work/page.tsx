@@ -64,7 +64,7 @@ export default function WorkPage() {
         <p className="body-text">
           <ExternalLink href="https://gist.github.com/Jah-yee/e12aa64a1a739d9749fdc5955a653740">centrifuge-sort</ExternalLink>
           {' - '}
-          physical sorting algorithm that should not exist
+          physical sorting algorithm that shouldn't exist
         </p>
       </section>
     </SiteStickyQedPage>
