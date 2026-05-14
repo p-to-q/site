@@ -26,6 +26,11 @@ export default function WorkPage() {
           {' - '}
           Keyboard cadence for browser stepping games
         </p>
+        <p className="body-text">
+          <ExternalLink href="https://github.com/p-to-q/flatus">flatus</ExternalLink>
+          {' - '}
+          a small thing that lives in your menubar and occasionally farts
+        </p>
       </section>
     </SiteStickyQedPage>
   )
