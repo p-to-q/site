@@ -1,7 +1,10 @@
+import { SITE_CONFIG } from '@/lib/constants'
 import { siteUrl } from '@/lib/site'
 import { SITE_LAST_UPDATED_ISO } from '@/lib/build-info'
 
 const llms = `# [p → q]
+
+> ${SITE_CONFIG.description}
 
 > An independent research practice working on the gap between what language models can express and what happens because of it.
 

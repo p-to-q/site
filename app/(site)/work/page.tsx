@@ -5,14 +5,14 @@ import { SiteStickyQedPage } from '@/components/layout/site-sticky-qed-page'
 export const metadata: Metadata = {
   title: 'Work',
   description:
-    'Selected projects from our practice: wittgenstein, sonde, autoclicker, flatus, and carburetor.',
+    'Selected projects from our practice: wittgenstein, sonde, autoclicker, flatus, carburetor, and centrifuge-sort.',
   alternates: {
     canonical: '/work',
   },
   openGraph: {
     title: 'Work',
     description:
-      'Selected projects from our practice: wittgenstein, sonde, autoclicker, flatus, and carburetor.',
+      'Selected projects from our practice: wittgenstein, sonde, autoclicker, flatus, carburetor, and centrifuge-sort.',
     url: '/work',
     images: [
       {
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Work',
     description:
-      'Selected projects from our practice: wittgenstein, sonde, autoclicker, flatus, and carburetor.',
+      'Selected projects from our practice: wittgenstein, sonde, autoclicker, flatus, carburetor, and centrifuge-sort.',
     images: ['/og?title=Work'],
   },
 }
@@ -59,7 +59,12 @@ export default function WorkPage() {
         <p className="body-text">
           <ExternalLink href="https://github.com/p-to-q/carburetor">[carburetor]</ExternalLink>
           {' - '}
-          a phone you refuel.
+          a phone you refuel
+        </p>
+        <p className="body-text">
+          <ExternalLink href="https://gist.github.com/Jah-yee/e12aa64a1a739d9749fdc5955a653740">centrifuge-sort</ExternalLink>
+          {' - '}
+          a physical sorting algorithm that should not exist
         </p>
       </section>
     </SiteStickyQedPage>

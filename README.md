@@ -11,7 +11,7 @@ We're interested in the arrow.
 
 </div>
 
-We study the layer between language and consequence.
+Experimental craft and research over scale.
 
 > `p` what can be said  
 > `→` how it becomes something  
