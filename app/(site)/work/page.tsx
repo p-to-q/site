@@ -5,14 +5,14 @@ import { SiteStickyQedPage } from '@/components/layout/site-sticky-qed-page'
 export const metadata: Metadata = {
   title: 'Work',
   description:
-    'Selected projects from our practice: wittgenstein, sonde, autoclicker, and flatus.',
+    'Selected projects from our practice: wittgenstein, sonde, autoclicker, flatus, and carburetor.',
   alternates: {
     canonical: '/work',
   },
   openGraph: {
     title: 'Work',
     description:
-      'Selected projects from our practice: wittgenstein, sonde, autoclicker, and flatus.',
+      'Selected projects from our practice: wittgenstein, sonde, autoclicker, flatus, and carburetor.',
     url: '/work',
     images: [
       {
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Work',
     description:
-      'Selected projects from our practice: wittgenstein, sonde, autoclicker, and flatus.',
+      'Selected projects from our practice: wittgenstein, sonde, autoclicker, flatus, and carburetor.',
     images: ['/og?title=Work'],
   },
 }
@@ -55,6 +55,11 @@ export default function WorkPage() {
           <ExternalLink href="https://github.com/p-to-q/flatus">flatus</ExternalLink>
           {' - '}
           a small thing that lives in your menubar and occasionally farts
+        </p>
+        <p className="body-text">
+          <ExternalLink href="https://github.com/p-to-q/carburetor">[carburetor]</ExternalLink>
+          {' - '}
+          a phone you refuel.
         </p>
       </section>
     </SiteStickyQedPage>
