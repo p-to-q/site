@@ -4,7 +4,32 @@ import { SiteStickyQedPage } from '@/components/layout/site-sticky-qed-page'
 
 export const metadata: Metadata = {
   title: 'Work',
-  description: 'wittgenstein - a modality harness for text-first LLMs',
+  description:
+    'Selected projects from our practice: wittgenstein, sonde, autoclicker, and flatus.',
+  alternates: {
+    canonical: '/work',
+  },
+  openGraph: {
+    title: 'Work',
+    description:
+      'Selected projects from our practice: wittgenstein, sonde, autoclicker, and flatus.',
+    url: '/work',
+    images: [
+      {
+        url: '/og?title=Work',
+        width: 1200,
+        height: 630,
+        alt: 'Work — [p → q]',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Work',
+    description:
+      'Selected projects from our practice: wittgenstein, sonde, autoclicker, and flatus.',
+    images: ['/og?title=Work'],
+  },
 }
 
 export default function WorkPage() {

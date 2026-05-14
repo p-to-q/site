@@ -3,13 +3,18 @@ import type { Metadata } from 'next'
 import { FontDisplayGate } from '@/components/layout/font-display-gate'
 import SiteChrome from '@/components/layout/site-chrome'
 import { SITE_CONFIG } from '@/lib/constants'
+import { getSiteSchemaOrgGraph } from '@/lib/schema-org-json-ld'
 import { siteUrl } from '@/lib/site'
+
+const defaultOgImage = {
+  url: '/og',
+  width: 1200,
+  height: 630,
+  alt: SITE_CONFIG.name,
+} as const
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  alternates: {
-    canonical: '/',
-  },
   title: {
     default: SITE_CONFIG.title,
     template: `%s | ${SITE_CONFIG.name}`,
@@ -21,10 +26,17 @@ export const metadata: Metadata = {
   openGraph: {
     title: SITE_CONFIG.title,
     description: SITE_CONFIG.description,
-    url: siteUrl,
+    url: '/',
     siteName: SITE_CONFIG.name,
     locale: 'en_US',
     type: 'website',
+    images: [defaultOgImage],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: SITE_CONFIG.title,
+    description: SITE_CONFIG.description,
+    images: [defaultOgImage.url],
   },
   robots: {
     index: true,
@@ -51,6 +63,8 @@ const CAMINGO_PRELOAD_WOFF2 = [
 
 const CAMINGO_FONT_DIR = '/fonts/CamingoMono%20Font/'
 
+const schemaOrgJsonLd = JSON.stringify(getSiteSchemaOrgGraph())
+
 export default function RootLayout({
   children,
 }: {
@@ -59,6 +73,10 @@ export default function RootLayout({
   return (
     <html lang="en" style={{ backgroundColor: 'var(--site-bg)' }}>
       <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: schemaOrgJsonLd }}
+        />
         {CAMINGO_PRELOAD_WOFF2.map((file, index) => (
           <link
             key={file}

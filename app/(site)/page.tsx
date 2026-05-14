@@ -8,6 +8,20 @@ import { SiteQedFooter } from '@/components/layout/site-sticky-qed-page'
 export const metadata: Metadata = {
   title: { absolute: '[p → q]' },
   description: 'We study the layer between language and consequence.',
+  alternates: {
+    canonical: '/',
+  },
+  openGraph: {
+    url: '/',
+    title: '[p → q]',
+    description: 'We study the layer between language and consequence.',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: '[p → q]',
+    description: 'We study the layer between language and consequence.',
+    images: ['/og'],
+  },
 }
 
 const ARROW_ROWS: [string, string][] = [
