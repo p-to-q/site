@@ -969,6 +969,12 @@ table {
   83.33% { content: '✽'; }
 }
 
+.claude-spinner {
+  display: inline-block;
+  width: 1.1em;        /* fixed slot — widest glyph fits, text never shifts */
+  text-align: center;
+}
+
 .claude-spinner::before {
   content: '·';
   /* step-end: hold each keyframe value for its full interval before jumping */
