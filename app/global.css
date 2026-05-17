@@ -959,6 +959,19 @@ table {
   mix-blend-mode: multiply;
 }
 
+/* Animated ellipsis: cycles . → .. → ... */
+@keyframes ellipsis-pulse {
+  0%   { content: '.';   }
+  33%  { content: '..';  }
+  66%  { content: '...'; }
+  100% { content: '.';   }
+}
+
+.animated-ellipsis::before {
+  content: '.';
+  animation: ellipsis-pulse 1.5s step-start infinite;
+}
+
 /* Classical Chinese margin quote — vertical right-to-left typesetting */
 .writing-margin-chinese {
   writing-mode: vertical-rl;

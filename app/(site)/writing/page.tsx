@@ -42,7 +42,7 @@ export default function WritingPage() {
   return (
     <SiteStickyQedPage>
       <section className="flex flex-col gap-3">
-        <p className="heading-text">continuously updating...</p>
+        <p className="heading-text">continuously updating<span className="animated-ellipsis" aria-hidden="true" /></p>
         {WRITINGS.map((entry) => (
           <p key={entry.slug} className="body-text">
             <Link href={`/writing/${entry.slug}`}>{entry.title}</Link>
