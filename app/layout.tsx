@@ -77,6 +77,12 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: schemaOrgJsonLd }}
         />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,700&family=Noto+Serif+SC:wght@400&display=swap"
+          rel="stylesheet"
+        />
         {CAMINGO_PRELOAD_WOFF2.map((file, index) => (
           <link
             key={file}

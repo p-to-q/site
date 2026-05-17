@@ -954,6 +954,18 @@ table {
   mix-blend-mode: multiply;
 }
 
+/* Classical Chinese margin quote — vertical right-to-left typesetting */
+.writing-margin-chinese {
+  writing-mode: vertical-rl;
+  font-family: 'Noto Serif SC', 'Songti SC', 'STSong', SimSun, serif;
+  font-size: 11px;
+  line-height: 1.9;
+  height: 200px;   /* controls column height; text wraps into additional columns leftward */
+  letter-spacing: 0.08em;
+  margin: 0;
+  color: currentColor;
+}
+
 /* ── Writing sidebar navigation ─────────────────────────── */
 
 .writing-sidebar {

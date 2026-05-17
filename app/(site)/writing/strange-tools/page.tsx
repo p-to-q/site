@@ -198,7 +198,9 @@ export default function StrangeToolsPage() {
             </p>
           </div>
           <MarginFigure>
-            <BracketSvg />
+            <p className="writing-margin-chinese">
+              「夫器无好恶，利害在人。太阿倒持，授人鳟柄；白旄黄钺，奄有四方。观此物之用，实进学之媒，虽有博戏之法，亦为小休之娱。」
+            </p>
           </MarginFigure>
         </section>
 
