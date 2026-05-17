@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Link from 'next/link'
 import { SiteStickyQedPage } from '@/components/layout/site-sticky-qed-page'
 
 export const metadata: Metadata = {
@@ -28,11 +29,27 @@ export const metadata: Metadata = {
   },
 }
 
+const WRITINGS = [
+  {
+    slug: 'strange-tools',
+    title: 'Strange Tools',
+    date: 'May 2026',
+    description: 'Tools whose strangeness continues to pay rent.',
+  },
+] as const
+
 export default function WritingPage() {
   return (
     <SiteStickyQedPage>
       <section className="flex flex-col gap-3">
-        <p className="heading-text">Continuously Updating</p>
+        <p className="heading-text">continuously updating</p>
+        {WRITINGS.map((entry) => (
+          <p key={entry.slug} className="body-text">
+            <Link href={`/writing/${entry.slug}`}>{entry.title}</Link>
+            {' - '}
+            <span style={{ color: 'var(--site-link)' }}>{entry.description}</span>
+          </p>
+        ))}
       </section>
     </SiteStickyQedPage>
   )
