@@ -274,7 +274,7 @@ export default function StrangeToolsPage() {
                 They make one hidden layer visible (not ten, one).
                 A field guide makes small differences visible.
                 A command line makes some of the machine&#39;s grammar visible.
-                A refueled phone makes energy visible.
+                A <ExternalLink href="https://github.com/p-to-q/carburetor">refueled phone</ExternalLink> makes energy visible.
                 A receipt-bearing file system makes provenance visible.
               </li>
               <li>
