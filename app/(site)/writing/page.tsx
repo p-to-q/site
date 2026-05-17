@@ -47,7 +47,7 @@ export default function WritingPage() {
           <p key={entry.slug} className="body-text">
             <Link href={`/writing/${entry.slug}`}>{entry.title}</Link>
             {' - '}
-            <span style={{ color: 'var(--site-link)' }}>{entry.description}</span>
+            <span className="text-[color:var(--site-link)]">{entry.description}</span>
           </p>
         ))}
       </section>

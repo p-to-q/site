@@ -814,10 +814,11 @@ table {
 }
 
 /* Pull quotes — substantial statements in Inter Bold (contrasts with CamingoMono body).
+   Inter is loaded via Google Fonts in app/layout.tsx.
    Selector specificity must beat `.writing-article__body p`. */
 .writing-article__body p.writing-article__pullquote,
 .writing-article__body .writing-article__pullquote {
-  font-family: 'Inter', sans-serif !important;
+  font-family: Inter, sans-serif !important;
   font-optical-sizing: auto;
   font-size: 23px !important;
   line-height: 1.32 !important;
@@ -874,7 +875,7 @@ table {
   color: var(--site-muted);
   letter-spacing: -0.01em;
   margin: 0 !important;
-  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 .writing-margin-caption__link {

@@ -127,7 +127,7 @@ export default function StrangeToolsPage() {
         {/* Title & date */}
         <header className="writing-article__header">
           <h1 className="writing-article__title">Strange Tools</h1>
-          <time className="writing-article__date" dateTime="2026-05-18">
+          <time className="writing-article__date" dateTime="2026-05-18" aria-label="Published May 2026 by Du">
             May 2026 · Du
           </time>
         </header>
@@ -207,7 +207,7 @@ export default function StrangeToolsPage() {
           <div className="writing-article__body">
             <p>
               This feels especially important now, when the easiest tools to build are services that collapse intention into result.
-              <span style={{whiteSpace:'nowrap'}}>ask <span className="arr">→</span> receive <span className="arr">→</span> approve <span className="arr">→</span> ship.</span>
+              <span className="whitespace-nowrap">ask <span className="arr">→</span> receive <span className="arr">→</span> approve <span className="arr">→</span> ship.</span>
               That is truly useful when the work is dull.
               But if every tool becomes a service, we lose some of the places where <em>judgment</em> forms.
             </p>
