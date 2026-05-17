@@ -867,6 +867,11 @@ table {
   margin-top: 0 !important;
 }
 
+.writing-article__signoff--divider {
+  color: var(--site-muted);
+  margin: 0;
+}
+
 
 .writing-margin-caption {
   font-family: 'CamingoMono', monospace;

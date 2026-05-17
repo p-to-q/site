@@ -184,7 +184,7 @@ export default function StrangeToolsPage() {
             </p>
             <p>
               They are not hard to explain because they are complicated.
-              Complicated tools are often very easy to explain: they save time, automate a workflow, replace a person, reduce a cost.
+              Complicated tools are often very easy to explain: they save time, automate a workflow, replace a person, reduce some cost.
               The hard ones are usually simpler than that.
               Their usefulness is not fully captured by features or convenience.
             </p>
@@ -360,6 +360,7 @@ export default function StrangeToolsPage() {
               The hope is not to make everything stranger.
               It is to give a small amount of room to the things modern technology has made too easy to miss, and to treat them with enough seriousness that their strangeness can do real work.
             </p>
+            <p className="writing-article__signoff--divider">—</p>
             <p className="writing-article__signoff">
               This is our first piece of <Link href="/writing">Writing</Link>.<br />
               Some of the strange tools we built live in{' '}
