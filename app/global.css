@@ -750,3 +750,285 @@ table {
   }
 }
 
+/* ── Writing article ───────────────────────────────────────────── */
+
+.writing-article {
+  display: flex;
+  flex-direction: column;
+  gap: 2.8rem;
+}
+
+.writing-article__header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.writing-article__title {
+  font-family: 'CamingoMono', monospace;
+  font-size: 16px !important;
+  line-height: 1.45 !important;
+  /* Use SemiBoldItalic (600 italic) — the only designed italic cut at readable weight */
+  font-weight: 600 !important;
+  font-style: italic !important;
+}
+
+.writing-article__date {
+  font-family: 'CamingoMono', monospace;
+  font-size: 12px !important;
+  line-height: 1.35 !important;
+  color: var(--site-muted);
+  letter-spacing: -0.035em;
+}
+
+/* Each section: body left, optional margin figure right */
+.writing-article__section {
+  position: relative;
+}
+
+.writing-article__body {
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+}
+
+.writing-article__body p,
+.writing-article__body li {
+  font-family: 'CamingoMono', monospace;
+  font-size: 16px !important;
+  line-height: 1.55 !important;
+  font-weight: 400 !important;
+  color: var(--site-text);
+  letter-spacing: -0.01em;
+}
+
+/*
+ * Italic fix: CamingoMono has no Regular Italic (400 italic).
+ * Available italic cuts: ExtraLightItalic (200) and SemiBoldItalic (600).
+ * Use SemiBoldItalic — the heavier weight compensates for italic's
+ * visual lightening, so emphasis reads at roughly the same density as body.
+ */
+.writing-article__body em {
+  font-style: italic !important;
+  font-weight: 600 !important;
+}
+
+/* Pull quotes — substantial statements in Inter Bold (contrasts with CamingoMono body).
+   Inter is loaded via Google Fonts in app/layout.tsx.
+   Selector specificity must beat `.writing-article__body p`. */
+.writing-article__body p.writing-article__pullquote,
+.writing-article__body .writing-article__pullquote {
+  font-family: Inter, sans-serif !important;
+  font-optical-sizing: auto;
+  font-size: 23px !important;
+  line-height: 1.32 !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.02em !important;
+  color: var(--site-text) !important;
+  margin-top: 0.8rem !important;
+  margin-bottom: 0.8rem !important;
+}
+
+/* Bullet list for the four qualities */
+.writing-article__qualities {
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.writing-article__qualities li {
+  padding-left: 1.5em;
+  position: relative;
+}
+
+.writing-article__qualities li::before {
+  content: '·';
+  position: absolute;
+  left: 0.35em;
+  color: var(--site-text);
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1.45;
+}
+
+/* Coda section — extra breathing room between signoff lines */
+.writing-article__coda .writing-article__body {
+  gap: 1.5rem;
+}
+
+.writing-article__signoff {
+  color: var(--site-link) !important;
+}
+
+.writing-article__signoff--first {
+  margin-top: 0 !important;
+}
+
+
+.writing-margin-caption {
+  font-family: 'CamingoMono', monospace;
+  font-size: 12px !important;
+  line-height: 1.4 !important;
+  color: var(--site-muted);
+  letter-spacing: -0.01em;
+  margin: 0 !important;
+  overflow-wrap: break-word;
+}
+
+.writing-margin-caption__link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.writing-margin-caption__link:hover {
+  color: var(--site-link);
+}
+
+/* ── Right-margin figures (hover-reveal, desktop only) ─────── */
+
+.writing-margin-figure {
+  position: absolute;
+  /* Anchor the LEFT edge at a consistent gap from the text box's right edge.
+     Measured from FourDotsSvg: right:-5.5rem − 32px width = 56px = 3.5rem gap. */
+  left: calc(100% + 3.5rem);
+  top: 0.5rem;
+  color: var(--site-link);
+  opacity: 0.55;
+  transition: opacity 300ms ease;
+  pointer-events: auto;
+  display: none;
+}
+
+.writing-margin-figure:hover {
+  opacity: 1;
+}
+
+.writing-margin-figure--top {
+  top: 0.25rem;
+}
+
+/* Show margin figures only when there is gutter space */
+@media (min-width: 960px) {
+  .writing-margin-figure {
+    display: block;
+  }
+}
+
+/* Captioned figure (photo + label) — overrides must come after base class.
+   Uses a wider right offset and explicit width so the 160px photo never
+   expands leftward into the article body. */
+.writing-margin-figure--captioned {
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: flex-start;
+  opacity: 1 !important;
+  transition: none !important;
+  /* Inherits left: calc(100% + 3.5rem) from base — same gap as SVG figures.
+     Explicit width prevents caption text from expanding rightward unbounded. */
+  width: 10rem;
+}
+
+@media (min-width: 960px) {
+  .writing-margin-figure--captioned {
+    display: flex !important;
+  }
+}
+
+.writing-margin-photo {
+  width: 100%;
+  max-width: 160px;
+  height: auto;
+  display: block;
+  transition: filter 200ms ease;
+}
+
+.writing-margin-figure--captioned:hover .writing-margin-photo {
+  filter: brightness(1.1) contrast(1.06) saturate(1.15);
+}
+
+/* White-background images: blend into the site's gray canvas */
+.writing-margin-photo--blend {
+  mix-blend-mode: multiply;
+}
+
+/* ── Writing sidebar navigation ─────────────────────────── */
+
+.writing-sidebar {
+  position: fixed;
+  left: 5rem;
+  bottom: 8rem;
+  width: 9rem;
+  display: none;
+}
+
+@media (min-width: 1280px) {
+  .writing-sidebar {
+    display: block;
+  }
+}
+
+.writing-sidebar__label {
+  font-family: 'CamingoMono', monospace;
+  font-size: 15px;
+  line-height: 1.35;
+  color: var(--site-muted);
+  letter-spacing: -0.02em;
+  margin-bottom: 0.7rem;
+}
+
+.writing-sidebar__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.writing-sidebar__link {
+  font-family: 'CamingoMono', monospace;
+  font-size: 15px;
+  line-height: 1.35;
+  font-weight: 400;
+  color: var(--site-muted);
+  text-decoration: none;
+  transition: color 120ms ease;
+  display: block;
+}
+
+.writing-sidebar__link:hover {
+  color: var(--site-text);
+  text-decoration: none;
+}
+
+.writing-sidebar__link.is-active {
+  color: var(--site-text);
+  font-weight: 600;
+}
+
+@media (max-width: 639px) {
+  .writing-article {
+    gap: 2.2rem;
+  }
+
+  .writing-article__title {
+    font-size: 1rem !important;
+    line-height: 1.55 !important;
+  }
+
+  .writing-article__body p,
+  .writing-article__body li {
+    font-size: 1rem !important;
+    line-height: 1.55 !important;
+  }
+
+  .writing-article__body p.writing-article__pullquote,
+  .writing-article__body .writing-article__pullquote {
+    font-size: 1.2rem !important;
+    line-height: 1.35 !important;
+  }
+}
+
