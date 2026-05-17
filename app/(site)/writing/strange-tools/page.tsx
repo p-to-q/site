@@ -208,8 +208,8 @@ export default function StrangeToolsPage() {
         <section id="judgment" className="writing-article__section">
           <div className="writing-article__body">
             <p>
-              This feels especially important now, when the easiest tools to build are services that collapse intention into result.
-              <span className="whitespace-nowrap">ask <span className="arr">→</span> receive <span className="arr">→</span> approve <span className="arr">→</span> ship.</span>
+              This feels especially important now, when the easiest tools to build are services that collapse intention into result.{' '}
+              <span className="whitespace-nowrap">ask <span className="arr">→</span> receive <span className="arr">→</span> approve <span className="arr">→</span> ship.</span>{' '}
               That is truly useful when the work is dull.
               But if every tool becomes a service, we lose some of the places where <em>judgment</em> forms.
             </p>
