@@ -366,9 +366,9 @@ export default function StrangeToolsPage() {
               A strange tool leaves you more able to begin.
             </p>
           </div>
-          <MarginFigureWithCaption>
+          <MarginFigure>
             <TwoByTwoSvg />
-          </MarginFigureWithCaption>
+          </MarginFigure>
         </section>
 
         {/* §7 — p-to-q coda */}
