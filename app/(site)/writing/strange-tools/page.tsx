@@ -239,10 +239,10 @@ export default function StrangeToolsPage() {
         <section id="builder" className="writing-article__section">
           <div className="writing-article__body">
             <p>
-              This is where <em>builder purpose</em> matters more than <ExternalLink href="https://farmerandfarmer.org/mastery/builder.html">user demand</ExternalLink>.
+              This is where <em>builder purpose</em> matters more than user demand.
               Users can often tell you where an existing tool hurts.
               They are less reliable at describing the tool that would let a different version of themselves exist.
-              The builder has to carry some view of the world that has not yet been fully requested.
+              The builder has to carry <ExternalLink href="https://farmerandfarmer.org/mastery/builder.html">some view of the world that has not yet been fully requested</ExternalLink>.
             </p>
             <p>
               A{' '}
