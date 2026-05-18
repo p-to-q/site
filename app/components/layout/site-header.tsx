@@ -144,9 +144,9 @@ export function SiteHeader() {
           <Link href="/writing" className={navClass('/writing')} aria-current={ariaCurrent('/writing')}>
             Writing
           </Link>
-        <ExternalLink href="https://github.com/p-to-q" className="body-text">
-          GitHub
-        </ExternalLink>
+          <ExternalLink href="https://github.com/p-to-q" className="body-text">
+            GitHub
+          </ExternalLink>
         </nav>
         <hr
           className="m-0 w-full border-0 p-0"

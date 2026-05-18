@@ -38,14 +38,18 @@ p-to-q.com [[click](https://www.p-to-q.com)]
 Install dependencies:
 
 ```bash
-pnpm install
+npm install
 ```
 
 Run locally:
 
 ```bash
-pnpm dev
+npm run dev
 ```
+
+### Rights
+
+Unless otherwise noted, site code, writing, images, and other assets are © p-to-q. All rights reserved.
 
 ### Clone
 
