@@ -969,6 +969,16 @@ table {
   83.33% { content: '✽'; }
 }
 
+/* Invisible wrapper link — no visual effect on any state */
+.claude-spinner-link,
+.claude-spinner-link:hover,
+.claude-spinner-link:focus {
+  color: inherit !important;
+  text-decoration: none !important;
+  font-weight: inherit !important;
+  outline: none;
+}
+
 .claude-spinner {
   display: inline-block;
   width: 1.1em;        /* fixed slot — widest glyph fits, text never shifts */

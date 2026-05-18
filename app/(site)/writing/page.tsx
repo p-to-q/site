@@ -42,7 +42,14 @@ export default function WritingPage() {
   return (
     <SiteStickyQedPage>
       <section className="flex flex-col gap-3">
-        <p className="heading-text"><span className="claude-spinner" aria-hidden="true" />{' '}continuously updating</p>
+        <p className="heading-text"><a
+            href="https://medium.com/@kyletmartinez/reverse-engineering-claudes-ascii-spinner-animation-eec2804626e0"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="claude-spinner-link"
+            tabIndex={-1}
+            aria-hidden="true"
+          ><span className="claude-spinner" /></a>{' '}continuously updating</p>
         {WRITINGS.map((entry) => (
           <p key={entry.slug} className="body-text">
             <Link href={`/writing/${entry.slug}`}>{entry.title}</Link>
