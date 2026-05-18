@@ -74,7 +74,7 @@ export default function WorkPage() {
         <p className="body-text">
           <ExternalLink href="https://github.com/p-to-q/lifeRestart">agent lifeRestart</ExternalLink>
           {' - '}
-          let an agent reroll its life, after{' '}
+          make something an agent want, after{' '}
           <ExternalLink href="https://github.com/VickScarlet/lifeRestart">lifeRestart</ExternalLink>
         </p>
       </section>
