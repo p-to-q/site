@@ -35,13 +35,22 @@ function MarginFigure({ children, className = '' }: { children: React.ReactNode;
   )
 }
 
-function MarginFigureWithCaption({ children, caption, href, className = '' }: { children: React.ReactNode; caption?: string; href?: string; className?: string }) {
+function MarginFigureWithCaption({ children, caption, captionHint, href, className = '' }: { children: React.ReactNode; caption?: string; captionHint?: string; href?: string; className?: string }) {
   return (
     <aside className={`writing-margin-figure writing-margin-figure--captioned ${className}`} aria-hidden="true">
       {children}
       {caption && (
         <p className="writing-margin-caption">
           {href ? <a href={href} target="_blank" rel="noopener noreferrer" className="writing-margin-caption__link">{caption}</a> : caption}
+          {captionHint && (
+            <span className="writing-margin-caption__hint">
+              {captionHint}
+              <svg className="writing-margin-caption__hint-icon" width="9" height="12" viewBox="0 0 9 12" fill="none" aria-hidden="true">
+                <rect x="1.25" y="0.75" width="6.5" height="10.5" rx="3.25" stroke="currentColor" strokeWidth="0.9" />
+                <line x1="4.5" y1="2.25" x2="4.5" y2="4.25" stroke="currentColor" strokeWidth="0.9" strokeLinecap="round" />
+              </svg>
+            </span>
+          )}
         </p>
       )}
     </aside>
@@ -258,7 +267,8 @@ export default function StrangeToolsPage() {
           </div>
           <MarginFigureWithCaption
             caption="Dynamicland — a humane dynamic medium where the physical room itself acts as the computer"
-            href="https://dynamicland.org/2024/The_communal_science_lab.pdf"
+            captionHint="press image for the physical setup"
+            className="writing-margin-figure--dynamicland"
           >
             <DynamiclandPhotoToggle />
           </MarginFigureWithCaption>

@@ -892,6 +892,10 @@ table {
   color: var(--site-link);
 }
 
+.writing-margin-figure--dynamicland:hover .writing-margin-caption {
+  color: var(--site-link);
+}
+
 /* ── Right-margin figures (hover-reveal, desktop only) ─────── */
 
 .writing-margin-figure {
@@ -968,6 +972,25 @@ table {
   cursor: pointer;
 }
 
+.writing-margin-caption .writing-margin-caption__hint {
+  display: inline-flex !important;
+  align-items: center;
+  gap: 0.3rem;
+  margin-top: 0.12rem;
+  color: inherit;
+  font-size: 0.68em !important;
+  line-height: 1.15 !important;
+  white-space: nowrap;
+}
+
+.writing-margin-caption .writing-margin-caption__hint-icon {
+  display: block;
+  flex: 0 0 auto;
+  width: 0.9em;
+  height: auto;
+  transform: translateY(0.08em);
+}
+
 .writing-margin-photo-toggle .writing-margin-photo {
   max-width: none;
 }
@@ -987,7 +1010,8 @@ table {
   opacity: 1;
 }
 
-.writing-margin-figure--captioned:hover .writing-margin-photo {
+.writing-margin-photo-toggle:hover .writing-margin-photo,
+.writing-margin-photo:hover {
   filter: brightness(1.1) contrast(1.06) saturate(1.15);
 }
 
