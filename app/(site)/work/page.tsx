@@ -5,14 +5,14 @@ import { SiteStickyQedPage } from '@/components/layout/site-sticky-qed-page'
 export const metadata: Metadata = {
   title: 'Work',
   description:
-    'Selected projects from our practice: wittgenstein, sonde, autoclicker, flatus, carburetor, and centrifuge-sort.',
+    'Selected projects from our practice: wittgenstein, sonde, autoclicker, flatus, carburetor, centrifuge-sort, aleph, and agent lifeRestart.',
   alternates: {
     canonical: '/work',
   },
   openGraph: {
     title: 'Work',
     description:
-      'Selected projects from our practice: wittgenstein, sonde, autoclicker, flatus, carburetor, and centrifuge-sort.',
+      'Selected projects from our practice: wittgenstein, sonde, autoclicker, flatus, carburetor, centrifuge-sort, aleph, and agent lifeRestart.',
     url: '/work',
     images: [
       {
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Work',
     description:
-      'Selected projects from our practice: wittgenstein, sonde, autoclicker, flatus, carburetor, and centrifuge-sort.',
+      'Selected projects from our practice: wittgenstein, sonde, autoclicker, flatus, carburetor, centrifuge-sort, aleph, and agent lifeRestart.',
     images: ['/og?title=Work'],
   },
 }
@@ -65,6 +65,16 @@ export default function WorkPage() {
           <ExternalLink href="https://gist.github.com/Jah-yee/e12aa64a1a739d9749fdc5955a653740">centrifuge-sort</ExternalLink>
           {' - '}
           physical sorting algorithm that shouldn't exist
+        </p>
+        <p className="body-text">
+          <ExternalLink href="https://github.com/p-to-q/aleph">aleph</ExternalLink>
+          {' - '}
+          reverse prompt search engine
+        </p>
+        <p className="body-text">
+          <ExternalLink href="https://github.com/p-to-q/lifeRestart">agent lifeRestart</ExternalLink>
+          {' - '}
+          let an agent reroll its life
         </p>
       </section>
     </SiteStickyQedPage>
