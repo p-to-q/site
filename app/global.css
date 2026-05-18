@@ -960,6 +960,33 @@ table {
   transition: filter 200ms ease;
 }
 
+.writing-margin-photo-toggle {
+  position: relative;
+  display: block;
+  width: 100%;
+  max-width: 160px;
+  cursor: pointer;
+}
+
+.writing-margin-photo-toggle .writing-margin-photo {
+  max-width: none;
+}
+
+.writing-margin-photo-toggle__pressed {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 120ms ease;
+}
+
+.writing-margin-photo-toggle[data-pressed='true'] .writing-margin-photo-toggle__default {
+  opacity: 0;
+}
+
+.writing-margin-photo-toggle[data-pressed='true'] .writing-margin-photo-toggle__pressed {
+  opacity: 1;
+}
+
 .writing-margin-figure--captioned:hover .writing-margin-photo {
   filter: brightness(1.1) contrast(1.06) saturate(1.15);
 }
@@ -1173,4 +1200,3 @@ table {
     line-height: 1.35 !important;
   }
 }
-

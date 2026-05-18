@@ -4,6 +4,7 @@ import { ExternalLink } from '@/components/content/external-link'
 import { SiteDivider } from '@/components/layout/site-divider'
 import { SiteHeader } from '@/components/layout/site-header'
 import { SiteQedFooter } from '@/components/layout/site-sticky-qed-page'
+import { DynamiclandPhotoToggle } from './dynamicland-photo-toggle'
 import { WritingNav } from './writing-nav'
 
 export const metadata: Metadata = {
@@ -259,12 +260,7 @@ export default function StrangeToolsPage() {
             caption="Dynamicland — a humane dynamic medium where the physical room itself acts as the computer"
             href="https://dynamicland.org/2024/The_communal_science_lab.pdf"
           >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/dynamicland-illustration.png"
-              alt="Illustration of Dynamicland's communal science lab — people working together in a room where computation is embedded in physical space"
-              className="writing-margin-photo"
-            />
+            <DynamiclandPhotoToggle />
           </MarginFigureWithCaption>
         </section>
 
@@ -272,10 +268,10 @@ export default function StrangeToolsPage() {
         <section id="builder" className="writing-article__section">
           <div className="writing-article__body">
             <p>
-              This is where <em>builder purpose</em> matters more than user demand.
+              This is where <ExternalLink href="https://farmerandfarmer.org/mastery/builder.html"><em>builder purpose</em> matters more than user demand</ExternalLink>.
               Users can often tell you where an existing tool hurts.
               They are less reliable at describing the tool that would let a different version of themselves exist.
-              The builder has to carry <ExternalLink href="https://farmerandfarmer.org/mastery/builder.html">some view of the world that has not yet been fully requested</ExternalLink>.
+              The builder has to carry some view of the world that has not yet been fully requested.
             </p>
             <p>
               A{' '}
