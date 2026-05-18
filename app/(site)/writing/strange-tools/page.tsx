@@ -366,7 +366,7 @@ export default function StrangeToolsPage() {
               A strange tool leaves you more able to begin.
             </p>
           </div>
-          <MarginFigure>
+          <MarginFigure className="writing-margin-figure--diagram">
             <TwoByTwoSvg />
           </MarginFigure>
         </section>

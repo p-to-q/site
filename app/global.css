@@ -911,6 +911,17 @@ table {
   opacity: 1;
 }
 
+/* 2x2 diagram has internal low-opacity layers — override wrapper so it
+   starts fully opaque and darkens on hover via brightness filter. */
+.writing-margin-figure--diagram {
+  opacity: 1;
+  transition: filter 300ms ease;
+}
+.writing-margin-figure--diagram:hover {
+  opacity: 1;
+  filter: brightness(0.55);
+}
+
 .writing-margin-figure--top {
   top: 0.25rem;
 }
