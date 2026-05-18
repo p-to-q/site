@@ -34,13 +34,15 @@ function MarginFigure({ children, className = '' }: { children: React.ReactNode;
   )
 }
 
-function MarginFigureWithCaption({ children, caption, href, className = '' }: { children: React.ReactNode; caption: string; href?: string; className?: string }) {
+function MarginFigureWithCaption({ children, caption, href, className = '' }: { children: React.ReactNode; caption?: string; href?: string; className?: string }) {
   return (
     <aside className={`writing-margin-figure writing-margin-figure--captioned ${className}`} aria-hidden="true">
       {children}
-      <p className="writing-margin-caption">
-        {href ? <a href={href} target="_blank" rel="noopener noreferrer" className="writing-margin-caption__link">{caption}</a> : caption}
-      </p>
+      {caption && (
+        <p className="writing-margin-caption">
+          {href ? <a href={href} target="_blank" rel="noopener noreferrer" className="writing-margin-caption__link">{caption}</a> : caption}
+        </p>
+      )}
     </aside>
   )
 }
@@ -102,14 +104,32 @@ function FourDotsSvg() {
   )
 }
 
-function MiddleLayersSvg() {
+function TwoByTwoSvg() {
   return (
-    <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <line x1="4" y1="8" x2="44" y2="8" stroke="currentColor" strokeWidth="1" strokeLinecap="round" opacity="0.3" />
-      <line x1="4" y1="16" x2="44" y2="16" stroke="currentColor" strokeWidth="1" strokeLinecap="round" opacity="0.5" />
-      <line x1="4" y1="24" x2="44" y2="24" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" opacity="1" />
-      <line x1="4" y1="32" x2="44" y2="32" stroke="currentColor" strokeWidth="1" strokeLinecap="round" opacity="0.5" />
-      <line x1="4" y1="40" x2="44" y2="40" stroke="currentColor" strokeWidth="1" strokeLinecap="round" opacity="0.3" />
+    <svg width="160" height="160" viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+      {/* Axes */}
+      <line x1="14" y1="80" x2="146" y2="80" stroke="currentColor" strokeWidth="0.75" />
+      <line x1="80" y1="14" x2="80" y2="146" stroke="currentColor" strokeWidth="0.75" />
+      {/* Arrow heads */}
+      <polyline points="142,77 146,80 142,83" stroke="currentColor" strokeWidth="0.75" strokeLinecap="round" strokeLinejoin="round" />
+      <polyline points="77,18 80,14 83,18" stroke="currentColor" strokeWidth="0.75" strokeLinecap="round" strokeLinejoin="round" />
+      {/* Axis labels */}
+      <text x="16" y="76" fontFamily="CamingoMono, monospace" fontSize="6" fill="currentColor" opacity="0.4">hidden</text>
+      <text x="104" y="76" fontFamily="CamingoMono, monospace" fontSize="6" fill="currentColor" opacity="0.4">exposed</text>
+      <text x="83" y="23" fontFamily="CamingoMono, monospace" fontSize="6" fill="currentColor" opacity="0.4">amplifies</text>
+      <text x="83" y="144" fontFamily="CamingoMono, monospace" fontSize="6" fill="currentColor" opacity="0.4">diminishes</text>
+      {/* Q1 top-left: good abstraction — muted */}
+      <text x="16" y="43" fontFamily="CamingoMono, monospace" fontSize="8" fill="currentColor" opacity="0.4">good</text>
+      <text x="16" y="54" fontFamily="CamingoMono, monospace" fontSize="8" fill="currentColor" opacity="0.4">abstraction</text>
+      {/* Q2 top-right: strange tools — full, bold */}
+      <text x="86" y="43" fontFamily="CamingoMono, monospace" fontSize="8" fill="currentColor" fontWeight="600">strange</text>
+      <text x="86" y="54" fontFamily="CamingoMono, monospace" fontSize="8" fill="currentColor" fontWeight="600">tools</text>
+      {/* Q3 bottom-left: service trap — muted */}
+      <text x="16" y="104" fontFamily="CamingoMono, monospace" fontSize="8" fill="currentColor" opacity="0.4">service</text>
+      <text x="16" y="115" fontFamily="CamingoMono, monospace" fontSize="8" fill="currentColor" opacity="0.4">trap</text>
+      {/* Q4 bottom-right: hostile complexity — muted */}
+      <text x="86" y="104" fontFamily="CamingoMono, monospace" fontSize="8" fill="currentColor" opacity="0.4">hostile</text>
+      <text x="86" y="115" fontFamily="CamingoMono, monospace" fontSize="8" fill="currentColor" opacity="0.4">complexity</text>
     </svg>
   )
 }
@@ -333,9 +353,9 @@ export default function StrangeToolsPage() {
               A strange tool leaves you more able to begin.
             </p>
           </div>
-          <MarginFigure>
-            <MiddleLayersSvg />
-          </MarginFigure>
+          <MarginFigureWithCaption>
+            <TwoByTwoSvg />
+          </MarginFigureWithCaption>
         </section>
 
         {/* §7 — p-to-q coda */}
