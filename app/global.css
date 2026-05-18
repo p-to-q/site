@@ -959,6 +959,89 @@ table {
   mix-blend-mode: multiply;
 }
 
+/* ── Work: full project photo, revealed in the left gutter on link hover ── */
+.work-row {
+  position: relative;
+}
+
+.work-thumb {
+  /* Fixed height = five body-text rows (current ± 2): 5 lines + 4 gaps */
+  --work-thumb-height: calc(5 * 1.45rem + 4 * 0.75rem);
+  /* One body-text row plus the flex gap below it */
+  --work-row-step: calc(1.45rem + 0.75rem);
+  /* Vertical anchor: centred on the hovered row by default; the list-edge
+     rules below pin it to the list top/bottom and switch this to 0 */
+  --thumb-ty: -50%;
+  position: absolute;
+  right: calc(100% + 2rem);
+  top: 50%;
+  display: none;
+  border: 1px solid var(--site-code-border);
+  background: var(--site-card-bg);
+  opacity: 0;
+  transform: translateY(var(--thumb-ty)) translateX(0.5rem);
+  transition: opacity 220ms ease, transform 220ms ease;
+  pointer-events: none;
+}
+
+/* Whole image, never cropped: fixed height, natural width. The wrapper
+   shrink-wraps this. max-width keeps a very wide image inside one gutter
+   (content is max-w-2xl = 42rem, centred at ≥1024) on narrower desktops. */
+.work-thumb img {
+  height: var(--work-thumb-height);
+  width: auto;
+  max-width: calc((100vw - 42rem) / 2 - 2rem);
+  object-fit: contain;
+  display: block;
+}
+
+/* Rule: the photo is 5 rows tall and centred on the hovered row, but it must
+   never spill past the top of the first project or the bottom of the last.
+   First/second rows pin to the list top, last/second-last pin to the list
+   bottom; every row in between stays centred. */
+.work-row:first-child .work-thumb {
+  top: 0;
+  bottom: auto;
+  --thumb-ty: 0;
+}
+.work-row:nth-child(2) .work-thumb {
+  top: calc(-1 * var(--work-row-step));
+  bottom: auto;
+  --thumb-ty: 0;
+}
+.work-row:nth-last-child(2) .work-thumb {
+  top: auto;
+  bottom: calc(-1 * var(--work-row-step));
+  --thumb-ty: 0;
+}
+.work-row:last-child .work-thumb {
+  top: auto;
+  bottom: 0;
+  --thumb-ty: 0;
+}
+
+.work-row:has(a:hover) .work-thumb,
+.work-row:has(a:focus-visible) .work-thumb {
+  opacity: 1;
+  transform: translateY(var(--thumb-ty)) translateX(0);
+}
+
+/* Left gutter only exists once the body centers (lg: mx-auto) */
+@media (min-width: 1024px) {
+  .work-thumb {
+    display: block;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .work-thumb,
+  .work-row:has(a:hover) .work-thumb,
+  .work-row:has(a:focus-visible) .work-thumb {
+    transform: translateY(-50%);
+    transition: opacity 220ms ease;
+  }
+}
+
 /* Claude Code spinner — · ✢ ✳ ✶ ✻ ✽, 120ms per frame = 720ms cycle */
 @keyframes claude-spinner {
   0%     { content: '·'; }
