@@ -49,7 +49,7 @@ function MarginFigureWithCaption({ children, caption, href, className = '' }: { 
 
 function KettleSvg() {
   return (
-    <svg width="56" height="68" viewBox="0 0 56 68" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg width="80" height="97" viewBox="0 0 56 68" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M20 14 L12 54 L44 54 L40 14 Z" stroke="currentColor" strokeWidth="1.2" strokeLinejoin="round" fill="none" />
       <line x1="13" y1="57" x2="43" y2="57" stroke="currentColor" strokeWidth="1.2" />
       <line x1="12" y1="54" x2="13" y2="57" stroke="currentColor" strokeWidth="1.2" />
@@ -109,7 +109,7 @@ function TwoByTwoSvg() {
   // Outer frame: 4,4 → 156,156. Dividers at x=80, y=80 (edge to edge).
   // Quadrant centres: Q1=(42,42) Q2=(118,42) Q3=(42,118) Q4=(118,118)
   return (
-    <svg width="160" height="160" viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg width="200" height="200" viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg">
 
       {/* Outer frame */}
       <rect x="4" y="4" width="152" height="152" stroke="currentColor" strokeWidth="0.5" opacity="0.2" />
