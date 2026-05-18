@@ -918,7 +918,7 @@ table {
   transition: filter 300ms ease;
 }
 .writing-margin-figure--diagram:hover {
-  filter: brightness(0.55);
+  filter: brightness(0.35);
 }
 
 .writing-margin-figure--top {
