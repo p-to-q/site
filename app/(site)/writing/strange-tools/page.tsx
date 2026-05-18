@@ -106,48 +106,42 @@ function FourDotsSvg() {
 
 function TwoByTwoSvg() {
   const f = 'CamingoMono, monospace'
-  // Quadrant centres: (40,44) (120,44) (40,116) (120,116)
-  // Axes at x=80, y=80; diagram occupies 0 0 160 160
+  // Outer frame: 4,4 → 156,156. Dividers at x=80, y=80 (edge to edge).
+  // Quadrant centres: Q1=(42,42) Q2=(118,42) Q3=(42,118) Q4=(118,118)
   return (
     <svg width="160" height="160" viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg">
 
-      {/* Highlight: strange tools quadrant (top-right) */}
-      <rect x="81" y="0" width="79" height="79" fill="currentColor" opacity="0.05" />
-
       {/* Outer frame */}
-      <rect x="0.5" y="0.5" width="159" height="159" stroke="currentColor" strokeWidth="0.5" opacity="0.15" />
+      <rect x="4" y="4" width="152" height="152" stroke="currentColor" strokeWidth="0.5" opacity="0.2" />
 
-      {/* Dividing axes */}
-      <line x1="0" y1="80" x2="160" y2="80" stroke="currentColor" strokeWidth="0.6" />
-      <line x1="80" y1="0" x2="80" y2="160" stroke="currentColor" strokeWidth="0.6" />
+      {/* Highlight: strange tools quadrant (top-right) */}
+      <rect x="80" y="4" width="76" height="76" fill="currentColor" opacity="0.06" />
 
-      {/* Axis direction arrows (right + top only — "expose" and "amplify" are the positive directions) */}
-      <polyline points="155,77 159,80 155,83" stroke="currentColor" strokeWidth="0.7" strokeLinecap="round" strokeLinejoin="round" />
-      <polyline points="77,5 80,1 83,5" stroke="currentColor" strokeWidth="0.7" strokeLinecap="round" strokeLinejoin="round" />
+      {/* Dividers — edge to edge within frame */}
+      <line x1="4" y1="80" x2="156" y2="80" stroke="currentColor" strokeWidth="0.5" opacity="0.5" />
+      <line x1="80" y1="4" x2="80" y2="156" stroke="currentColor" strokeWidth="0.5" opacity="0.5" />
 
-      {/* Axis labels — small, near arrow tips */}
-      <text x="80" y="93" textAnchor="middle" fontFamily={f} fontSize="6.5" fill="currentColor" opacity="0.3">hidden</text>
-      <text x="152" y="93" textAnchor="end" fontFamily={f} fontSize="6.5" fill="currentColor" opacity="0.3">exposed</text>
-      <text x="88" y="11" fontFamily={f} fontSize="6.5" fill="currentColor" opacity="0.3">amplifies</text>
-      <text x="88" y="91" fontFamily={f} fontSize="6.5" fill="currentColor" opacity="0.3">diminishes</text>
+      {/* Axis labels — each at its own edge, above/beside the divider */}
+      <text x="7"   y="76" fontFamily={f} fontSize="5.5" fill="currentColor" opacity="0.32">hidden</text>
+      <text x="153" y="76" textAnchor="end" fontFamily={f} fontSize="5.5" fill="currentColor" opacity="0.32">exposed</text>
+      <text x="83"  y="14" fontFamily={f} fontSize="5.5" fill="currentColor" opacity="0.32">amplifies</text>
+      <text x="83"  y="153" fontFamily={f} fontSize="5.5" fill="currentColor" opacity="0.32">diminishes</text>
 
-      {/* Q1 top-left — muted */}
-      <text x="40" y="38" textAnchor="middle" fontFamily={f} fontSize="8" fill="currentColor" opacity="0.32">good</text>
-      <text x="40" y="50" textAnchor="middle" fontFamily={f} fontSize="8" fill="currentColor" opacity="0.32">abstraction</text>
+      {/* Q1 top-left — good abstraction, muted */}
+      <text x="42" y="37" textAnchor="middle" fontFamily={f} fontSize="7.5" fill="currentColor" opacity="0.28">good</text>
+      <text x="42" y="48" textAnchor="middle" fontFamily={f} fontSize="7.5" fill="currentColor" opacity="0.28">abstraction</text>
 
-      {/* Q2 top-right — highlighted */}
-      <text x="120" y="38" textAnchor="middle" fontFamily={f} fontSize="8" fill="currentColor">strange</text>
-      <text x="120" y="50" textAnchor="middle" fontFamily={f} fontSize="8" fill="currentColor">tools</text>
-      {/* Small marker dot */}
-      <circle cx="152" cy="8" r="2.5" fill="currentColor" />
+      {/* Q2 top-right — strange tools, primary */}
+      <text x="118" y="37" textAnchor="middle" fontFamily={f} fontSize="7.5" fill="currentColor">strange</text>
+      <text x="118" y="48" textAnchor="middle" fontFamily={f} fontSize="7.5" fill="currentColor">tools</text>
 
-      {/* Q3 bottom-left — muted */}
-      <text x="40" y="110" textAnchor="middle" fontFamily={f} fontSize="8" fill="currentColor" opacity="0.32">service</text>
-      <text x="40" y="122" textAnchor="middle" fontFamily={f} fontSize="8" fill="currentColor" opacity="0.32">trap</text>
+      {/* Q3 bottom-left — service trap, muted */}
+      <text x="42" y="109" textAnchor="middle" fontFamily={f} fontSize="7.5" fill="currentColor" opacity="0.28">service</text>
+      <text x="42" y="120" textAnchor="middle" fontFamily={f} fontSize="7.5" fill="currentColor" opacity="0.28">trap</text>
 
-      {/* Q4 bottom-right — muted */}
-      <text x="120" y="110" textAnchor="middle" fontFamily={f} fontSize="8" fill="currentColor" opacity="0.32">hostile</text>
-      <text x="120" y="122" textAnchor="middle" fontFamily={f} fontSize="8" fill="currentColor" opacity="0.32">complexity</text>
+      {/* Q4 bottom-right — hostile complexity, muted */}
+      <text x="118" y="109" textAnchor="middle" fontFamily={f} fontSize="7.5" fill="currentColor" opacity="0.28">hostile</text>
+      <text x="118" y="120" textAnchor="middle" fontFamily={f} fontSize="7.5" fill="currentColor" opacity="0.28">complexity</text>
 
     </svg>
   )
