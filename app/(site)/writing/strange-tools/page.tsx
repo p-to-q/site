@@ -136,12 +136,12 @@ function TwoByTwoSvg() {
       <text x="118" y="48" textAnchor="middle" fontFamily={f} fontSize="7.5" fill="currentColor">tools</text>
 
       {/* Q3 bottom-left — service trap, muted */}
-      <text x="42" y="109" textAnchor="middle" fontFamily={f} fontSize="7.5" fill="currentColor" opacity="0.28">service</text>
-      <text x="42" y="120" textAnchor="middle" fontFamily={f} fontSize="7.5" fill="currentColor" opacity="0.28">trap</text>
+      <text x="42" y="117" textAnchor="middle" fontFamily={f} fontSize="7.5" fill="currentColor" opacity="0.28">service</text>
+      <text x="42" y="128" textAnchor="middle" fontFamily={f} fontSize="7.5" fill="currentColor" opacity="0.28">trap</text>
 
       {/* Q4 bottom-right — hostile complexity, muted */}
-      <text x="118" y="109" textAnchor="middle" fontFamily={f} fontSize="7.5" fill="currentColor" opacity="0.28">hostile</text>
-      <text x="118" y="120" textAnchor="middle" fontFamily={f} fontSize="7.5" fill="currentColor" opacity="0.28">complexity</text>
+      <text x="118" y="117" textAnchor="middle" fontFamily={f} fontSize="7.5" fill="currentColor" opacity="0.28">hostile</text>
+      <text x="118" y="128" textAnchor="middle" fontFamily={f} fontSize="7.5" fill="currentColor" opacity="0.28">complexity</text>
 
     </svg>
   )
