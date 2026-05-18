@@ -128,12 +128,12 @@ function TwoByTwoSvg() {
       <text x="83"  y="153" fontFamily={f} fontSize="5.5" fill="currentColor" opacity="0.32">diminishes</text>
 
       {/* Q1 top-left — good abstraction, muted */}
-      <text x="42" y="43" textAnchor="middle" fontFamily={f} fontSize="7.5" fill="currentColor" opacity="0.28">good</text>
-      <text x="42" y="54" textAnchor="middle" fontFamily={f} fontSize="7.5" fill="currentColor" opacity="0.28">abstraction</text>
+      <text x="42" y="37" textAnchor="middle" fontFamily={f} fontSize="7.5" fill="currentColor" opacity="0.28">good</text>
+      <text x="42" y="48" textAnchor="middle" fontFamily={f} fontSize="7.5" fill="currentColor" opacity="0.28">abstraction</text>
 
       {/* Q2 top-right — strange tools, primary */}
-      <text x="118" y="43" textAnchor="middle" fontFamily={f} fontSize="7.5" fill="currentColor">strange</text>
-      <text x="118" y="54" textAnchor="middle" fontFamily={f} fontSize="7.5" fill="currentColor">tools</text>
+      <text x="118" y="37" textAnchor="middle" fontFamily={f} fontSize="7.5" fill="currentColor">strange</text>
+      <text x="118" y="48" textAnchor="middle" fontFamily={f} fontSize="7.5" fill="currentColor">tools</text>
 
       {/* Q3 bottom-left — service trap, muted */}
       <text x="42" y="117" textAnchor="middle" fontFamily={f} fontSize="7.5" fill="currentColor" opacity="0.28">service</text>
