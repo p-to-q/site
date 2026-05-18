@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
 const NAV_SECTIONS = [
   { id: 'strange',        label: 'strange' },
   { id: 'strangeness',    label: 'strangeness' },
-  { id: 'judgment',       label: 'judgment' },
+  { id: 'judgment',       label: 'discernment' },
   { id: 'builder',        label: 'builder' },
   { id: 'four-qualities', label: 'four qualities' },
   { id: 'middle',         label: 'the middle' },
