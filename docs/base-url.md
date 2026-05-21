@@ -9,4 +9,24 @@
 
 **Subdomains** (`*.ptoq.io`): add the hostname in Vercel (or your DNS provider), assign it to the right project, and set **`NEXT_PUBLIC_BASE_URL`** on that project to the matching `https://…` origin. No extra code is required beyond this env var for each deployment.
 
+## One Project, Two Domains
+
+If a project needs both:
+
+- a **primary public domain** such as `https://machinedie.life`
+- an **organization alias** such as `https://liferestart.ptoq.io`
+
+configure the deployment like this:
+
+1. Pick exactly one **canonical production origin**.
+2. Set **`NEXT_PUBLIC_BASE_URL`** to that canonical origin on the production project.
+3. Point the secondary hostname at the same deployment, but redirect it to the canonical host at the edge or platform level.
+
+For the `agent_lifeRestarter` project, the intended setup is:
+
+- Canonical production origin: `https://machinedie.life`
+- Organization alias: `https://liferestart.ptoq.io`
+
+Until DNS is ready, leave previews on their preview host and only set `NEXT_PUBLIC_BASE_URL` on production once the canonical domain is live.
+
 See `.env.example`.

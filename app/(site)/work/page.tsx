@@ -109,10 +109,14 @@ export default function WorkPage() {
           reverse prompt search engine
         </WorkItem>
         <WorkItem thumb={thumbs['liferestart']}>
-          <ExternalLink href="https://github.com/p-to-q/lifeRestart">agent lifeRestart</ExternalLink>
+          <ExternalLink href="https://machinedie.life">agent lifeRestart</ExternalLink>
           {' - '}
           make something an agent want, after{' '}
           <ExternalLink href="https://github.com/VickScarlet/lifeRestart">lifeRestart</ExternalLink>
+          {' '}
+          (
+          <ExternalLink href="https://github.com/p-to-q/lifeRestart">code</ExternalLink>
+          )
         </WorkItem>
       </section>
     </SiteStickyQedPage>
