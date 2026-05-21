@@ -104,7 +104,7 @@ export default function WorkPage() {
           physical sorting algorithm that shouldn't exist
         </WorkItem>
         <WorkItem thumb={thumbs['aleph']}>
-          <ExternalLink href="https://github.com/p-to-q/aleph">aleph</ExternalLink>
+          <ExternalLink href="https://aleph.ptoq.io/">aleph</ExternalLink>
           {' - '}
           reverse prompt search engine
         </WorkItem>
@@ -113,10 +113,6 @@ export default function WorkPage() {
           {' - '}
           make something an agent want, after{' '}
           <ExternalLink href="https://github.com/VickScarlet/lifeRestart">lifeRestart</ExternalLink>
-          {' '}
-          (
-          <ExternalLink href="https://github.com/p-to-q/lifeRestart">code</ExternalLink>
-          )
         </WorkItem>
       </section>
     </SiteStickyQedPage>
