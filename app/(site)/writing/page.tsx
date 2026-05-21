@@ -41,8 +41,8 @@ const WRITINGS = [
 export default function WritingPage() {
   return (
     <SiteStickyQedPage>
-      <section className="writing-index" aria-labelledby="writing-index-status">
-        <p id="writing-index-status" className="heading-text writing-index__status"><a
+      <section className="flex flex-col gap-3">
+        <p className="heading-text"><a
             href="https://medium.com/@kyletmartinez/reverse-engineering-claudes-ascii-spinner-animation-eec2804626e0"
             target="_blank"
             rel="noopener noreferrer"
@@ -50,16 +50,13 @@ export default function WritingPage() {
             tabIndex={-1}
             aria-hidden="true"
           ><span className="claude-spinner" /></a>{' '}continuously updating</p>
-        <div className="writing-index__divider" aria-hidden="true" />
-        <div className="writing-index__entries">
-          {WRITINGS.map((entry) => (
-            <p key={entry.slug} className="body-text writing-index__entry">
-              <Link href={`/writing/${entry.slug}`}>{entry.title}</Link>
-              {' - '}
-              <span className="text-[color:var(--site-link)]">{entry.description}</span>
-            </p>
-          ))}
-        </div>
+        {WRITINGS.map((entry) => (
+          <p key={entry.slug} className="body-text">
+            <Link href={`/writing/${entry.slug}`}>{entry.title}</Link>
+            {' - '}
+            <span className="text-[color:var(--site-link)]">{entry.description}</span>
+          </p>
+        ))}
       </section>
     </SiteStickyQedPage>
   )

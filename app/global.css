@@ -608,38 +608,6 @@ table {
   transform: translateY(clamp(3rem, 10vh, 5rem));
 }
 
-/* Writing index: status, divider, then entries. The rule separates page state
-   from article links without introducing another font scale. */
-.writing-index {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-}
-
-.writing-index__status,
-.writing-index__entry {
-  margin: 0;
-}
-
-.writing-index__divider {
-  width: 100%;
-  height: 1px;
-  margin: 0.85rem 0 0.95rem;
-  background-image: repeating-linear-gradient(
-    to right,
-    var(--site-muted) 0,
-    var(--site-muted) 2px,
-    transparent 2px,
-    transparent 7px
-  );
-}
-
-.writing-index__entries {
-  display: flex;
-  flex-direction: column;
-  gap: 0.45rem;
-}
-
 .site-copyright-text {
   margin-top: clamp(2.25rem, 8vh, 3.5rem);
   margin-bottom: clamp(4rem, 12vh, 6rem);
