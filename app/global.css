@@ -892,7 +892,12 @@ table {
   color: var(--site-link);
 }
 
-.writing-margin-figure--dynamicland:hover .writing-margin-caption {
+/* Standard hover for every captioned margin figure: hovering the caption
+   (or anywhere in the figure) lifts its color from muted to link.
+   Applies whether or not the caption has an `href` — keeps decorative
+   captions like "Notion, 2013 (reconstructed)" on the same affordance
+   as linked ones, and makes future captions consistent by default. */
+.writing-margin-figure--captioned:hover .writing-margin-caption {
   color: var(--site-link);
 }
 
