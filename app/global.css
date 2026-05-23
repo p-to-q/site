@@ -98,6 +98,13 @@
   --sh-jsxliterals: #6266d1;
   --sh-property: #e25a1c;
   --sh-entity: #e25a1c;
+
+  /* Right-margin annotation timing — kept here so caption / figure / photo
+     hover transitions stay in lockstep when the system is tuned. */
+  --writing-margin-text-fade: 150ms ease;    /* caption / link / chinese color */
+  --writing-margin-figure-fade: 300ms ease;  /* SVG figure / diagram reveal */
+  --writing-margin-photo-fade: 200ms ease;   /* photo brightness micro-pop */
+  --writing-margin-photo-swap: 120ms ease;   /* photo-toggle default ↔ pressed */
 }
 
 html {
@@ -873,6 +880,11 @@ table {
 }
 
 
+/* Right-margin annotations.
+   Standard: every caption (with or without href) fades muted→link on
+   figure hover, using --writing-margin-text-fade for the easing.
+   The hint span and chinese quote inherit `color`, so when their
+   parent's color animates they animate frame-by-frame for free. */
 .writing-margin-caption {
   font-family: 'CamingoMono', monospace;
   font-size: 12px !important;
@@ -881,25 +893,19 @@ table {
   letter-spacing: -0.01em;
   margin: 0 !important;
   overflow-wrap: break-word;
-  /* Match the global `a` color easing so non-link captions (Notion,
-     Dynamicland) fade with the same rhythm as linked ones (Kettle). */
-  transition: color 150ms ease;
+  transition: color var(--writing-margin-text-fade);
 }
 
 .writing-margin-caption__link {
   color: inherit;
   text-decoration: none;
+  transition: color var(--writing-margin-text-fade);
 }
 
 .writing-margin-caption__link:hover {
   color: var(--site-link);
 }
 
-/* Standard hover for every captioned margin figure: hovering the caption
-   (or anywhere in the figure) lifts its color from muted to link.
-   Applies whether or not the caption has an `href` — keeps decorative
-   captions like "Notion, 2013 (reconstructed)" on the same affordance
-   as linked ones, and makes future captions consistent by default. */
 .writing-margin-figure--captioned:hover .writing-margin-caption {
   color: var(--site-link);
 }
@@ -914,7 +920,7 @@ table {
   top: 0.5rem;
   color: var(--site-link);
   opacity: 0.55;
-  transition: opacity 300ms ease;
+  transition: opacity var(--writing-margin-figure-fade);
   pointer-events: auto;
   display: none;
 }
@@ -927,7 +933,7 @@ table {
    starts fully opaque and darkens on hover via brightness filter. */
 .writing-margin-figure--diagram {
   opacity: 1;
-  transition: filter 300ms ease;
+  transition: filter var(--writing-margin-figure-fade);
 }
 .writing-margin-figure--diagram:hover {
   filter: brightness(0.35);
@@ -946,13 +952,14 @@ table {
 
 /* Captioned figure (photo + label) — overrides must come after base class.
    Uses a wider right offset and explicit width so the 160px photo never
-   expands leftward into the article body. */
+   expands leftward into the article body. The wrapper itself doesn't
+   fade (it's always visible); the caption inside owns its color easing. */
 .writing-margin-figure--captioned {
   flex-direction: column;
   gap: 0.5rem;
   align-items: flex-start;
   opacity: 1 !important;
-  transition: none !important;
+  transition: none;
   /* Inherits left: calc(100% + 3.5rem) from base — same gap as SVG figures.
      Explicit width prevents caption text from expanding rightward unbounded. */
   width: 10rem;
@@ -969,7 +976,7 @@ table {
   max-width: 160px;
   height: auto;
   display: block;
-  transition: filter 200ms ease;
+  transition: filter var(--writing-margin-photo-fade);
 }
 
 .writing-margin-photo-toggle {
@@ -1007,7 +1014,7 @@ table {
   position: absolute;
   inset: 0;
   opacity: 0;
-  transition: opacity 120ms ease;
+  transition: opacity var(--writing-margin-photo-swap);
 }
 
 .writing-margin-photo-toggle[data-pressed='true'] .writing-margin-photo-toggle__default {
@@ -1143,7 +1150,9 @@ table {
   animation: claude-spinner 0.72s step-end infinite;
 }
 
-/* Classical Chinese margin quote — vertical right-to-left typesetting */
+/* Classical Chinese margin quote — vertical right-to-left typesetting.
+   Color easing keeps it on the same hover rhythm as other margin captions
+   if/when a hover state is later applied here. */
 .writing-margin-chinese {
   writing-mode: vertical-rl;
   font-family: 'Noto Serif SC', 'Songti SC', 'STSong', SimSun, serif;
@@ -1153,6 +1162,7 @@ table {
   letter-spacing: 0.08em;
   margin: 0;
   color: currentColor;
+  transition: color var(--writing-margin-text-fade);
 }
 
 /* ── Writing sidebar navigation ─────────────────────────── */
