@@ -881,6 +881,9 @@ table {
   letter-spacing: -0.01em;
   margin: 0 !important;
   overflow-wrap: break-word;
+  /* Match the global `a` color easing so non-link captions (Notion,
+     Dynamicland) fade with the same rhythm as linked ones (Kettle). */
+  transition: color 150ms ease;
 }
 
 .writing-margin-caption__link {
