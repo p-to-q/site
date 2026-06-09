@@ -31,6 +31,12 @@ export const metadata: Metadata = {
 
 const WRITINGS = [
   {
+    slug: 'the-forest-and-the-interface',
+    title: 'The Forest and the Interface',
+    date: 'June 2026',
+    description: 'A forest has an interface that is not user-friendly.',
+  },
+  {
     slug: 'strange-tools',
     title: 'Strange Tools',
     date: 'May 2026',
