@@ -765,6 +765,197 @@ table {
   gap: 2.8rem;
 }
 
+/* Forest photo carousel — embedded photo scroll */
+.forest-photo-carousel {
+  position: relative;
+  width: 100%;
+  margin: 1rem 0;
+  background-color: #333333;
+  border: 1px solid #2a2a2a;
+  border-radius: 4px;
+  padding-top: 1.6rem;
+  padding-bottom: 1rem;
+  padding-left: 1.2rem;
+  padding-right: 1.2rem;
+  overflow: hidden;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* 胶片孔容器 - 顶到边缘，像真实胶片 */
+.forest-photo-carousel__sprocket-container {
+  position: absolute;
+  top: 0.5rem;
+  left: 0;
+  right: 0;
+  height: 6px;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+/* 胶片孔滚动轨道 */
+.forest-photo-carousel__sprocket-track {
+  width: 100%;
+  height: 6px;
+  overflow-x: hidden;
+  scrollbar-width: none;
+}
+
+.forest-photo-carousel__sprocket-track::-webkit-scrollbar {
+  display: none;
+}
+
+/* 胶片孔内容 - 更接近正方形，8px 宽 × 6px 高 */
+.forest-photo-carousel__sprockets {
+  height: 6px;
+  width: 6000px;
+  background-image: url("data:image/svg+xml,%3Csvg width='16' height='6' xmlns='http://www.w3.org/2000/svg'%3E%3Crect x='0' y='0' width='8' height='6' rx='1' ry='1' fill='%23dddddd'/%3E%3C/svg%3E");
+  background-repeat: repeat-x;
+  background-size: 16px 6px;
+}
+
+html[data-theme='dark'] .forest-photo-carousel {
+  background-color: #333333;
+  border-color: #2a2a2a;
+}
+
+html[data-theme='dark'] .forest-photo-carousel__sprockets {
+  background-image: url("data:image/svg+xml,%3Csvg width='16' height='6' xmlns='http://www.w3.org/2000/svg'%3E%3Crect x='0' y='0' width='8' height='6' rx='1' ry='1' fill='%23dddddd'/%3E%3C/svg%3E");
+}
+
+.forest-photo-carousel__track {
+  display: flex;
+  gap: 0.8rem;
+  overflow-x: auto;
+  scroll-snap-type: none;
+  scroll-behavior: auto;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 0.6rem;
+  padding-left: 0.3rem;
+}
+
+.forest-photo-carousel__track::-webkit-scrollbar {
+  display: none;
+}
+
+.forest-photo-carousel__item {
+  flex: 0 0 auto;
+  width: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #000;
+  border-radius: 2px;
+  overflow: hidden;
+  position: relative;
+}
+
+.forest-photo-carousel__image {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  aspect-ratio: 16 / 9;
+  opacity: 0.96;
+  transition: opacity 180ms ease;
+}
+
+.forest-photo-carousel__item:hover .forest-photo-carousel__image {
+  opacity: 1;
+}
+
+/* 照片右下角帧标签 */
+.forest-photo-carousel__frame-label {
+  position: absolute;
+  bottom: 8px;
+  right: 10px;
+  font-size: 9px;
+  line-height: 1.2;
+  color: rgba(255, 255, 255, 0.75);
+  background-color: rgba(0, 0, 0, 0.4);
+  padding: 3px 6px;
+  border-radius: 2px;
+  font-family: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, 'DejaVu Sans Mono', monospace;
+  letter-spacing: 0.01em;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.forest-photo-carousel__caption {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.65rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 10px;
+  line-height: 1.2;
+  color: rgba(255, 255, 255, 0.5);
+  letter-spacing: 0.02em;
+  font-family: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, 'DejaVu Sans Mono', monospace;
+}
+
+.forest-photo-carousel__left {
+  flex-shrink: 0;
+}
+
+html[data-theme='dark'] .forest-photo-carousel__caption {
+  border-top-color: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.forest-photo-carousel__date {
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+.forest-photo-carousel__counter {
+  font-weight: 400;
+  opacity: 0.6;
+  font-size: 9px;
+  flex-shrink: 0;
+}
+
+.forest-photo-carousel__description {
+  flex: 1;
+  font-size: 10px;
+  line-height: 1.2;
+  color: rgba(255, 255, 255, 0.65);
+  font-style: italic;
+  margin: 0 0.15rem;
+}
+
+@media (min-width: 960px) {
+  .forest-photo-carousel {
+    /* 延伸到右侧 margin note 底部 — 正文宽度 100% + 间距 3.5rem + note 宽度 13rem */
+    width: calc(100% + 3.5rem + 13rem);
+  }
+
+  .forest-photo-carousel__item {
+    width: 440px;
+  }
+}
+
+@media (max-width: 639px) {
+  .forest-photo-carousel {
+    margin: 0.6rem -0.5rem;
+    border-left: none;
+    border-right: none;
+    border-radius: 0;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+
+  .forest-photo-carousel__item {
+    width: 300px;
+  }
+
+  .forest-photo-carousel__caption {
+    font-size: 10px;
+  }
+}
+
 .writing-article__header {
   display: flex;
   flex-direction: column;
@@ -1016,7 +1207,11 @@ table {
   }
 
   .writing-margin-note--photo {
-    top: 0.25rem;
+    top: 22rem;
+  }
+
+  .writing-margin-note--tree {
+    top: 28rem;
   }
 
   .writing-margin-note--roots {
@@ -1277,6 +1472,11 @@ table {
   color: var(--site-muted);
   letter-spacing: -0.02em;
   margin-bottom: 0.7rem;
+}
+
+.writing-sidebar__label--forest-interface {
+  white-space: nowrap;
+  width: max-content;
 }
 
 .writing-sidebar__list {

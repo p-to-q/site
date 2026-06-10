@@ -5,6 +5,7 @@ import { SiteDivider } from '@/components/layout/site-divider'
 import { SiteHeader } from '@/components/layout/site-header'
 import { SiteQedFooter } from '@/components/layout/site-sticky-qed-page'
 import { WritingNav } from './writing-nav'
+import { ForestPhotoCarousel } from './forest-photo-carousel'
 
 export const metadata: Metadata = {
   title: 'The Forest and the Interface',
@@ -161,6 +162,12 @@ export default function ForestInterfacePage() {
             <p>
               I have a small folder of forest photos that I keep coming back to.
             </p>
+
+            <ForestPhotoCarousel />
+
+            <p>
+              They are not especially good photographs. Some are blurry, taken too quickly while walking or riding past something I did not have time to understand. A few are from places meant to be visited: paths, signs, families moving slowly through a weekend. Others are from the edges of cities, where the green looks less like a destination and more like something that stayed behind.
+            </p>
             <p>
               I keep them anyway. I liked them all.
             </p>
@@ -175,11 +182,8 @@ export default function ForestInterfacePage() {
               Nothing has happened, exactly, <em>but the world has become less flat</em>.
             </p>
           </div>
-          <MarginNote className="writing-margin-note--photo">
+          <MarginNote className="writing-margin-note--tree">
             <TreeSvg />
-            <p>
-              They are not especially good photographs. Some are blurry, taken too quickly while walking or riding past something I did not have time to understand. A few are from places meant to be visited: paths, signs, families moving slowly through a weekend. Others are from the edges of cities, where the green looks less like a destination and more like something that stayed behind.
-            </p>
           </MarginNote>
         </section>
 

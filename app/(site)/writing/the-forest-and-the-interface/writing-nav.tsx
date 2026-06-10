@@ -39,7 +39,9 @@ export function WritingNav() {
 
   return (
     <nav className="writing-sidebar" aria-label="Article sections">
-      <p className="writing-sidebar__label">The Forest and the Interface</p>
+      <p className="writing-sidebar__label writing-sidebar__label--forest-interface">
+        The Forest and the Interface
+      </p>
       <ul className="writing-sidebar__list">
         {NAV_SECTIONS.map(({ id, label }) => (
           <li key={id}>
