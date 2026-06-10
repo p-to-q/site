@@ -73,16 +73,6 @@ function LoopSvg() {
   )
 }
 
-function ThresholdSvg() {
-  return (
-    <svg width="44" height="70" viewBox="0 0 44 70" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M7 66V25C7 14.5 13.5 6 22 6C30.5 6 37 14.5 37 25V66" stroke="currentColor" strokeWidth="1.3" fill="none" />
-      <path d="M13 66V28C13 20.5 17 14 22 14C27 14 31 20.5 31 28V66" stroke="currentColor" strokeWidth="0.9" fill="none" opacity="0.45" />
-      <line x1="7" y1="66" x2="37" y2="66" stroke="currentColor" strokeWidth="0.8" opacity="0.35" />
-    </svg>
-  )
-}
-
 function MapSvg() {
   return (
     <svg width="64" height="48" viewBox="0 0 48 36" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -108,7 +98,7 @@ function PathSvg() {
 
 function TreeLineSvg() {
   return (
-    <svg width="64" height="40" viewBox="0 0 64 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg width="128" height="80" viewBox="0 0 64 40" fill="none" xmlns="http://www.w3.org/2000/svg">
       <line x1="0" y1="36" x2="64" y2="36" stroke="currentColor" strokeWidth="0.7" opacity="0.25" />
       <line x1="8" y1="36" x2="8" y2="14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
       <line x1="17" y1="36" x2="17" y2="19" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
@@ -241,12 +231,6 @@ export default function ForestInterfacePage() {
               They let you enter without becoming fully available. They offer enough to begin, but not enough to feel finished. They do not rush to turn themselves into an experience. If you want more from them, you have to become a little <em>more specific</em>.
             </p>
           </div>
-          <MarginNote>
-            <ThresholdSvg />
-            <p>
-              <MarginLink href="https://www.ecehh.org/research/attention-restoration-theory-a-systematic-review/">Soft fascination</MarginLink> is useful without being the whole story: attention held lightly enough to recover, not so hard that it becomes captured.
-            </p>
-          </MarginNote>
         </section>
 
         {/* §4 — User-friendly */}
@@ -354,8 +338,10 @@ export default function ForestInterfacePage() {
               <em>The forest does not answer this way.</em>
             </p>
           </div>
-          <MarginNote>
+          <MarginFigure>
             <LoopSvg />
+          </MarginFigure>
+          <MarginNote className="writing-margin-note--game-note">
             <p>
               <MarginLink href="https://dl.digra.org/index.php/dl/article/download/575/575">Gamification</MarginLink> is the polite term. <MarginLink href="https://bogost.com/writing/blog/gamification_is_bullshit/">Bogost's harsher one</MarginLink> is useful because it keeps the capture motive in view.
             </p>
@@ -396,12 +382,9 @@ export default function ForestInterfacePage() {
               Some things should leave us more present than captured.
             </p>
           </div>
-          <MarginNote>
+          <MarginFigure>
             <PathSvg />
-            <p>
-              <MarginLink href="https://www.routledge.com/Lines-A-Brief-History/Ingold/p/book/9781138640399">Tim Ingold's lines</MarginLink> are the quiet reference here: walking, drawing, writing, and wayfinding all become forms of attention over time.
-            </p>
-          </MarginNote>
+          </MarginFigure>
         </section>
 
         {/* §8 — Layers */}

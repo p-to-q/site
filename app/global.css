@@ -1026,6 +1026,10 @@ table {
   .writing-margin-note--trail {
     width: 14rem;
   }
+
+  .writing-margin-note--game-note {
+    top: 5.75rem;
+  }
 }
 
 /* Captioned figure (photo + label) — overrides must come after base class.
