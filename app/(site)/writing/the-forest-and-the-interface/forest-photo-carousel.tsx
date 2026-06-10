@@ -102,6 +102,7 @@ export function ForestPhotoCarousel() {
   const scrollContainerRef = useRef<HTMLDivElement>(null)
   const carouselRef = useRef<HTMLDivElement>(null)
   const sprocketTrackRef = useRef<HTMLDivElement>(null)
+  const lastPhotoIndex = photos.length - 1
 
   // 胶片孔同步滚动
   useEffect(() => {
@@ -247,7 +248,12 @@ export function ForestPhotoCarousel() {
     return () => container.removeEventListener('scroll', handleScroll)
   }, [])
 
-  const currentPhoto = photos[currentIndex]
+  useEffect(() => {
+    setCurrentIndex((index) => Math.max(0, Math.min(lastPhotoIndex, index)))
+  }, [lastPhotoIndex])
+
+  const safeIndex = Math.max(0, Math.min(lastPhotoIndex, currentIndex))
+  const currentPhoto = photos[safeIndex]
 
   return (
     <div className="forest-photo-carousel" ref={carouselRef}>
@@ -305,7 +311,7 @@ export function ForestPhotoCarousel() {
           </div>
         )}
         <span className="forest-photo-carousel__counter">
-          #{currentIndex + 1}/{photos.length}
+          #{safeIndex + 1}/{photos.length}
         </span>
       </div>
     </div>
