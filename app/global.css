@@ -836,6 +836,10 @@ table {
   margin-bottom: 0.8rem !important;
 }
 
+.writing-article__body p.writing-article__pause-before {
+  margin-top: 1.55rem !important;
+}
+
 /* Bullet list for the four qualities */
 .writing-article__qualities {
   display: flex;
