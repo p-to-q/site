@@ -79,6 +79,65 @@ function LoopSvg() {
   )
 }
 
+function DoorwaySvg() {
+  return (
+    <svg width="32" height="60" viewBox="0 0 32 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M4 58V20A12 12 0 0 1 28 20V58" stroke="currentColor" strokeWidth="1.3" fill="none" />
+      <line x1="4" y1="58" x2="28" y2="58" stroke="currentColor" strokeWidth="0.8" opacity="0.35" />
+    </svg>
+  )
+}
+
+function MapSvg() {
+  return (
+    <svg width="48" height="36" viewBox="0 0 48 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="2" y="2" width="44" height="32" stroke="currentColor" strokeWidth="1.2" fill="none" />
+      <line x1="16" y1="2" x2="16" y2="34" stroke="currentColor" strokeWidth="0.8" strokeDasharray="2 3" />
+      <line x1="32" y1="2" x2="32" y2="34" stroke="currentColor" strokeWidth="0.8" strokeDasharray="2 3" />
+      <circle cx="36" cy="20" r="2.5" stroke="currentColor" strokeWidth="0.8" fill="none" />
+      <circle cx="36" cy="20" r="0.8" fill="currentColor" />
+    </svg>
+  )
+}
+
+function PlumbSvg() {
+  return (
+    <svg width="24" height="72" viewBox="0 0 24 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <line x1="12" y1="4" x2="12" y2="58" stroke="currentColor" strokeWidth="1" strokeLinecap="round" />
+      <circle cx="12" cy="64" r="5" stroke="currentColor" strokeWidth="1.2" fill="none" />
+      <circle cx="12" cy="64" r="1.5" fill="currentColor" opacity="0.4" />
+      <line x1="7" y1="18" x2="17" y2="18" stroke="currentColor" strokeWidth="0.7" opacity="0.35" />
+      <line x1="7" y1="32" x2="17" y2="32" stroke="currentColor" strokeWidth="0.7" opacity="0.35" />
+      <line x1="7" y1="46" x2="17" y2="46" stroke="currentColor" strokeWidth="0.7" opacity="0.35" />
+    </svg>
+  )
+}
+
+function PathSvg() {
+  return (
+    <svg width="32" height="96" viewBox="0 0 32 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M16 4C8 16 24 32 16 48C8 64 24 80 16 92" stroke="currentColor" strokeWidth="1.5" fill="none" strokeLinecap="round" />
+      <circle cx="12" cy="24" r="1.2" fill="currentColor" opacity="0.25" />
+      <circle cx="20" cy="56" r="1.2" fill="currentColor" opacity="0.25" />
+      <circle cx="14" cy="76" r="1.2" fill="currentColor" opacity="0.25" />
+    </svg>
+  )
+}
+
+function TreeLineSvg() {
+  return (
+    <svg width="64" height="40" viewBox="0 0 64 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <line x1="0" y1="36" x2="64" y2="36" stroke="currentColor" strokeWidth="0.7" opacity="0.25" />
+      <line x1="8" y1="36" x2="8" y2="14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+      <line x1="17" y1="36" x2="17" y2="19" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
+      <line x1="25" y1="36" x2="25" y2="23" stroke="currentColor" strokeWidth="1.1" strokeLinecap="round" opacity="0.8" />
+      <line x1="32" y1="36" x2="32" y2="27" stroke="currentColor" strokeWidth="0.9" strokeLinecap="round" opacity="0.6" />
+      <line x1="38" y1="36" x2="38" y2="30" stroke="currentColor" strokeWidth="0.7" strokeLinecap="round" opacity="0.4" />
+      <line x1="43" y1="36" x2="43" y2="32" stroke="currentColor" strokeWidth="0.5" strokeLinecap="round" opacity="0.25" />
+    </svg>
+  )
+}
+
 function RootsSvg() {
   return (
     <svg width="72" height="80" viewBox="0 0 72 80" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -205,6 +264,9 @@ export default function ForestInterfacePage() {
               That seems worth thinking about now.
             </p>
           </div>
+          <MarginFigure>
+            <DoorwaySvg />
+          </MarginFigure>
         </section>
 
         {/* §4 — User-friendly */}
@@ -238,6 +300,12 @@ export default function ForestInterfacePage() {
               The map is not the place. The weather icon is not the air. The battery percentage is not energy. The prompt is not the work.
             </p>
           </div>
+          <MarginFigureWithCaption
+            caption="After Korzybski — 'the map is not the territory', 1931"
+            href="https://en.wikipedia.org/wiki/Map%E2%80%93territory_relation"
+          >
+            <MapSvg />
+          </MarginFigureWithCaption>
         </section>
 
         {/* §5 — Fitness */}
@@ -271,6 +339,9 @@ export default function ForestInterfacePage() {
               Some interfaces teach nothing except where to click next.
             </p>
           </div>
+          <MarginFigure>
+            <PlumbSvg />
+          </MarginFigure>
         </section>
 
         {/* §6 — The game */}
@@ -351,6 +422,9 @@ export default function ForestInterfacePage() {
               Some things should leave us more present than captured.
             </p>
           </div>
+          <MarginFigure>
+            <PathSvg />
+          </MarginFigure>
         </section>
 
         {/* §8 — Layers */}
@@ -391,6 +465,9 @@ export default function ForestInterfacePage() {
 
         {/* §9 — Walkable (coda) */}
         <section id="walkable" className="writing-article__section writing-article__coda">
+          <MarginFigure>
+            <TreeLineSvg />
+          </MarginFigure>
           <div className="writing-article__body">
             <p>
               That is a different kind of design.
