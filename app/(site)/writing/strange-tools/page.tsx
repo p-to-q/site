@@ -159,7 +159,7 @@ function TwoByTwoSvg() {
 
 export default function StrangeToolsPage() {
   return (
-    <div className="flex min-h-[calc(100dvh-5.5rem)] flex-col">
+    <div className="strange-tools-page flex min-h-[calc(100dvh-5.5rem)] flex-col">
       <SiteHeader />
 
       {/* Left sidebar nav — client component for active-section tracking */}
