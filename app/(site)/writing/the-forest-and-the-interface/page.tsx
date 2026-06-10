@@ -26,33 +26,19 @@ export const metadata: Metadata = {
 
 /* ── Right-margin components ── */
 
-function MarginFigure({ children, className = '' }: { children: React.ReactNode; className?: string }) {
+function MarginNote({ children, className = '' }: { children: React.ReactNode; className?: string }) {
   return (
-    <aside className={`writing-margin-figure ${className}`} aria-hidden="true">
+    <aside className={`writing-margin-note ${className}`}>
       {children}
     </aside>
   )
 }
 
-function MarginFigureWithCaption({ children, caption, captionHint, href, className = '' }: { children: React.ReactNode; caption?: string; captionHint?: string; href?: string; className?: string }) {
+function MarginLink({ href, children }: { href: string; children: React.ReactNode }) {
   return (
-    <aside className={`writing-margin-figure writing-margin-figure--captioned ${className}`} aria-hidden="true">
+    <a href={href} target="_blank" rel="noopener noreferrer">
       {children}
-      {caption && (
-        <p className="writing-margin-caption">
-          {href ? <a href={href} target="_blank" rel="noopener noreferrer" className="writing-margin-caption__link">{caption}</a> : caption}
-          {captionHint && (
-            <span className="writing-margin-caption__hint">
-              {captionHint}
-              <svg className="writing-margin-caption__hint-icon" width="9" height="12" viewBox="0 0 9 12" fill="none" aria-hidden="true">
-                <rect x="1.25" y="0.75" width="6.5" height="10.5" rx="3.25" stroke="currentColor" strokeWidth="0.9" />
-                <line x1="4.5" y1="2.25" x2="4.5" y2="4.25" stroke="currentColor" strokeWidth="0.9" strokeLinecap="round" />
-              </svg>
-            </span>
-          )}
-        </p>
-      )}
-    </aside>
+    </a>
   )
 }
 
@@ -75,6 +61,65 @@ function LoopSvg() {
       <path d="M24 8C14 8 6 16 6 26C6 36 14 44 24 44C34 44 42 36 42 26C42 20 39 14 34 11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" fill="none" />
       <polyline points="36,6 34,11 39,13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fill="none" />
       <circle cx="24" cy="26" r="2" fill="currentColor" opacity="0.3" />
+    </svg>
+  )
+}
+
+function DoorwaySvg() {
+  return (
+    <svg width="32" height="60" viewBox="0 0 32 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M4 58V20A12 12 0 0 1 28 20V58" stroke="currentColor" strokeWidth="1.3" fill="none" />
+      <line x1="4" y1="58" x2="28" y2="58" stroke="currentColor" strokeWidth="0.8" opacity="0.35" />
+    </svg>
+  )
+}
+
+function MapSvg() {
+  return (
+    <svg width="48" height="36" viewBox="0 0 48 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="2" y="2" width="44" height="32" stroke="currentColor" strokeWidth="1.2" fill="none" />
+      <line x1="16" y1="2" x2="16" y2="34" stroke="currentColor" strokeWidth="0.8" strokeDasharray="2 3" />
+      <line x1="32" y1="2" x2="32" y2="34" stroke="currentColor" strokeWidth="0.8" strokeDasharray="2 3" />
+      <circle cx="36" cy="20" r="2.5" stroke="currentColor" strokeWidth="0.8" fill="none" />
+      <circle cx="36" cy="20" r="0.8" fill="currentColor" />
+    </svg>
+  )
+}
+
+function PlumbSvg() {
+  return (
+    <svg width="24" height="72" viewBox="0 0 24 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <line x1="12" y1="4" x2="12" y2="58" stroke="currentColor" strokeWidth="1" strokeLinecap="round" />
+      <circle cx="12" cy="64" r="5" stroke="currentColor" strokeWidth="1.2" fill="none" />
+      <circle cx="12" cy="64" r="1.5" fill="currentColor" opacity="0.4" />
+      <line x1="7" y1="18" x2="17" y2="18" stroke="currentColor" strokeWidth="0.7" opacity="0.35" />
+      <line x1="7" y1="32" x2="17" y2="32" stroke="currentColor" strokeWidth="0.7" opacity="0.35" />
+      <line x1="7" y1="46" x2="17" y2="46" stroke="currentColor" strokeWidth="0.7" opacity="0.35" />
+    </svg>
+  )
+}
+
+function PathSvg() {
+  return (
+    <svg width="32" height="96" viewBox="0 0 32 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M16 4C8 16 24 32 16 48C8 64 24 80 16 92" stroke="currentColor" strokeWidth="1.5" fill="none" strokeLinecap="round" />
+      <circle cx="12" cy="24" r="1.2" fill="currentColor" opacity="0.25" />
+      <circle cx="20" cy="56" r="1.2" fill="currentColor" opacity="0.25" />
+      <circle cx="14" cy="76" r="1.2" fill="currentColor" opacity="0.25" />
+    </svg>
+  )
+}
+
+function TreeLineSvg() {
+  return (
+    <svg width="64" height="40" viewBox="0 0 64 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <line x1="0" y1="36" x2="64" y2="36" stroke="currentColor" strokeWidth="0.7" opacity="0.25" />
+      <line x1="8" y1="36" x2="8" y2="14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+      <line x1="17" y1="36" x2="17" y2="19" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
+      <line x1="25" y1="36" x2="25" y2="23" stroke="currentColor" strokeWidth="1.1" strokeLinecap="round" opacity="0.8" />
+      <line x1="32" y1="36" x2="32" y2="27" stroke="currentColor" strokeWidth="0.9" strokeLinecap="round" opacity="0.6" />
+      <line x1="38" y1="36" x2="38" y2="30" stroke="currentColor" strokeWidth="0.7" strokeLinecap="round" opacity="0.4" />
+      <line x1="43" y1="36" x2="43" y2="32" stroke="currentColor" strokeWidth="0.5" strokeLinecap="round" opacity="0.25" />
     </svg>
   )
 }
@@ -131,9 +176,6 @@ export default function ForestInterfacePage() {
               I have a small folder of forest photos that I keep coming back to.
             </p>
             <p>
-              They are not especially good photographs. Some are blurry, taken too quickly while walking or riding past something I did not have time to understand. A few are from places meant to be visited: paths, signs, families moving slowly through a weekend. Others are from the edges of cities, where the green looks less like a destination and more like something that stayed behind.
-            </p>
-            <p>
               I keep them anyway. I liked them all.
             </p>
             <p>
@@ -149,9 +191,12 @@ export default function ForestInterfacePage() {
               Nothing has happened, exactly, but the world has become less flat.
             </p>
           </div>
-          <MarginFigure className="writing-margin-figure--top">
+          <MarginNote className="writing-margin-note--photo">
             <TreeSvg />
-          </MarginFigure>
+            <p>
+              They are not especially good photographs. Some are blurry, taken too quickly while walking or riding past something I did not have time to understand. A few are from places meant to be visited: paths, signs, families moving slowly through a weekend. Others are from the edges of cities, where the green looks less like a destination and more like something that stayed behind.
+            </p>
+          </MarginNote>
         </section>
 
         {/* §2 — Semi-structured */}
@@ -164,17 +209,24 @@ export default function ForestInterfacePage() {
               The world we actually live in is semi-structured. Half designed, half not. Half planned, half grown. Half interface, half weather.
             </p>
             <p>
-              A forest is not outside design. Many forests we move through are designed, managed, damaged, restored, named, protected, entered through signs and paths, and monitored through maps and policies. The point is not that forest is natural and interface is artificial. That distinction is too easy and mostly unhelpful.
+              A forest is not outside design. Many forests we move through are designed, managed, damaged, restored, named, protected, entered through signs and paths, and monitored through maps and policies. This is <ExternalLink href="https://yalebooks.yale.edu/book/9780300078152/seeing-like-a-state/">legibility</ExternalLink> at its gentlest, and it is not always bad. The point is not that forest is natural and interface is artificial. That distinction is too easy and mostly unhelpful.
             </p>
             <p>
               The better distinction is between systems that hold the world open and systems that close it too quickly.
             </p>
           </div>
-          <MarginFigure>
+          <MarginNote>
             <p className="writing-margin-chinese">
               「天地有大美而不言，四时有明法而不议，万物有成理而不说。」
             </p>
-          </MarginFigure>
+            <p>
+              <span className="writing-margin-note__kicker">north star</span>
+              Legibility without capture: an interface can make a place readable without making it feel solved.
+            </p>
+            <p>
+              <MarginLink href="https://yalebooks.yale.edu/book/9780300078152/seeing-like-a-state/">James C. Scott</MarginLink> is the political warning label here: schematic order forgets the local knowledge that kept the world workable.
+            </p>
+          </MarginNote>
         </section>
 
         {/* §3 — Generous */}
@@ -205,6 +257,12 @@ export default function ForestInterfacePage() {
               That seems worth thinking about now.
             </p>
           </div>
+          <MarginNote>
+            <DoorwaySvg />
+            <p>
+              <MarginLink href="https://www.ecehh.org/research/attention-restoration-theory-a-systematic-review/">Soft fascination</MarginLink> is useful without being the whole story: attention held lightly enough to recover, not so hard that it becomes captured.
+            </p>
+          </MarginNote>
         </section>
 
         {/* §4 — User-friendly */}
@@ -214,7 +272,7 @@ export default function ForestInterfacePage() {
               A forest has an interface that is not user-friendly.
             </p>
             <p>
-              I was thinking about this because <em>user-friendly</em> is such a polite phrase. In software it usually means the tool has done some work before you arrive. It has guessed what you probably want. It has removed some choices, softened some edges, and made the next action obvious.
+              I was thinking about this because <ExternalLink href="https://jnd.org/books/the-design-of-everyday-things-revised-and-expanded-edition/"><em>user-friendly</em></ExternalLink> is such a polite phrase. In software it usually means the tool has done some work before you arrive. It has guessed what you probably want. It has removed some choices, softened some edges, and made the next action obvious.
             </p>
             <p>
               Most of the time, this is good. A good form should not make you suffer. A map should help. A button should look like a button. Nobody wants a clever checkout page.
@@ -223,7 +281,7 @@ export default function ForestInterfacePage() {
               But user-friendly can also become a way of saying: the world has been made smaller for you.
             </p>
             <p>
-              A forest does not do this. It does not arrange itself around your task. It does not care whether you are trying to get somewhere quickly. Still, it is full of information. A path is worn into the ground. Mud keeps a record of the last rain. Light changes where the trees thin out. Moss grows more easily in some places than others. A fallen branch tells you something happened here, even if you do not know what.
+              A forest does not do this. It does not arrange itself around your task. It does not care whether you are trying to get somewhere quickly. Still, it is full of <ExternalLink href="https://cs.brown.edu/courses/cs137/2017/readings/Gibson-AFF.pdf">information for action</ExternalLink>. A path is worn into the ground. Mud keeps a record of the last rain. Light changes where the trees thin out. Moss grows more easily in some places than others. A fallen branch tells you something happened here, even if you do not know what.
             </p>
             <p>
               None of this is hidden. It just has not been formatted as instructions.
@@ -238,6 +296,15 @@ export default function ForestInterfacePage() {
               The map is not the place. The weather icon is not the air. The battery percentage is not energy. The prompt is not the work.
             </p>
           </div>
+          <MarginNote>
+            <MapSvg />
+            <p>
+              <MarginLink href="https://archive.org/details/sciencesanityint00korz">After Korzybski</MarginLink> — &ldquo;the map is not the territory,&rdquo; 1931.
+            </p>
+            <p>
+              <MarginLink href="https://cs.brown.edu/courses/cs137/2017/readings/Gibson-AFF.pdf">Gibson</MarginLink> keeps affordance relational: a path affords passage for a body in a place. It does not need to become a command.
+            </p>
+          </MarginNote>
         </section>
 
         {/* §5 — Fitness */}
@@ -271,6 +338,12 @@ export default function ForestInterfacePage() {
               Some interfaces teach nothing except where to click next.
             </p>
           </div>
+          <MarginNote>
+            <PlumbSvg />
+            <p>
+              A good interface can act like a <MarginLink href="https://griesemer.net/publications/">boundary object</MarginLink>: flexible enough for different publics, stable enough to coordinate care.
+            </p>
+          </MarginNote>
         </section>
 
         {/* §6 — The game */}
@@ -307,9 +380,12 @@ export default function ForestInterfacePage() {
               The forest does not answer this way.
             </p>
           </div>
-          <MarginFigure>
+          <MarginNote>
             <LoopSvg />
-          </MarginFigure>
+            <p>
+              <MarginLink href="https://dl.digra.org/index.php/dl/article/download/575/575">Gamification</MarginLink> is the polite term. <MarginLink href="https://bogost.com/writing/blog/gamification_is_bullshit/">Bogost's harsher one</MarginLink> is useful because it keeps the capture motive in view.
+            </p>
+          </MarginNote>
         </section>
 
         {/* §7 — Trail */}
@@ -329,7 +405,7 @@ export default function ForestInterfacePage() {
             </p>
             <p>
               A{' '}
-              <ExternalLink href="https://en.wikipedia.org/wiki/Field_guide">field guide</ExternalLink>
+              <ExternalLink href="https://www.sibleyguides.com/">field guide</ExternalLink>
               {' '}works in a similar way. It does not turn the forest into a game of identification, though it can be used that way. At its best, it gives names and distinctions without replacing the encounter. It lets the world keep some authority. You still have to look. You still have to be wrong. You still have to learn the difference between two things that used to be one thing to you.
             </p>
             <p>
@@ -351,6 +427,12 @@ export default function ForestInterfacePage() {
               Some things should leave us more present than captured.
             </p>
           </div>
+          <MarginNote>
+            <PathSvg />
+            <p>
+              <MarginLink href="https://www.routledge.com/Lines-A-Brief-History/Ingold/p/book/9781138640399">Tim Ingold's lines</MarginLink> are the quiet reference here: walking, drawing, writing, and wayfinding all become forms of attention over time.
+            </p>
+          </MarginNote>
         </section>
 
         {/* §8 — Layers */}
@@ -366,7 +448,7 @@ export default function ForestInterfacePage() {
               A tree is not only a tree. It is shade, habitat, age, water memory, fungal relation, soil work, carbon, damage, shelter, food, rot, future ground. A path is not only a path. It is habit, maintenance, erosion, permission, repeated bodies, convenience, compromise. A clearing is not only open space. It is light, disturbance, chance, edge, new growth.
             </p>
             <p>
-              This is where the &ldquo;<ExternalLink href="https://en.wikipedia.org/wiki/Mycorrhizal_network">Wood-Wide Web</ExternalLink>&rdquo; is useful to think with, even if the metaphor should be handled carefully. The phrase makes visible a hidden layer: trees, roots, fungi, soil, exchange, dependency, competition, signaling, decay. It reminds us that a forest is not only what stands above the ground. It is also a set of relations below visibility.
+              This is where the &ldquo;<ExternalLink href="https://suzannesimard.com/research/">Wood-Wide Web</ExternalLink>&rdquo; is useful to think with, even if the metaphor should be <ExternalLink href="https://www.nature.com/articles/s41559-023-01986-1">handled carefully</ExternalLink>. The phrase makes visible a hidden layer: trees, roots, fungi, soil, exchange, dependency, competition, signaling, decay. It reminds us that a forest is not only what stands above the ground. It is also a set of relations below visibility.
             </p>
             <p>
               I do not need the forest to become a perfect internet metaphor. I almost prefer that it does not. The point is not that trees are secretly people, or that roots are cables, or that fungi are moral infrastructure. The point is that the forest is a multi-layered relational system, and the visible interface is only the beginning.
@@ -381,12 +463,15 @@ export default function ForestInterfacePage() {
               That is rarer than it sounds.
             </p>
           </div>
-          <MarginFigureWithCaption
-            caption="Suzanne Simard — mycorrhizal networks and the intelligence of forests"
-            href="https://www.ted.com/talks/suzanne_simard_how_trees_talk_to_each_other"
-          >
+          <MarginNote className="writing-margin-note--roots">
             <RootsSvg />
-          </MarginFigureWithCaption>
+            <p>
+              <MarginLink href="https://www.ted.com/talks/suzanne_simard_how_trees_talk_to_each_other">Suzanne Simard</MarginLink> — mycorrhizal networks and the intelligence of forests.
+            </p>
+            <p>
+              The good version of the Wood-Wide Web is not &ldquo;trees are people.&rdquo; It is stranger: <MarginLink href="https://www.nature.com/articles/41557">carbon transfer</MarginLink>, fungal mediation, competition, kinship claims, and enough uncertainty that <MarginLink href="https://www.nature.com/articles/s41559-023-01986-1">over-reading</MarginLink> becomes part of the object lesson.
+            </p>
+          </MarginNote>
         </section>
 
         {/* §9 — Walkable (coda) */}
@@ -432,6 +517,13 @@ export default function ForestInterfacePage() {
               <Link href="/writing">Writing</Link>.
             </p>
           </div>
+          <MarginNote className="writing-margin-note--trail">
+            <TreeLineSvg />
+            <p>
+              <span className="writing-margin-note__kicker">reference trail</span>
+              <MarginLink href="https://yalebooks.yale.edu/book/9780300078152/seeing-like-a-state/">Scott</MarginLink>, <MarginLink href="https://cs.brown.edu/courses/cs137/2017/readings/Gibson-AFF.pdf">Gibson</MarginLink>, <MarginLink href="https://www.routledge.com/Lines-A-Brief-History/Ingold/p/book/9781138640399">Ingold</MarginLink>, <MarginLink href="https://press.princeton.edu/books/paperback/9780691220550/the-mushroom-at-the-end-of-the-world">Tsing</MarginLink>, <MarginLink href="https://www.patternlanguage.com/">Alexander</MarginLink>, <MarginLink href="https://suzannesimard.com/research/">Simard</MarginLink>/<MarginLink href="https://www.nature.com/articles/s41559-023-01986-1">Karst</MarginLink>, <MarginLink href="https://dl.digra.org/index.php/dl/article/download/575/575">Deterding</MarginLink>/<MarginLink href="https://bogost.com/writing/blog/gamification_is_bullshit/">Bogost</MarginLink>.
+            </p>
+          </MarginNote>
         </section>
 
       </article>

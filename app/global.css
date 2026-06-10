@@ -910,6 +910,57 @@ table {
   color: var(--site-link);
 }
 
+.writing-margin-note {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin-top: 1rem;
+  border-left: 1px solid var(--site-link-underline);
+  padding-left: 0.85rem;
+  color: var(--site-muted);
+  transition: color var(--writing-margin-text-fade), border-color var(--writing-margin-text-fade);
+}
+
+.writing-margin-note:hover {
+  border-color: var(--site-link-underline-hover);
+  color: var(--site-link);
+}
+
+.writing-margin-note p {
+  font-family: 'CamingoMono', monospace;
+  font-size: 12px !important;
+  line-height: 1.45 !important;
+  letter-spacing: 0;
+  margin: 0 !important;
+  color: currentColor !important;
+  overflow-wrap: break-word;
+}
+
+.writing-margin-note a {
+  color: currentColor;
+  text-decoration-color: transparent;
+  text-decoration-thickness: 0.08rem;
+}
+
+.writing-margin-note a:hover {
+  color: var(--site-link-hover);
+  text-decoration-color: var(--site-link-underline-hover);
+  font-weight: 600 !important;
+}
+
+.writing-margin-note svg {
+  flex: 0 0 auto;
+  color: currentColor;
+  opacity: 0.9;
+}
+
+.writing-margin-note__kicker {
+  display: block;
+  margin-bottom: 0.3rem;
+  color: var(--site-text);
+  font-weight: 600;
+}
+
 /* ── Right-margin figures (hover-reveal, desktop only) ─────── */
 
 .writing-margin-figure {
@@ -947,6 +998,29 @@ table {
 @media (min-width: 960px) {
   .writing-margin-figure {
     display: block;
+  }
+
+  .writing-margin-note {
+    position: absolute;
+    left: calc(100% + 3.5rem);
+    top: 0.5rem;
+    width: 13rem;
+    margin-top: 0;
+    border-left: 0;
+    padding-left: 0;
+    pointer-events: auto;
+  }
+
+  .writing-margin-note--photo {
+    top: 0.25rem;
+  }
+
+  .writing-margin-note--roots {
+    width: 14rem;
+  }
+
+  .writing-margin-note--trail {
+    width: 14rem;
   }
 }
 
@@ -1163,6 +1237,13 @@ table {
   margin: 0;
   color: currentColor;
   transition: color var(--writing-margin-text-fade);
+}
+
+.writing-margin-note p.writing-margin-chinese {
+  font-family: 'Noto Serif SC', 'Songti SC', 'STSong', SimSun, serif;
+  font-size: 11px !important;
+  line-height: 1.9 !important;
+  letter-spacing: 0;
 }
 
 /* ── Writing sidebar navigation ─────────────────────────── */
