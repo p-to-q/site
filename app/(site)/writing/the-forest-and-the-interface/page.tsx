@@ -218,8 +218,8 @@ export default function ForestInterfacePage() {
             <p>
               The world keeps asking you to respond. The forest does not ask so much. It gives you more than enough to notice, but <em>less pressure to turn noticing into action</em>.
             </p>
-            <p>
-              <em>I find that generous.</em>
+            <p className="writing-article__pullquote">
+              I find that generous.
             </p>
             <p>
               When I look at the photos now, I do not think first about nature. I think about this feeling of being gently made less competent.
