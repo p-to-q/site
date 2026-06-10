@@ -267,7 +267,7 @@ export default function ForestInterfacePage() {
           <MarginNote>
             <MapSvg />
             <p>
-              <MarginLink href="https://en.wikipedia.org/wiki/Map%E2%80%93territory_relation">After Korzybski</MarginLink> — &ldquo;the map is not the territory,&rdquo; 1931.
+              <MarginLink href="https://en.wikipedia.org/wiki/Map%E2%80%93territory_relation">After Korzybski</MarginLink> (1931). &ldquo;The map is not the territory.&rdquo;
             </p>
           </MarginNote>
         </section>
