@@ -27,14 +27,14 @@ const photos: Photo[] = [
   {
     filename: '270281781107648_.jpg',
     date: '2024-07-25',
-    frameLabel: '#03 Urwald',
-    description: "Neuenburger Urwald — one of Germany's largest primeval forests"
+    frameLabel: '#03 Decay...',
+    description: 'New growth and ancient decay, side by side. Some trees rot underground while the forest keeps renewing'
   },
   {
     filename: '270311781107660_.jpg',
     date: '2023-11-10',
-    frameLabel: '#04 Decay...',
-    description: 'New growth and ancient decay, side by side. Some trees rot underground while the forest keeps renewing'
+    frameLabel: '#04 Gongqing',
+    description: 'Gongqing Forest Park, Yangpu District, Shanghai'
   },
   {
     filename: '270241781107637_.jpg',
@@ -63,14 +63,14 @@ const photos: Photo[] = [
   {
     filename: '270191781107625_.jpg',
     date: '2025-02-11',
-    frameLabel: '#09 Gongqing',
-    description: 'Gongqing Forest Park, Yangpu District, Shanghai'
+    frameLabel: '#09 Olympic',
+    description: 'Near Olympic Forest Park, between 4th & 5th Ring Road. Not sure if it survived the 19XX disaster'
   },
   {
     filename: '270251781107639_.jpg',
     date: '2024-02-26',
-    frameLabel: '#10 Olympic',
-    description: 'Near Olympic Forest Park, between 4th & 5th Ring Road. Not sure if it survived the 19XX disaster'
+    frameLabel: '#10 Train...!',
+    description: 'Through train window...!'
   },
   {
     filename: '270261781107641_.jpg',
@@ -90,15 +90,9 @@ const photos: Photo[] = [
     frameLabel: '#13 Sea'
   },
   {
-    filename: '270221781107631_crop.jpg',
-    date: '2024-02-26',
-    frameLabel: '#14 Train...!',
-    description: 'Through train window...!'
-  },
-  {
     filename: '270211781107630_crop.jpg',
     date: '2024-07-24',
-    frameLabel: '#15 Buttress roots!',
+    frameLabel: '#14 Buttress roots!',
     description: 'Buttress roots — the kind I only saw in textbooks about Xishuangbanna. Unexpected to find them in Europe!'
   },
 ]
