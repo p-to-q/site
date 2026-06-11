@@ -1210,10 +1210,6 @@ html[data-theme='dark'] .forest-photo-carousel__caption {
     top: 22rem;
   }
 
-  .writing-margin-note--tree {
-    top: 28rem;
-  }
-
   .writing-margin-note--roots {
     width: 14rem;
   }
@@ -1549,7 +1545,6 @@ html[data-theme='dark'] .forest-photo-carousel__caption {
     font-size: 0.72em !important;
   }
 
-  .writing-margin-note--tree,
   .writing-margin-note--roots,
   .writing-margin-note--trail {
     border-left: 0;

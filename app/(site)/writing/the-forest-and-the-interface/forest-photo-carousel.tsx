@@ -93,7 +93,7 @@ const photos: Photo[] = [
     filename: '270211781107630_crop.jpg',
     date: '2024-07-24',
     frameLabel: '#14 Buttress roots!',
-    description: 'Buttress roots — the kind I only saw in textbooks about Xishuangbanna. Unexpected to find them in Europe!'
+    description: 'Only saw these in textbooks before!'
   },
 ]
 
@@ -237,10 +237,31 @@ export function ForestPhotoCarousel() {
     if (!container) return
 
     const handleScroll = () => {
-      const scrollLeft = container.scrollLeft
-      const itemWidth = container.children[0]?.clientWidth || 0
-      const gap = 0.8 * 16 // Mirrors .forest-photo-carousel__track gap.
-      const newIndex = Math.round(scrollLeft / (itemWidth + gap))
+      const items = Array.from(container.children) as HTMLElement[]
+      const maxScrollLeft = container.scrollWidth - container.clientWidth
+      const edgeTolerance = 2
+
+      if (container.scrollLeft <= edgeTolerance) {
+        setCurrentIndex(0)
+        return
+      }
+
+      if (container.scrollLeft >= maxScrollLeft - edgeTolerance) {
+        setCurrentIndex(photos.length - 1)
+        return
+      }
+
+      const viewportCenter = container.scrollLeft + container.clientWidth / 2
+      const newIndex = items.reduce((closestIndex, item, index) => {
+        const closestItem = items[closestIndex]
+        const itemCenter = item.offsetLeft + item.clientWidth / 2
+        const closestCenter = closestItem.offsetLeft + closestItem.clientWidth / 2
+
+        return Math.abs(itemCenter - viewportCenter) < Math.abs(closestCenter - viewportCenter)
+          ? index
+          : closestIndex
+      }, 0)
+
       setCurrentIndex(Math.max(0, Math.min(photos.length - 1, newIndex)))
     }
 

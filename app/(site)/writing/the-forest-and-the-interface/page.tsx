@@ -53,17 +53,6 @@ function MarginLink({ href, children }: { href: string; children: React.ReactNod
 
 /* ── Right-margin SVG illustrations ── */
 
-function TreeSvg() {
-  return (
-    <svg width="48" height="72" viewBox="0 0 48 72" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <line x1="24" y1="72" x2="24" y2="40" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-      <path d="M24 40C14 40 6 30 10 20C12 14 18 8 24 6C30 8 36 14 38 20C42 30 34 40 24 40Z" stroke="currentColor" strokeWidth="1.2" fill="none" />
-      <line x1="24" y1="40" x2="16" y2="50" stroke="currentColor" strokeWidth="1" strokeLinecap="round" />
-      <line x1="24" y1="40" x2="32" y2="48" stroke="currentColor" strokeWidth="1" strokeLinecap="round" />
-    </svg>
-  )
-}
-
 function LoopSvg() {
   return (
     <svg width="60" height="70" viewBox="0 0 48 56" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -172,7 +161,7 @@ export default function ForestInterfacePage() {
               I keep them anyway. I liked them all.
             </p>
             <p>
-              I like all of these versions because they were mixed with ordinary life and still <em>not fully absorbed by it</em>. That is the feeling I keep returning to. A forest can have benches, fences, maps, litter, children, mobile reception, histories of use and management, and still refuse to become completely explainable. <em>It lets you enter, but it does not make itself small for you.</em> You can follow the path and still not know what you are looking at.
+              I like all of these versions because they were mixed with ordinary life and still <em>not fully absorbed by it</em>. That is the feeling I keep returning to. A forest can be public, managed, interrupted, full of signs of use, and still refuse to become completely explainable. <em>It lets you enter, but it does not make itself small for you.</em> You can follow the path and still not know what you are looking at.
             </p>
             <p>
               I can tell when a place makes me quieter, but I cannot always tell why. At first everything is too general. Trees. Ground. Water. Green. Then, if I stay long enough, the place begins to separate. I notice the lake before the ground that leads to it. I notice the light before the shapes it makes.
@@ -182,9 +171,6 @@ export default function ForestInterfacePage() {
               Nothing has happened, exactly, <em>but the world has become less flat</em>.
             </p>
           </div>
-          <MarginNote className="writing-margin-note--tree">
-            <TreeSvg />
-          </MarginNote>
         </section>
 
         {/* §2 — Semi-structured */}
@@ -197,7 +183,7 @@ export default function ForestInterfacePage() {
               The world we actually live in is semi-structured. Half designed, half not. Half planned, half grown. Half interface, half weather.
             </p>
             <p>
-              This is <ExternalLink href="https://yalebooks.yale.edu/book/9780300078152/seeing-like-a-state/">legibility</ExternalLink> at its gentlest, and it is not always bad. The point is not that forest is natural and interface is artificial. That distinction is too easy and mostly unhelpful.
+              This is <ExternalLink href="https://www.nps.gov/subjects/hfc/waysides.htm">interpretation</ExternalLink> at its gentlest, and it is not always bad. The point is not that forest is natural and interface is artificial. That distinction is too easy and mostly unhelpful.
             </p>
             <p>
               <em>The better distinction is between systems that hold the world open and systems that close it too quickly.</em>
@@ -309,7 +295,10 @@ export default function ForestInterfacePage() {
           </div>
           <MarginNote>
             <p>
-              A good interface can act like a <MarginLink href="https://griesemer.net/publications/">boundary object</MarginLink>: flexible enough for different publics, stable enough to coordinate care.
+              A good interface can act like a <MarginLink href="https://scalar.usc.edu/works/boundary-objects-guide/index">boundary object</MarginLink>: flexible enough for different publics, stable enough to coordinate care.
+            </p>
+            <p>
+              Tim Ingold's <MarginLink href="https://www.routledge.com/The-Perception-of-the-Environment-Essays-on-Livelihood-Dwelling-and-Skill/Ingold/p/book/9781032052274">dwelling perspective</MarginLink> is useful here: perception is trained by moving through a world, not standing outside it.
             </p>
           </MarginNote>
         </section>
