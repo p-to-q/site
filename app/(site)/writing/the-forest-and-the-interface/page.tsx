@@ -44,11 +44,7 @@ function MarginFigure({ children, className = '' }: { children: React.ReactNode;
 }
 
 function MarginLink({ href, children }: { href: string; children: React.ReactNode }) {
-  return (
-    <a href={href} target="_blank" rel="noopener noreferrer">
-      {children}
-    </a>
-  )
+  return <ExternalLink href={href}>{children}</ExternalLink>
 }
 
 /* ── Right-margin SVG illustrations ── */
@@ -230,7 +226,7 @@ export default function ForestInterfacePage() {
               A forest has an interface that is not user-friendly.
             </p>
             <p>
-              I was thinking about this because <ExternalLink href="https://jnd.org/books/the-design-of-everyday-things-revised-and-expanded-edition/"><em>user-friendly</em></ExternalLink> is such a polite phrase. In software it usually means the tool has done some work before you arrive. It has guessed what you probably want. It has removed some choices, softened some edges, and made the next action obvious.
+              I was thinking about this because <ExternalLink href="https://ux.stackexchange.com/questions/34051/is-user-friendly-a-valid-term-in-user-experience"><em>user-friendly</em></ExternalLink> is such a polite phrase. In software it usually means the tool has done some work before you arrive. It has guessed what you probably want. It has removed some choices, softened some edges, and made the next action obvious.
             </p>
             <p>
               Most of the time, this is good. A good form should not make you suffer. A map should help. A button should look like a button. Nobody wants a clever checkout page.
@@ -298,7 +294,7 @@ export default function ForestInterfacePage() {
               A good interface can act like a <MarginLink href="https://scalar.usc.edu/works/boundary-objects-guide/index">boundary object</MarginLink>: flexible enough for different publics, stable enough to coordinate care.
             </p>
             <p>
-              Tim Ingold's <MarginLink href="https://www.routledge.com/The-Perception-of-the-Environment-Essays-on-Livelihood-Dwelling-and-Skill/Ingold/p/book/9781032052274">dwelling perspective</MarginLink> is useful here: perception is trained by moving through a world, not standing outside it.
+              Tim Ingold's <MarginLink href="https://www.livinganthropologically.com/perception-of-the-environment/building-dwelling-living/">dwelling perspective</MarginLink> is useful here: perception is trained by moving through a world, not standing outside it.
             </p>
           </MarginNote>
         </section>
@@ -360,7 +356,7 @@ export default function ForestInterfacePage() {
               A field guide works in a similar way: it gives names and distinctions without replacing the encounter.
             </p>
             <p>
-              <em>The interface I trust is designed, but not possessive; structured, but not hungry to become the whole event.</em>
+              The interface I trust is designed, but not possessive; structured, but not hungry to become the whole event.
             </p>
             <p>
               A good interface can help a person begin without deciding too much on their behalf. It can leave some uncertainty intact without abandoning them to confusion. It can make the next step possible without making the whole experience about next steps.
@@ -402,7 +398,7 @@ export default function ForestInterfacePage() {
               That is what I keep coming back to. The forest does not refuse interface. It is full of interfaces: paths, signs, maps, seasons, edges, habits, warnings, names. But it resists becoming <em>only</em> interface. It remains more than the systems that help us enter it.
             </p>
             <p>
-              <em>A person can spend time there without being asked to win.</em>
+              A person can spend time there without being asked to win.
             </p>
             <p>
               That is rarer than it sounds.
