@@ -161,6 +161,16 @@ a.is-active {
   font-weight: 600 !important;
 }
 
+.external-link-arrow {
+  opacity: 0.78;
+  transition: opacity 150ms ease;
+}
+
+a:hover .external-link-arrow,
+a.is-active .external-link-arrow {
+  opacity: 1;
+}
+
 .prose .anchor {
   @apply absolute invisible no-underline;
 

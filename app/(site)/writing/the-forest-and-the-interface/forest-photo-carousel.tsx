@@ -45,8 +45,8 @@ const photos: Photo[] = [
   {
     filename: '270221781107631_.jpg',
     date: '2024-07-18',
-    frameLabel: '#06 Italy',
-    description: 'Italy'
+    frameLabel: '#06 Rome',
+    description: 'Moonlight shadow'
   },
   {
     filename: '270271781107643_.jpg',
@@ -87,7 +87,8 @@ const photos: Photo[] = [
   {
     filename: '270291781107653_.jpg',
     date: '2024-06-15',
-    frameLabel: '#13 Sea'
+    frameLabel: '#13 Sea',
+    description: 'an dem Meer'
   },
   {
     filename: '270211781107630_crop.jpg',
