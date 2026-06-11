@@ -1159,6 +1159,24 @@ html[data-theme='dark'] .forest-photo-carousel__caption {
   opacity: 0.9;
 }
 
+.writing-margin-app-icon {
+  display: inline-flex;
+  width: 4.6rem;
+  aspect-ratio: 1;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #333333;
+  border-radius: 1.1rem;
+  background: transparent;
+  overflow: hidden;
+}
+
+.writing-margin-app-icon img {
+  display: block;
+  width: 82%;
+  height: auto;
+}
+
 .writing-margin-note__kicker {
   display: block;
   margin-bottom: 0.3rem;
@@ -1230,6 +1248,11 @@ html[data-theme='dark'] .forest-photo-carousel__caption {
 
   .writing-margin-note--game-note {
     top: 5.75rem;
+  }
+
+  .writing-margin-note--grug {
+    top: 17.5rem;
+    width: 12.5rem;
   }
 }
 

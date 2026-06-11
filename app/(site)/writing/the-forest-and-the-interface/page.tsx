@@ -124,6 +124,14 @@ function RootsSvg() {
   )
 }
 
+function GrugIcon() {
+  return (
+    <span className="writing-margin-app-icon" aria-hidden="true">
+      <img src="/resources/pictures/forest-interface/grug-logo-transparent.png" alt="" width="82" height="36" loading="lazy" />
+    </span>
+  )
+}
+
 export default function ForestInterfacePage() {
   return (
     <div className="flex min-h-[calc(100dvh-5.5rem)] flex-col">
@@ -460,6 +468,12 @@ export default function ForestInterfacePage() {
           </div>
           <MarginNote className="writing-margin-note--trail">
             <TreeLineSvg />
+          </MarginNote>
+          <MarginNote className="writing-margin-note--grug">
+            <GrugIcon />
+            <p>
+              Alex pointed me to <MarginLink href="https://www.grug.so/">grug</MarginLink>: open, read a small truth, maybe draw how it feels. A tool that gets out of the way.
+            </p>
           </MarginNote>
         </section>
 
