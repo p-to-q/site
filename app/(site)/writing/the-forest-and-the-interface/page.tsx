@@ -126,9 +126,9 @@ function RootsSvg() {
 
 function GrugIcon() {
   return (
-    <span className="writing-margin-app-icon" aria-hidden="true">
+    <ExternalLink href="https://www.grug.so/" className="writing-margin-app-icon" aria-label="Open grug">
       <img src="/resources/pictures/forest-interface/grug-logo-transparent.png" alt="" width="82" height="36" loading="lazy" />
-    </span>
+    </ExternalLink>
   )
 }
 

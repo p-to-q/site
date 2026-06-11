@@ -1165,16 +1165,43 @@ html[data-theme='dark'] .forest-photo-carousel__caption {
   aspect-ratio: 1;
   align-items: center;
   justify-content: center;
-  border: 1px solid #333333;
+  border: 1px solid var(--site-muted);
   border-radius: 1.1rem;
   background: transparent;
+  color: var(--site-muted);
   overflow: hidden;
+  text-decoration: none;
+  transition: border-color 0.16s ease, color 0.16s ease;
+}
+
+.writing-margin-app-icon .external-link-arrow {
+  display: none;
+}
+
+.writing-margin-app-icon:hover,
+.writing-margin-app-icon:focus-visible,
+.writing-margin-app-icon:active {
+  border-color: var(--site-text);
+  color: var(--site-text);
+}
+
+.writing-margin-app-icon:focus-visible {
+  outline: 2px solid var(--site-text);
+  outline-offset: 0.2rem;
 }
 
 .writing-margin-app-icon img {
   display: block;
   width: 82%;
   height: auto;
+  opacity: 0.42;
+  transition: opacity 0.16s ease;
+}
+
+.writing-margin-app-icon:hover img,
+.writing-margin-app-icon:focus-visible img,
+.writing-margin-app-icon:active img {
+  opacity: 1;
 }
 
 .writing-margin-note__kicker {
@@ -1184,7 +1211,10 @@ html[data-theme='dark'] .forest-photo-carousel__caption {
   font-weight: 600;
 }
 
-/* ── Right-margin figures (hover-reveal, desktop only) ─────── */
+/* ── Right-margin figures ─────────────────────────────────────
+   Desktop: figures live in the right gutter and reveal with hover.
+   Mobile: the standard at the end of this section moves all writing
+   margin figures, images, and notes back into the article flow. */
 
 .writing-margin-figure {
   position: absolute;
@@ -1543,8 +1573,10 @@ html[data-theme='dark'] .forest-photo-carousel__caption {
     gap: 2.2rem;
   }
 
-  .strange-tools-page .writing-margin-figure,
-  .strange-tools-page .writing-margin-figure--captioned {
+  /* Mobile writing standard: no hidden right-gutter artifacts. SVGs,
+     captioned images, and notes render inline with the article content. */
+  .writing-article .writing-margin-figure,
+  .writing-article .writing-margin-figure--captioned {
     position: static;
     left: auto;
     top: auto;
@@ -1556,14 +1588,34 @@ html[data-theme='dark'] .forest-photo-carousel__caption {
     filter: none;
   }
 
-  .strange-tools-page .writing-margin-figure {
+  .writing-article .writing-margin-figure {
     flex-direction: column;
     gap: 0.6rem;
     align-items: flex-start;
   }
 
-  .strange-tools-page .writing-margin-figure--captioned {
+  .writing-article .writing-margin-figure svg {
+    max-width: min(8rem, 42vw);
+    height: auto;
+  }
+
+  .writing-article .writing-margin-figure--captioned {
     gap: 0.6rem;
+  }
+
+  .writing-article .writing-margin-photo,
+  .writing-article .writing-margin-photo-toggle {
+    max-width: min(10rem, 52vw);
+  }
+
+  .writing-article .writing-margin-note {
+    margin-top: 1rem;
+    border-left: 0;
+    padding-left: 0;
+  }
+
+  .writing-article .writing-margin-app-icon {
+    width: 4.25rem;
   }
 
   .writing-margin-note p,
@@ -1576,12 +1628,6 @@ html[data-theme='dark'] .forest-photo-carousel__caption {
 
   .writing-margin-caption .writing-margin-caption__hint {
     font-size: 0.72em !important;
-  }
-
-  .writing-margin-note--roots,
-  .writing-margin-note--trail {
-    border-left: 0;
-    padding-left: 0;
   }
 
   .writing-article__title {
