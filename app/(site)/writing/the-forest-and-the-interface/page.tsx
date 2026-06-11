@@ -140,8 +140,8 @@ export default function ForestInterfacePage() {
         {/* Title & date */}
         <header className="writing-article__header">
           <h1 className="writing-article__title">The Forest and the Interface</h1>
-          <time className="writing-article__date" dateTime="2026-06" aria-label="Published June 2026 by Du, Sym">
-            June 2026 · Du, Sym
+          <time className="writing-article__date" dateTime="2026-06" aria-label="Published June 2026 by Du, Sym, sharpened with Claude Opus 4.6">
+            June 2026 · Du, Sym, sharpened with Claude Opus 4.6
           </time>
         </header>
 
