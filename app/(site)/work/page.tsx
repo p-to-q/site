@@ -106,13 +106,19 @@ export default function WorkPage() {
         <WorkItem thumb={thumbs['aleph']}>
           <ExternalLink href="https://aleph.ptoq.io/">aleph</ExternalLink>
           {' - '}
-          reverse prompt search engine
+          reverse prompt search engine, also engineering{' '}
+          <ExternalLink href="https://github.com/p-to-q/aleph-benchmark">benchmark</ExternalLink>
         </WorkItem>
         <WorkItem thumb={thumbs['liferestart']}>
           <ExternalLink href="https://machinedie.life">agent lifeRestart</ExternalLink>
           {' - '}
           make something an agent want, after{' '}
           <ExternalLink href="https://github.com/VickScarlet/lifeRestart">lifeRestart</ExternalLink>
+        </WorkItem>
+        <WorkItem thumb={thumbs['murmur']}>
+          <ExternalLink href="https://murmur.ptoq.io/">murmur</ExternalLink>
+          {' - '}
+          get the melody out of your head
         </WorkItem>
       </section>
     </SiteStickyQedPage>
