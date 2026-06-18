@@ -43,6 +43,28 @@ function MarginFigure({ children, className = '' }: { children: React.ReactNode;
   )
 }
 
+function MarginFigureWithCaption({ children, caption, captionHint, href, className = '' }: { children: React.ReactNode; caption?: React.ReactNode; captionHint?: string; href?: string; className?: string }) {
+  return (
+    <aside className={`writing-margin-figure writing-margin-figure--captioned ${className}`} aria-hidden="true">
+      {children}
+      {caption && (
+        <p className="writing-margin-caption">
+          {href ? <a href={href} target="_blank" rel="noopener noreferrer" className="writing-margin-caption__link">{caption}</a> : caption}
+          {captionHint && (
+            <span className="writing-margin-caption__hint">
+              {captionHint}
+              <svg className="writing-margin-caption__hint-icon" width="9" height="12" viewBox="0 0 9 12" fill="none" aria-hidden="true">
+                <rect x="1.25" y="0.75" width="6.5" height="10.5" rx="3.25" stroke="currentColor" strokeWidth="0.9" />
+                <line x1="4.5" y1="2.25" x2="4.5" y2="4.25" stroke="currentColor" strokeWidth="0.9" strokeLinecap="round" />
+              </svg>
+            </span>
+          )}
+        </p>
+      )}
+    </aside>
+  )
+}
+
 function MarginLink({ href, children }: { href: string; children: React.ReactNode }) {
   return <ExternalLink href={href}>{children}</ExternalLink>
 }
@@ -421,6 +443,19 @@ export default function ForestInterfacePage() {
               The good version of the Wood-Wide Web is not &ldquo;trees are people.&rdquo; It is stranger: <MarginLink href="https://www.nature.com/articles/41557">carbon transfer</MarginLink>, fungal mediation, competition, kinship claims, and enough uncertainty that <MarginLink href="https://www.nature.com/articles/s41559-023-01986-1">over-reading</MarginLink> becomes part of the object lesson.
             </p>
           </MarginNote>
+          <MarginFigureWithCaption
+            caption={<>Earth&apos;s underground fungal network is so vast that, if it were in outer space, it would span roughly 10% of the <ExternalLink href="https://www.livescience.com/tag/milky-way" className="writing-margin-caption__link">Milky Way</ExternalLink> if placed in a straight line, a new study in <ExternalLink href="https://www.science.org/doi/10.1126/science.adu4373" className="writing-margin-caption__link">Science</ExternalLink> finds.</>}
+            className="writing-margin-figure--mycorrhizal-network"
+          >
+            <img
+              src="/resources/pictures/forest-interface/mycorrhizal-network-science-2026.webp"
+              alt=""
+              width="160"
+              height="90"
+              loading="lazy"
+              className="writing-margin-photo"
+            />
+          </MarginFigureWithCaption>
         </section>
 
         {/* §9 — Walkable (coda) */}

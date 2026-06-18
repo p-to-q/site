@@ -1103,12 +1103,16 @@ html[data-theme='dark'] .forest-photo-carousel__caption {
 
 .writing-margin-caption__link {
   color: inherit;
-  text-decoration: none;
+  text-decoration-line: underline;
+  text-decoration-thickness: 0.08rem;
+  text-underline-offset: 2px;
+  text-decoration-color: var(--site-link-underline);
   transition: color var(--writing-margin-text-fade);
 }
 
 .writing-margin-caption__link:hover {
   color: var(--site-link);
+  text-decoration-color: var(--site-link-underline-hover);
 }
 
 .writing-margin-figure--captioned:hover .writing-margin-caption {
@@ -1272,6 +1276,14 @@ html[data-theme='dark'] .forest-photo-carousel__caption {
     width: 14rem;
   }
 
+  .writing-margin-figure--mycorrhizal-network {
+    top: 20.5rem;
+  }
+
+  .writing-margin-figure--mycorrhizal-network .writing-margin-photo:active {
+    filter: invert(1) brightness(1.05) contrast(1.08);
+  }
+
   .writing-margin-note--trail {
     width: 14rem;
   }
@@ -1299,6 +1311,10 @@ html[data-theme='dark'] .forest-photo-carousel__caption {
   /* Inherits left: calc(100% + 3.5rem) from base — same gap as SVG figures.
      Explicit width prevents caption text from expanding rightward unbounded. */
   width: 10rem;
+}
+
+.writing-margin-figure--captioned.writing-margin-figure--mycorrhizal-network {
+  width: 14rem;
 }
 
 @media (min-width: 960px) {
