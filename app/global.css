@@ -1110,7 +1110,14 @@ html[data-theme='dark'] .forest-photo-carousel__caption {
   transition: color var(--writing-margin-text-fade);
 }
 
-.writing-margin-caption__link:hover {
+.writing-margin-caption a {
+  color: currentColor;
+  text-decoration-color: transparent;
+  text-decoration-thickness: 0.08rem;
+}
+
+.writing-margin-caption__link:hover,
+.writing-margin-caption a:hover {
   color: var(--site-link);
   text-decoration-color: var(--site-link-underline-hover);
 }
