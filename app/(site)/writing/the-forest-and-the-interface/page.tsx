@@ -444,7 +444,7 @@ export default function ForestInterfacePage() {
             </p>
           </MarginNote>
           <MarginFigureWithCaption
-            caption={<>Earth&apos;s underground fungal network is so vast that, if it were in outer space, it would span roughly 10% of the <ExternalLink href="https://www.livescience.com/tag/milky-way" className="writing-margin-caption__link">Milky Way</ExternalLink> if placed in a straight line, a new study in <ExternalLink href="https://www.science.org/doi/10.1126/science.adu4373" className="writing-margin-caption__link">Science</ExternalLink> finds.</>}
+            caption={<>Earth&apos;s underground fungal network is so vast that, if it were in outer space, it would span roughly 10% of the <ExternalLink href="https://www.livescience.com/tag/milky-way">Milky Way</ExternalLink> if placed in a straight line, a new study in <ExternalLink href="https://www.science.org/doi/10.1126/science.adu4373">Science</ExternalLink> finds.</>}
             className="writing-margin-figure--mycorrhizal-network"
           >
             <img
