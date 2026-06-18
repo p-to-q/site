@@ -156,7 +156,7 @@ function GrugIcon() {
 
 export default function ForestInterfacePage() {
   return (
-    <div className="forest-interface-page flex min-h-[calc(100dvh-5.5rem)] flex-col">
+    <div className="flex min-h-[calc(100dvh-5.5rem)] flex-col">
       <SiteHeader />
 
       <WritingNav />
