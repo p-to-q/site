@@ -71,7 +71,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" style={{ backgroundColor: 'var(--site-bg)' }}>
+    <html lang="en" suppressHydrationWarning style={{ backgroundColor: 'var(--site-bg)' }}>
       <head>
         <script
           type="application/ld+json"
