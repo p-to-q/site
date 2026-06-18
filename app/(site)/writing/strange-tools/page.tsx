@@ -198,6 +198,13 @@ export default function StrangeToolsPage() {
               <ExternalLink href="https://karpathy.github.io/2026/02/12/microgpt/">piece of algorithm</ExternalLink>
               {' '}a few hundred people love in a way that is hard to summarize.
             </p>
+            <MarginFigureWithCaption
+              caption="Alessi® Toru Electric Kettle"
+              href="https://us.alessi.com/products/toru-electric-kettle"
+              className="writing-margin-figure--top"
+            >
+              <KettleSvg />
+            </MarginFigureWithCaption>
             <p>
               For a while, I called these &ldquo;niche tools&rdquo;. The word was partly true and partly lazy.{' '}
               &ldquo;Niche&rdquo; describes the size of an audience without saying much about the quality of the need.
@@ -208,13 +215,6 @@ export default function StrangeToolsPage() {
               &ldquo;Strange&rdquo; feels more useful.
             </p>
           </div>
-          <MarginFigureWithCaption
-            caption="Alessi® Toru Electric Kettle"
-            href="https://us.alessi.com/products/toru-electric-kettle"
-            className="writing-margin-figure--top"
-          >
-            <KettleSvg />
-          </MarginFigureWithCaption>
         </section>
 
         {/* §2 — Pragmatic strangeness */}
@@ -239,12 +239,12 @@ export default function StrangeToolsPage() {
             <p className="writing-article__pullquote">
               Sometimes power is the wrong measure. A tool can be powerful and still make its user smaller. A tool can be limited and still enlarge the person using it.
             </p>
+            <MarginFigure>
+              <p className="writing-margin-chinese">
+                「夫器无好恶，利害在人。太阿倒持，授人鳟柄；白旄黄钺，奄有四方。观此物之用，实进学之媒，虽有博戏之法，亦为小休之娱。」
+              </p>
+            </MarginFigure>
           </div>
-          <MarginFigure>
-            <p className="writing-margin-chinese">
-              「夫器无好恶，利害在人。太阿倒持，授人鳟柄；白旄黄钺，奄有四方。观此物之用，实进学之媒，虽有博戏之法，亦为小休之娱。」
-            </p>
-          </MarginFigure>
         </section>
 
         {/* §3 — Services vs. judgment */}
@@ -264,14 +264,14 @@ export default function StrangeToolsPage() {
             <p className="writing-article__pullquote">
               The best strange tools are not hard to use because difficulty is a virtue. They are strange because they are still in contact with the material that made them necessary.
             </p>
+            <MarginFigureWithCaption
+              caption="Dynamicland — a humane dynamic medium where the physical room itself acts as the computer"
+              captionHint="press image for the physical setup"
+              className="writing-margin-figure--dynamicland"
+            >
+              <DynamiclandPhotoToggle />
+            </MarginFigureWithCaption>
           </div>
-          <MarginFigureWithCaption
-            caption="Dynamicland — a humane dynamic medium where the physical room itself acts as the computer"
-            captionHint="press image for the physical setup"
-            className="writing-margin-figure--dynamicland"
-          >
-            <DynamiclandPhotoToggle />
-          </MarginFigureWithCaption>
         </section>
 
         {/* §4 — Builder purpose */}
@@ -293,6 +293,9 @@ export default function StrangeToolsPage() {
               You still have to go outside. You still have to wait.
               You still have to mistake one thing for another until your eye learns the difference.
             </p>
+            <MarginFigure>
+              <FieldGuideSvg />
+            </MarginFigure>
             <p className="writing-article__pullquote">
               The tool works because the world is still doing some of the teaching.
             </p>
@@ -300,9 +303,6 @@ export default function StrangeToolsPage() {
               The strange tools I trust usually have four qualities.
             </p>
           </div>
-          <MarginFigure>
-            <FieldGuideSvg />
-          </MarginFigure>
         </section>
 
         {/* §5 — Four qualities */}
@@ -334,10 +334,10 @@ export default function StrangeToolsPage() {
                 The object should accumulate evidence — after enough contact, the right people usually know why they matter.
               </li>
             </ul>
+            <MarginFigure>
+              <FourDotsSvg />
+            </MarginFigure>
           </div>
-          <MarginFigure>
-            <FourDotsSvg />
-          </MarginFigure>
         </section>
 
         {/* §6 — The middle */}
@@ -358,6 +358,9 @@ export default function StrangeToolsPage() {
               A strange tool keeps some of the middle alive.
               It does not make everything difficult. It preserves that kind of contact.
             </p>
+            <MarginFigure className="writing-margin-figure--diagram">
+              <TwoByTwoSvg />
+            </MarginFigure>
             <p>
               This is the part that gets lost when every interface tries to become frictionless.
               Removing friction is useful when friction is accidental.
@@ -372,29 +375,26 @@ export default function StrangeToolsPage() {
               A strange tool leaves you more able to begin.
             </p>
           </div>
-          <MarginFigure className="writing-margin-figure--diagram">
-            <TwoByTwoSvg />
-          </MarginFigure>
         </section>
 
         {/* §7 — p-to-q coda */}
         <section id="coda" className="writing-article__section writing-article__coda">
-          <MarginFigureWithCaption
-            caption="Notion, 2013 (reconstructed)"
-          >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/notion-flint-2013.png"
-              alt="A flint hand-axe beside the McLuhan quote — We shape our tools, and thereafter our tools will shape us"
-              className="writing-margin-photo writing-margin-photo--blend"
-            />
-          </MarginFigureWithCaption>
           <div className="writing-article__body">
             <p>
               That is the kind of work we want{' '}
               <ExternalLink href="https://github.com/p-to-q">[p → q]</ExternalLink>
               {' '}to make room for: small, rigorous, uncertain artifacts that find something modern tools have hidden too well and bring it back to the surface.
             </p>
+            <MarginFigureWithCaption
+              caption="Notion, 2013 (reconstructed)"
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/notion-flint-2013.png"
+                alt="A flint hand-axe beside the McLuhan quote — We shape our tools, and thereafter our tools will shape us"
+                className="writing-margin-photo writing-margin-photo--blend"
+              />
+            </MarginFigureWithCaption>
             <p>
               The hope is not to make everything stranger.
               It is to give a small amount of room to the things modern technology has made too easy to miss, and to treat them with enough seriousness that their strangeness can do real work.

@@ -208,6 +208,11 @@ export default function ForestInterfacePage() {
             <p className="writing-article__pullquote">
               The world we actually live in is semi-structured. Half designed, half not. Half planned, half grown. Half interface, half weather.
             </p>
+            <MarginFigure>
+              <p className="writing-margin-chinese">
+                「天地有大美而不言，四时有明法而不议，万物有成理而不说。」
+              </p>
+            </MarginFigure>
             <p>
               This is <ExternalLink href="https://www.nps.gov/subjects/hfc/waysides.htm">interpretation</ExternalLink> at its gentlest, and it is not always bad. The point is not that forest is natural and interface is artificial. That distinction is too easy and mostly unhelpful.
             </p>
@@ -215,11 +220,6 @@ export default function ForestInterfacePage() {
               <em>The better distinction is between systems that hold the world open and systems that close it too quickly.</em>
             </p>
           </div>
-          <MarginFigure>
-            <p className="writing-margin-chinese">
-              「天地有大美而不言，四时有明法而不议，万物有成理而不说。」
-            </p>
-          </MarginFigure>
         </section>
 
         {/* §3 — Generous */}
@@ -279,13 +279,13 @@ export default function ForestInterfacePage() {
             <p className="writing-article__pullquote">
               The map is not the place. The weather icon is not the air. The battery percentage is not energy. The prompt is not the work.
             </p>
+            <MarginNote>
+              <MapSvg />
+              <p>
+                <MarginLink href="https://en.wikipedia.org/wiki/Map%E2%80%93territory_relation">After Korzybski</MarginLink> (1931). &ldquo;The map is not the territory.&rdquo;
+              </p>
+            </MarginNote>
           </div>
-          <MarginNote>
-            <MapSvg />
-            <p>
-              <MarginLink href="https://en.wikipedia.org/wiki/Map%E2%80%93territory_relation">After Korzybski</MarginLink> (1931). &ldquo;The map is not the territory.&rdquo;
-            </p>
-          </MarginNote>
         </section>
 
         {/* §5 — Fitness */}
@@ -315,18 +315,18 @@ export default function ForestInterfacePage() {
             <p className="writing-article__pullquote">
               This matters for interface because an interface is never only a surface. It teaches a posture.
             </p>
+            <MarginNote>
+              <p>
+                A good interface can act like a <MarginLink href="https://scalar.usc.edu/works/boundary-objects-guide/index">boundary object</MarginLink>: flexible enough for different publics, stable enough to coordinate care.
+              </p>
+              <p>
+                Tim Ingold's <MarginLink href="https://www.livinganthropologically.com/perception-of-the-environment/building-dwelling-living/">dwelling perspective</MarginLink> is useful here: perception is trained by moving through a world, not standing outside it.
+              </p>
+            </MarginNote>
             <p>
               Some interfaces teach nothing except where to click next.
             </p>
           </div>
-          <MarginNote>
-            <p>
-              A good interface can act like a <MarginLink href="https://scalar.usc.edu/works/boundary-objects-guide/index">boundary object</MarginLink>: flexible enough for different publics, stable enough to coordinate care.
-            </p>
-            <p>
-              Tim Ingold's <MarginLink href="https://www.livinganthropologically.com/perception-of-the-environment/building-dwelling-living/">dwelling perspective</MarginLink> is useful here: perception is trained by moving through a world, not standing outside it.
-            </p>
-          </MarginNote>
         </section>
 
         {/* §6 — The game */}
@@ -344,6 +344,9 @@ export default function ForestInterfacePage() {
             <p className="writing-article__pullquote">
               This assumption often ends in something like a game.
             </p>
+            <MarginFigure>
+              <LoopSvg />
+            </MarginFigure>
             <p>
               A game is a beautiful form when it is honest about being one. It draws a boundary around a world and gives that world rules. It makes action meaningful by giving it consequence inside the boundary. It can turn boredom into attention and confusion into play. It is one of the oldest technologies humans have for making behavior feel alive.
             </p>
@@ -356,15 +359,12 @@ export default function ForestInterfacePage() {
             <p>
               <em>The forest does not answer this way.</em>
             </p>
+            <MarginNote className="writing-margin-note--game-note">
+              <p>
+                <MarginLink href="https://dl.digra.org/index.php/dl/article/download/575/575">Gamification</MarginLink> is the polite term. <MarginLink href="https://bogost.com/writing/blog/gamification_is_bullshit/">Bogost's harsher one</MarginLink> is useful because it keeps the capture motive in view.
+              </p>
+            </MarginNote>
           </div>
-          <MarginFigure>
-            <LoopSvg />
-          </MarginFigure>
-          <MarginNote className="writing-margin-note--game-note">
-            <p>
-              <MarginLink href="https://dl.digra.org/index.php/dl/article/download/575/575">Gamification</MarginLink> is the polite term. <MarginLink href="https://bogost.com/writing/blog/gamification_is_bullshit/">Bogost's harsher one</MarginLink> is useful because it keeps the capture motive in view.
-            </p>
-          </MarginNote>
         </section>
 
         {/* §7 — Trail */}
@@ -382,6 +382,9 @@ export default function ForestInterfacePage() {
             <p>
               <em>A trail is not a quest line. A trail is a trace of use.</em> It does not tell you that you are winning. It tells you that others have passed here, and that this might be a way through. <em>It helps without making itself the whole event.</em>
             </p>
+            <MarginFigure>
+              <PathSvg />
+            </MarginFigure>
             <p>
               A field guide works in a similar way: it gives names and distinctions without replacing the encounter.
             </p>
@@ -401,9 +404,6 @@ export default function ForestInterfacePage() {
               Some things should leave us more present than captured.
             </p>
           </div>
-          <MarginFigure>
-            <PathSvg />
-          </MarginFigure>
         </section>
 
         {/* §8 — Layers */}
@@ -434,6 +434,15 @@ export default function ForestInterfacePage() {
                 className="writing-margin-photo"
               />
             </MarginFigureWithCaption>
+            <MarginNote className="writing-margin-note--roots">
+              <RootsSvg />
+              <p>
+                <MarginLink href="https://www.ted.com/talks/suzanne_simard_how_trees_talk_to_each_other">Suzanne Simard</MarginLink> — mycorrhizal networks and the intelligence of forests.
+              </p>
+              <p>
+                The good version of the Wood-Wide Web is not &ldquo;trees are people.&rdquo; It is stranger: <MarginLink href="https://www.nature.com/articles/41557">carbon transfer</MarginLink>, fungal mediation, competition, kinship claims, and enough uncertainty that <MarginLink href="https://www.nature.com/articles/s41559-023-01986-1">over-reading</MarginLink> becomes part of the object lesson.
+              </p>
+            </MarginNote>
             <p>
               I do not need the forest to become a perfect internet metaphor. I almost prefer that it does not. The point is not that trees are secretly people, or that roots are cables, or that fungi are moral infrastructure. The point is that the forest is a multi-layered relational system, and the visible interface is only the beginning.
             </p>
@@ -447,15 +456,6 @@ export default function ForestInterfacePage() {
               That is rarer than it sounds.
             </p>
           </div>
-          <MarginNote className="writing-margin-note--roots">
-            <RootsSvg />
-            <p>
-              <MarginLink href="https://www.ted.com/talks/suzanne_simard_how_trees_talk_to_each_other">Suzanne Simard</MarginLink> — mycorrhizal networks and the intelligence of forests.
-            </p>
-            <p>
-              The good version of the Wood-Wide Web is not &ldquo;trees are people.&rdquo; It is stranger: <MarginLink href="https://www.nature.com/articles/41557">carbon transfer</MarginLink>, fungal mediation, competition, kinship claims, and enough uncertainty that <MarginLink href="https://www.nature.com/articles/s41559-023-01986-1">over-reading</MarginLink> becomes part of the object lesson.
-            </p>
-          </MarginNote>
         </section>
 
         {/* §9 — Walkable (coda) */}
@@ -476,12 +476,21 @@ export default function ForestInterfacePage() {
             <p className="writing-article__pullquote">
               Some things should remain walkable instead.
             </p>
+            <MarginNote className="writing-margin-note--trail">
+              <TreeLineSvg />
+            </MarginNote>
             <p>
               They should have paths, not levels. They should allow return without turning return into a streak.
             </p>
             <p className="writing-article__pause-before">
               This is where I start thinking about tools again.
             </p>
+            <MarginNote className="writing-margin-note--grug">
+              <GrugIcon />
+              <p>
+                Alex pointed me to <MarginLink href="https://www.grug.so/">grug</MarginLink>: open, read a small truth, maybe draw how it feels. A tool that gets out of the way.
+              </p>
+            </MarginNote>
             <p>
               Not every tool should become a forest. That would be unbearable. Most tools should simply do their job and get out of the way. I believe that too.
             </p>
@@ -501,15 +510,6 @@ export default function ForestInterfacePage() {
               <Link href="/writing">Writing</Link>.
             </p>
           </div>
-          <MarginNote className="writing-margin-note--trail">
-            <TreeLineSvg />
-          </MarginNote>
-          <MarginNote className="writing-margin-note--grug">
-            <GrugIcon />
-            <p>
-              Alex pointed me to <MarginLink href="https://www.grug.so/">grug</MarginLink>: open, read a small truth, maybe draw how it feels. A tool that gets out of the way.
-            </p>
-          </MarginNote>
         </section>
 
       </article>
