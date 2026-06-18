@@ -421,6 +421,19 @@ export default function ForestInterfacePage() {
             <p>
               This is where the &ldquo;<ExternalLink href="https://en.wikipedia.org/wiki/Mycorrhizal_network">Wood-Wide Web</ExternalLink>&rdquo; is useful to think with, even if the metaphor should be <ExternalLink href="https://www.nature.com/articles/s41559-023-01986-1">handled carefully</ExternalLink>. The phrase makes visible a hidden layer: trees, roots, fungi, soil, exchange, dependency, competition, signaling, decay. It reminds us that a forest is not only what stands above the ground. It is also a set of relations below visibility.
             </p>
+            <MarginFigureWithCaption
+              caption={<>Earth&apos;s underground fungal network is so vast that, if it were in outer space, it would span roughly 10% of the <MarginLink href="https://www.livescience.com/tag/milky-way">Milky Way</MarginLink> if placed in a straight line, a new study in <MarginLink href="https://www.science.org/doi/10.1126/science.adu4373">Science</MarginLink> finds.</>}
+              className="writing-margin-figure--mycorrhizal-network"
+            >
+              <img
+                src="/resources/pictures/forest-interface/mycorrhizal-network-science-2026.webp"
+                alt=""
+                width="160"
+                height="90"
+                loading="lazy"
+                className="writing-margin-photo"
+              />
+            </MarginFigureWithCaption>
             <p>
               I do not need the forest to become a perfect internet metaphor. I almost prefer that it does not. The point is not that trees are secretly people, or that roots are cables, or that fungi are moral infrastructure. The point is that the forest is a multi-layered relational system, and the visible interface is only the beginning.
             </p>
@@ -443,19 +456,6 @@ export default function ForestInterfacePage() {
               The good version of the Wood-Wide Web is not &ldquo;trees are people.&rdquo; It is stranger: <MarginLink href="https://www.nature.com/articles/41557">carbon transfer</MarginLink>, fungal mediation, competition, kinship claims, and enough uncertainty that <MarginLink href="https://www.nature.com/articles/s41559-023-01986-1">over-reading</MarginLink> becomes part of the object lesson.
             </p>
           </MarginNote>
-          <MarginFigureWithCaption
-            caption={<>Earth&apos;s underground fungal network is so vast that, if it were in outer space, it would span roughly 10% of the <MarginLink href="https://www.livescience.com/tag/milky-way">Milky Way</MarginLink> if placed in a straight line, a new study in <MarginLink href="https://www.science.org/doi/10.1126/science.adu4373">Science</MarginLink> finds.</>}
-            className="writing-margin-figure--mycorrhizal-network"
-          >
-            <img
-              src="/resources/pictures/forest-interface/mycorrhizal-network-science-2026.webp"
-              alt=""
-              width="160"
-              height="90"
-              loading="lazy"
-              className="writing-margin-photo"
-            />
-          </MarginFigureWithCaption>
         </section>
 
         {/* §9 — Walkable (coda) */}
