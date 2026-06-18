@@ -1106,17 +1106,13 @@ html[data-theme='dark'] .forest-photo-carousel__caption {
   text-decoration-line: underline;
   text-decoration-thickness: 0.08rem;
   text-underline-offset: 2px;
-  text-decoration-color: var(--site-link-underline);
-  transition: color var(--writing-margin-text-fade);
+  text-decoration-color: transparent;
+  transition: color var(--writing-margin-text-fade), text-decoration-color var(--writing-margin-text-fade);
 }
 
 .writing-margin-caption__link:hover {
-  color: var(--site-link);
+  color: var(--site-link-hover);
   text-decoration-color: var(--site-link-underline-hover);
-}
-
-.writing-margin-figure--captioned:hover .writing-margin-caption {
-  color: var(--site-link);
 }
 
 .writing-margin-note {
@@ -1128,11 +1124,6 @@ html[data-theme='dark'] .forest-photo-carousel__caption {
   padding-left: 0.85rem;
   color: var(--site-muted);
   transition: color var(--writing-margin-text-fade), border-color var(--writing-margin-text-fade);
-}
-
-.writing-margin-note:hover {
-  border-color: var(--site-link-underline-hover);
-  color: var(--site-link);
 }
 
 .writing-margin-note p {
@@ -1147,8 +1138,11 @@ html[data-theme='dark'] .forest-photo-carousel__caption {
 
 .writing-margin-note a {
   color: currentColor;
+  text-decoration-line: underline;
   text-decoration-color: transparent;
   text-decoration-thickness: 0.08rem;
+  text-underline-offset: 2px;
+  transition: color var(--writing-margin-text-fade), text-decoration-color var(--writing-margin-text-fade);
 }
 
 .writing-margin-note a:hover {
