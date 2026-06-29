@@ -120,7 +120,7 @@ export default function WorkPage() {
           {' - '}
           get the melody out of your head
         </WorkItem>
-        <WorkItem>
+        <WorkItem thumb={thumbs['jiko']}>
           <ExternalLink href="https://github.com/p-to-q/jiko">[jiko]</ExternalLink>
           {' - '}
           instant decision making instrument
