@@ -120,6 +120,11 @@ export default function WorkPage() {
           {' - '}
           get the melody out of your head
         </WorkItem>
+        <WorkItem>
+          <ExternalLink href="https://github.com/p-to-q/jiko">Jiko</ExternalLink>
+          {' - '}
+          instant decision making instrument
+        </WorkItem>
       </section>
     </SiteStickyQedPage>
   )
