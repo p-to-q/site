@@ -215,12 +215,12 @@ export default function WorkPage() {
             matter
           </WorkPreviewLink>
           {' - '}
-          make thought matter (as a BCI).{' '}
+           make thought matter (as a BCI){' '}
           <PitchLink project="matter" preview={thumb('matter-pitch')} />
         </WorkItem>
         <WorkItem>
           <WorkPreviewLink href="https://useeme.ptoq.io/" preview={thumb('see-me-see-u')}>
-            see-me-see-u
+            SEE-ME SEE-U
           </WorkPreviewLink>
           {' - '}
           what kinds of bodies can a self inhabit？
