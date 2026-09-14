@@ -92,7 +92,7 @@ function WorkPreviewLink({ preview, children, className = '', ...props }: WorkPr
 }
 
 function PitchLink({ project, preview }: {
-  project: 'jiko' | 'matter' | 'murmur' | 'wittgenstein'
+  project: 'jiko' | 'matter' | 'murmur' | 'wittgenstein' | 'see-me-see-u'
   preview: string
 }) {
   return (
@@ -104,6 +104,23 @@ function PitchLink({ project, preview }: {
       aria-label={`${project} [p→q] hackathon pitch PDF`}
     >
       [PDF]
+    </WorkPreviewLink>
+  )
+}
+
+function PosterLink({ project, preview }: {
+  project: 'see-me-see-u'
+  preview: string
+}) {
+  return (
+    <WorkPreviewLink
+      href={`/work/${project}-poster.jpg`}
+      preview={preview}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={`${project} poster`}
+    >
+      [Poster]
     </WorkPreviewLink>
   )
 }
@@ -223,7 +240,9 @@ export default function WorkPage() {
             SEE-ME SEE-U
           </WorkPreviewLink>
           {' - '}
-          what kinds of bodies can a self inhabit？
+          what kinds of bodies can a self inhabit{' '}
+          <PosterLink project="see-me-see-u" preview={thumb('see-me-see-u-poster')} />
+        </WorkItem>
         </WorkItem>
       </section>
     </SiteStickyQedPage>
