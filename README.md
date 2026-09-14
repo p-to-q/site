@@ -47,6 +47,22 @@ Run locally:
 npm run dev
 ```
 
+Production builds derive the public last-updated timestamp from Git without
+rewriting tracked source files. Set `SITE_LAST_UPDATED_ISO` only when a release
+needs an explicit ISO-8601 override.
+
+### IndexNow
+
+Trusted release automation should call `node scripts/indexnow-submit.mjs` directly.
+The optional `POST /api/indexnow` endpoint fails closed until the server-only
+`INDEXNOW_SUBMIT_TOKEN` is configured; it accepts authenticated JSON requests
+containing at most 100 same-origin URLs. See `.env.example` for the variable.
+
+### Work previews
+
+Work-page hover previews are bound to individual links rather than project rows.
+Asset naming and replacement checks are documented in [docs/work-previews.md](docs/work-previews.md).
+
 ### Rights
 
 Unless otherwise noted, site code, writing, images, and other assets are © p-to-q. All rights reserved.

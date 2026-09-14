@@ -25,6 +25,7 @@ function spreadFromParallax(absParallax: number): number {
 export function NotFoundSection() {
   const router = useRouter()
   const logoRef = useRef<HTMLAnchorElement>(null)
+  const leaveTimerRef = useRef<number | null>(null)
   const [restored, setRestored] = useState(false)
   const [leaving, setLeaving] = useState(false)
   const [parallax, setParallax] = useState(0)
@@ -43,11 +44,27 @@ export function NotFoundSection() {
     return () => {
       window.removeEventListener('pointermove', onMove)
       window.removeEventListener('pointerleave', onLeave)
+      if (leaveTimerRef.current) window.clearTimeout(leaveTimerRef.current)
     }
   }, [])
 
   const goHome = (e: MouseEvent) => {
-    if (leaving) return
+    if (
+      e.button !== 0 ||
+      e.metaKey ||
+      e.ctrlKey ||
+      e.shiftKey ||
+      e.altKey
+    ) {
+      return
+    }
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+
+    if (leaving) {
+      e.preventDefault()
+      return
+    }
     e.preventDefault()
 
     const logoRect = logoRef.current?.getBoundingClientRect()
@@ -74,7 +91,7 @@ export function NotFoundSection() {
 
     setRestored(true)
     setLeaving(true)
-    window.setTimeout(() => router.push('/'), LEAVE_MS)
+    leaveTimerRef.current = window.setTimeout(() => router.push('/'), LEAVE_MS)
   }
 
   const intentOn = () => setRestored(true)

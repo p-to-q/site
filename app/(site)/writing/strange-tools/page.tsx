@@ -37,10 +37,10 @@ function MarginFigure({ children, className = '' }: { children: React.ReactNode;
 
 function MarginFigureWithCaption({ children, caption, captionHint, href, className = '' }: { children: React.ReactNode; caption?: string; captionHint?: string; href?: string; className?: string }) {
   return (
-    <aside className={`writing-margin-figure writing-margin-figure--captioned ${className}`} aria-hidden="true">
+    <figure className={`writing-margin-figure writing-margin-figure--captioned ${className}`}>
       {children}
       {caption && (
-        <p className="writing-margin-caption">
+        <figcaption className="writing-margin-caption">
           {href ? <a href={href} target="_blank" rel="noopener noreferrer" className="writing-margin-caption__link">{caption}</a> : caption}
           {captionHint && (
             <span className="writing-margin-caption__hint">
@@ -51,9 +51,9 @@ function MarginFigureWithCaption({ children, caption, captionHint, href, classNa
               </svg>
             </span>
           )}
-        </p>
+        </figcaption>
       )}
-    </aside>
+    </figure>
   )
 }
 
@@ -177,6 +177,7 @@ export default function StrangeToolsPage() {
 
         {/* §1 — Opening */}
         <section id="strange" className="writing-article__section">
+          <h2 className="sr-only">Strange</h2>
           <div className="writing-article__body">
             <p>
               I have a weakness for tools that are a little hard to explain.
@@ -219,6 +220,7 @@ export default function StrangeToolsPage() {
 
         {/* §2 — Pragmatic strangeness */}
         <section id="strangeness" className="writing-article__section">
+          <h2 className="sr-only">Pragmatic strangeness</h2>
           <div className="writing-article__body">
             <p>
               The tools I trust tend to have a specific kind of <em>pragmatic strangeness</em>.
@@ -240,7 +242,7 @@ export default function StrangeToolsPage() {
               Sometimes power is the wrong measure. A tool can be powerful and still make its user smaller. A tool can be limited and still enlarge the person using it.
             </p>
             <MarginFigure>
-              <p className="writing-margin-chinese">
+              <p className="writing-margin-chinese" lang="zh-CN">
                 「夫器无好恶，利害在人。太阿倒持，授人鳟柄；白旄黄钺，奄有四方。观此物之用，实进学之媒，虽有博戏之法，亦为小休之娱。」
               </p>
             </MarginFigure>
@@ -249,6 +251,7 @@ export default function StrangeToolsPage() {
 
         {/* §3 — Services vs. judgment */}
         <section id="judgment" className="writing-article__section">
+          <h2 className="sr-only">Discernment</h2>
           <div className="writing-article__body">
             <p>
               This feels especially important now, when the easiest tools to build are services that collapse intention into result.{' '}
@@ -276,6 +279,7 @@ export default function StrangeToolsPage() {
 
         {/* §4 — Builder purpose */}
         <section id="builder" className="writing-article__section">
+          <h2 className="sr-only">Builder purpose</h2>
           <div className="writing-article__body">
             <p>
               This is where <ExternalLink href="https://farmerandfarmer.org/mastery/builder.html"><em>builder purpose</em> matters more than user demand</ExternalLink>.
@@ -307,6 +311,7 @@ export default function StrangeToolsPage() {
 
         {/* §5 — Four qualities */}
         <section id="four-qualities" className="writing-article__section">
+          <h2 className="sr-only">Four qualities</h2>
           <div className="writing-article__body">
             <ul className="writing-article__qualities">
               <li>
@@ -342,6 +347,7 @@ export default function StrangeToolsPage() {
 
         {/* §6 — The middle */}
         <section id="middle" className="writing-article__section">
+          <h2 className="sr-only">The middle</h2>
           <div className="writing-article__body">
             <p>
               This is what I look for now: not tools that are weird on first contact, but tools whose strangeness continues to pay rent.
@@ -379,6 +385,7 @@ export default function StrangeToolsPage() {
 
         {/* §7 — p-to-q coda */}
         <section id="coda" className="writing-article__section writing-article__coda">
+          <h2 className="sr-only">[p → q]</h2>
           <div className="writing-article__body">
             <p>
               That is the kind of work we want{' '}

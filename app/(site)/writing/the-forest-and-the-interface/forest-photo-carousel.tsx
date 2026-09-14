@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect, type KeyboardEvent } from 'react'
 import Image from 'next/image'
 
 interface Photo {
@@ -126,109 +126,33 @@ export function ForestPhotoCarousel() {
 
     const edgeTolerance = 3
     const playbackSpeed = 1.15
-    let isPlaying = false
-    let lockedScrollY: number | null = null
-    let previousBodyPosition = ''
-    let previousBodyTop = ''
-    let previousBodyLeft = ''
-    let previousBodyRight = ''
-    let previousBodyWidth = ''
-    let previousBodyPaddingRight = ''
-    let previousHtmlOverscrollBehavior = ''
-
-    const lockPage = () => {
-      if (lockedScrollY !== null) return
-
-      const body = document.body
-      const html = document.documentElement
-      const scrollbarWidth = window.innerWidth - html.clientWidth
-
-      lockedScrollY = window.scrollY
-      previousBodyPosition = body.style.position
-      previousBodyTop = body.style.top
-      previousBodyLeft = body.style.left
-      previousBodyRight = body.style.right
-      previousBodyWidth = body.style.width
-      previousBodyPaddingRight = body.style.paddingRight
-      previousHtmlOverscrollBehavior = html.style.overscrollBehavior
-
-      html.style.overscrollBehavior = 'none'
-      body.style.position = 'fixed'
-      body.style.top = `-${lockedScrollY}px`
-      body.style.left = '0'
-      body.style.right = '0'
-      body.style.width = '100%'
-      if (scrollbarWidth > 0) {
-        body.style.paddingRight = `${scrollbarWidth}px`
-      }
-    }
-
-    const unlockPage = () => {
-      if (lockedScrollY === null) return
-
-      const body = document.body
-      const html = document.documentElement
-      const scrollY = lockedScrollY
-
-      body.style.position = previousBodyPosition
-      body.style.top = previousBodyTop
-      body.style.left = previousBodyLeft
-      body.style.right = previousBodyRight
-      body.style.width = previousBodyWidth
-      body.style.paddingRight = previousBodyPaddingRight
-      html.style.overscrollBehavior = previousHtmlOverscrollBehavior
-
-      lockedScrollY = null
-      window.scrollTo(0, scrollY)
-    }
 
     const handleWheel = (e: WheelEvent) => {
-      const rect = carousel.getBoundingClientRect()
-      const vh = window.innerHeight
-      const max = container.scrollWidth - container.clientWidth
+      // Browser zoom and native horizontal gestures always keep their defaults.
+      if (e.ctrlKey || e.metaKey || Math.abs(e.deltaX) >= Math.abs(e.deltaY)) return
 
+      const max = container.scrollWidth - container.clientWidth
       if (max <= edgeTolerance) return
 
       const current = container.scrollLeft
       const isScrollingDown = e.deltaY > 0
       const isScrollingUp = e.deltaY < 0
-      const playbackLine = vh * 0.49
       const atStart = current <= edgeTolerance
       const atEnd = current >= max - edgeTolerance
 
-      const willCrossLineDown =
-        isScrollingDown && rect.top > playbackLine && rect.top - e.deltaY <= playbackLine && rect.bottom > playbackLine
-      const willCrossLineUp =
-        isScrollingUp && rect.top < playbackLine && rect.top - e.deltaY >= playbackLine && rect.bottom > playbackLine
-      const isPastLineDown =
-        isScrollingDown && rect.top <= playbackLine && rect.bottom > playbackLine
-      const isPastLineUp =
-        isScrollingUp && rect.top >= playbackLine && rect.top < vh && rect.bottom > playbackLine
-      const shouldStartPlaying = willCrossLineDown || willCrossLineUp || isPastLineDown || isPastLineUp
-
-      if (!isPlaying && !shouldStartPlaying) return
-
       if ((isScrollingDown && atEnd) || (isScrollingUp && atStart)) {
-        isPlaying = false
-        unlockPage()
         return
       }
 
       e.preventDefault()
-
-      if (!isPlaying) {
-        isPlaying = true
-        lockPage()
-        return
-      }
-
       container.scrollLeft = Math.max(0, Math.min(max, current + e.deltaY * playbackSpeed))
     }
 
-    window.addEventListener('wheel', handleWheel, { passive: false, capture: true })
+    // Scope wheel translation to the carousel itself. The page is never fixed,
+    // and scrolling naturally returns to the article at either edge.
+    carousel.addEventListener('wheel', handleWheel, { passive: false })
     return () => {
-      unlockPage()
-      window.removeEventListener('wheel', handleWheel, { capture: true })
+      carousel.removeEventListener('wheel', handleWheel)
     }
   }, [])
 
@@ -277,8 +201,24 @@ export function ForestPhotoCarousel() {
   const safeIndex = Math.max(0, Math.min(lastPhotoIndex, currentIndex))
   const currentPhoto = photos[safeIndex]
 
+  const handleTrackKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
+    if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return
+    const container = scrollContainerRef.current
+    if (!container) return
+
+    event.preventDefault()
+    const direction = event.key === 'ArrowRight' ? 1 : -1
+    container.scrollBy({ left: direction * container.clientWidth * 0.85, behavior: 'auto' })
+  }
+
   return (
-    <div className="forest-photo-carousel" ref={carouselRef}>
+    <div
+      className="forest-photo-carousel"
+      ref={carouselRef}
+      role="region"
+      aria-roledescription="carousel"
+      aria-label="Forest photographs"
+    >
       {/* 胶片孔轨道 - 跟随照片滚动 */}
       <div className="forest-photo-carousel__sprocket-container">
         <div
@@ -293,19 +233,26 @@ export function ForestPhotoCarousel() {
       <div
         ref={scrollContainerRef}
         className="forest-photo-carousel__track"
+        tabIndex={0}
+        onKeyDown={handleTrackKeyDown}
+        aria-label="Forest photographs. Use left and right arrow keys to browse."
       >
         {photos.map((photo, index) => (
           <div
             key={photo.filename}
             className="forest-photo-carousel__item"
+            role="group"
+            aria-roledescription="slide"
+            aria-label={`${index + 1} of ${photos.length}: ${photo.description ?? photo.frameLabel}`}
           >
             <Image
               src={`/resources/pictures/forest-interface/${photo.filename}`}
-              alt={`Forest photo ${index + 1}`}
+              alt={photo.description ?? photo.frameLabel}
               width={1800}
               height={815}
               className="forest-photo-carousel__image"
-              priority={index < 3}
+              priority={index === 0}
+              sizes="(max-width: 639px) 300px, (max-width: 1199px) 400px, 440px"
               quality={85}
             />
             {/* 照片右下角帧标签 */}
@@ -317,13 +264,14 @@ export function ForestPhotoCarousel() {
       </div>
 
       {/* 底部信息：时间 + 详细描述 + 计数 */}
-      <div className="forest-photo-carousel__caption">
+      <div className="forest-photo-carousel__caption" aria-live="polite" aria-atomic="true">
         <div className="forest-photo-carousel__left">
           <span className="forest-photo-carousel__date">
             {currentPhoto.date && new Date(currentPhoto.date).toLocaleDateString('en-US', {
               year: 'numeric',
               month: 'short',
-              day: 'numeric'
+              day: 'numeric',
+              timeZone: 'UTC',
             })}
           </span>
         </div>

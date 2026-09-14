@@ -1,5 +1,6 @@
 import './global.css'
 import type { Metadata } from 'next'
+import { preload } from 'react-dom'
 import { FontDisplayGate } from '@/components/layout/font-display-gate'
 import SiteChrome from '@/components/layout/site-chrome'
 import { SITE_CONFIG } from '@/lib/constants'
@@ -60,14 +61,14 @@ export const metadata: Metadata = {
   },
 }
 
-/** All Camingo Mono woff2 cuts — preload so `document.fonts.ready` resolves quickly when possible. */
+/** Keep the complete local Camingo family warm before the site's all-at-once reveal. */
 const CAMINGO_PRELOAD_WOFF2 = [
   'CamingoMono-Regular.woff2',
-  'CamingoMono-SemiBold.woff2',
-  'CamingoMono-Bold.woff2',
-  'CamingoMono-SemiBoldItalic.woff2',
   'CamingoMono-Light.woff2',
+  'CamingoMono-SemiBold.woff2',
+  'CamingoMono-SemiBoldItalic.woff2',
   'CamingoMono-ExtraLightItalic.woff2',
+  'CamingoMono-Bold.woff2',
 ] as const
 
 const CAMINGO_FONT_DIR = '/fonts/CamingoMono%20Font/'
@@ -79,6 +80,15 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+  CAMINGO_PRELOAD_WOFF2.forEach((file, index) => {
+    preload(`${CAMINGO_FONT_DIR}${file}`, {
+      as: 'font',
+      type: 'font/woff2',
+      crossOrigin: 'anonymous',
+      fetchPriority: index === 0 ? 'high' : undefined,
+    })
+  })
+
   return (
     <html lang="en" suppressHydrationWarning style={{ backgroundColor: 'var(--site-bg)' }}>
       <head>
@@ -92,17 +102,6 @@ export default function RootLayout({
           href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,700&family=Noto+Serif+SC:wght@400&display=swap"
           rel="stylesheet"
         />
-        {CAMINGO_PRELOAD_WOFF2.map((file, index) => (
-          <link
-            key={file}
-            rel="preload"
-            href={`${CAMINGO_FONT_DIR}${file}`}
-            as="font"
-            type="font/woff2"
-            crossOrigin="anonymous"
-            fetchPriority={index === 0 ? 'high' : undefined}
-          />
-        ))}
       </head>
       <body
         className="antialiased mx-4 mt-8 max-w-[36rem] font-sans sm:mx-6 sm:max-w-2xl lg:mx-auto"
@@ -113,6 +112,7 @@ export default function RootLayout({
           ['--home-logo-viewport-offset' as string]: '3.5rem',
         }}
       >
+        <a href="#main-content" className="skip-link">Skip to content</a>
         <noscript
           dangerouslySetInnerHTML={{
             __html: '<style>.font-gate-pending{visibility:visible!important}</style>',

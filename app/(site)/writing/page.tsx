@@ -31,22 +31,23 @@ export const metadata: Metadata = {
 
 const WRITINGS = [
   {
-    slug: 'the-forest-and-the-interface',
-    title: 'The Forest and the Interface',
-    date: 'June 2026',
-    description: 'A forest has an interface that is not user-friendly.',
-  },
-  {
     slug: 'strange-tools',
     title: 'Strange Tools',
     date: 'May 2026',
     description: 'Tools whose strangeness continues to pay rent.',
+  },
+  {
+    slug: 'the-forest-and-the-interface',
+    title: 'The Forest and the Interface',
+    date: 'June 2026',
+    description: 'A forest has an interface that is not user-friendly.',
   },
 ] as const
 
 export default function WritingPage() {
   return (
     <SiteStickyQedPage>
+      <h1 className="sr-only">Writing</h1>
       <section className="flex flex-col gap-3">
         <p className="heading-text"><a
             href="https://medium.com/@kyletmartinez/reverse-engineering-claudes-ascii-spinner-animation-eec2804626e0"

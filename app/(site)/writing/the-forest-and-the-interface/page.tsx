@@ -45,10 +45,10 @@ function MarginFigure({ children, className = '' }: { children: React.ReactNode;
 
 function MarginFigureWithCaption({ children, caption, captionHint, href, className = '' }: { children: React.ReactNode; caption?: React.ReactNode; captionHint?: string; href?: string; className?: string }) {
   return (
-    <aside className={`writing-margin-figure writing-margin-figure--captioned ${className}`} aria-hidden="true">
+    <figure className={`writing-margin-figure writing-margin-figure--captioned ${className}`}>
       {children}
       {caption && (
-        <p className="writing-margin-caption">
+        <figcaption className="writing-margin-caption">
           {href ? <a href={href} target="_blank" rel="noopener noreferrer" className="writing-margin-caption__link">{caption}</a> : caption}
           {captionHint && (
             <span className="writing-margin-caption__hint">
@@ -59,9 +59,9 @@ function MarginFigureWithCaption({ children, caption, captionHint, href, classNa
               </svg>
             </span>
           )}
-        </p>
+        </figcaption>
       )}
-    </aside>
+    </figure>
   )
 }
 
@@ -173,6 +173,7 @@ export default function ForestInterfacePage() {
 
         {/* §1 — Photos */}
         <section id="photos" className="writing-article__section">
+          <h2 className="sr-only">Photos</h2>
           <div className="writing-article__body">
             <p>
               I have a small folder of forest photos that I keep coming back to.
@@ -201,6 +202,7 @@ export default function ForestInterfacePage() {
 
         {/* §2 — Semi-structured */}
         <section id="semi-structured" className="writing-article__section">
+          <h2 className="sr-only">Semi-structured</h2>
           <div className="writing-article__body">
             <p>
               I think this is what I like most about forests. Not that they are wild, or pure, or outside human life. Most of the forests I know are not. They have signs, paths, bikes, benches, fences, histories of use and management. They are already mixed with us.
@@ -209,7 +211,7 @@ export default function ForestInterfacePage() {
               The world we actually live in is semi-structured. Half designed, half not. Half planned, half grown. Half interface, half weather.
             </p>
             <MarginFigure>
-              <p className="writing-margin-chinese">
+              <p className="writing-margin-chinese" lang="zh-CN">
                 「天地有大美而不言，四时有明法而不议，万物有成理而不说。」
               </p>
             </MarginFigure>
@@ -224,6 +226,7 @@ export default function ForestInterfacePage() {
 
         {/* §3 — Generous */}
         <section id="generous" className="writing-article__section">
+          <h2 className="sr-only">Generous</h2>
           <div className="writing-article__body">
             <p>
               The forest does not ask me to do anything with my attention right away. It does not reward me for returning, or punish me for misunderstanding, or turn my walk into evidence of itself. It is not generous in the way a good service is generous. It is generous in the way a place can be generous: by allowing me to arrive before I know what I am doing there.
@@ -251,6 +254,7 @@ export default function ForestInterfacePage() {
 
         {/* §4 — User-friendly */}
         <section id="user-friendly" className="writing-article__section">
+          <h2 className="sr-only">User-friendly</h2>
           <div className="writing-article__body">
             <p className="writing-article__pullquote">
               A forest has an interface that is not user-friendly.
@@ -290,6 +294,7 @@ export default function ForestInterfacePage() {
 
         {/* §5 — Fitness */}
         <section id="fitness" className="writing-article__section">
+          <h2 className="sr-only">Fitness</h2>
           <div className="writing-article__body">
             <p>
               User-friendly often means the system asks less of the person. This is often good. Much of life is already too demanding in useless ways. Bad forms, hostile machines, confusing workflows, ugly bureaucracies — these do not make anyone more alive.
@@ -331,6 +336,7 @@ export default function ForestInterfacePage() {
 
         {/* §6 — The game */}
         <section id="game" className="writing-article__section">
+          <h2 className="sr-only">The game</h2>
           <div className="writing-article__body">
             <p>
               This is where I start to lose patience with certain interfaces.
@@ -369,6 +375,7 @@ export default function ForestInterfacePage() {
 
         {/* §7 — Trail */}
         <section id="trail" className="writing-article__section">
+          <h2 className="sr-only">Trail</h2>
           <div className="writing-article__body">
             <p className="writing-article__pullquote">
               A FOREST ROUTES ATTENTION DIFFERENTLY.
@@ -408,6 +415,7 @@ export default function ForestInterfacePage() {
 
         {/* §8 — Layers */}
         <section id="layers" className="writing-article__section">
+          <h2 className="sr-only">Layers</h2>
           <div className="writing-article__body">
             <p>
               It comes from being able to enter something without exhausting it.
@@ -460,6 +468,7 @@ export default function ForestInterfacePage() {
 
         {/* §9 — Walkable (coda) */}
         <section id="walkable" className="writing-article__section writing-article__coda">
+          <h2 className="sr-only">Walkable</h2>
           <div className="writing-article__body">
             <p>
               That is a different kind of design.

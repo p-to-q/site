@@ -1,4 +1,19 @@
 const path = require('path')
+const { execFileSync } = require('node:child_process')
+
+const LAST_UPDATED_FALLBACK = '2026-07-05T09:25:43+08:00'
+
+function getSiteLastUpdatedIso() {
+  if (process.env.SITE_LAST_UPDATED_ISO) return process.env.SITE_LAST_UPDATED_ISO
+  try {
+    return execFileSync('git', ['log', '-1', '--format=%cI'], {
+      encoding: 'utf8',
+      stdio: ['ignore', 'pipe', 'ignore'],
+    }).trim() || LAST_UPDATED_FALLBACK
+  } catch {
+    return LAST_UPDATED_FALLBACK
+  }
+}
 
 // Force React from this repo (avoids mixing with e.g. ~/node_modules/react).
 const reactAbsolute = path.join(__dirname, 'node_modules/react')
@@ -13,6 +28,9 @@ const nextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
   devIndicators: false,
+  env: {
+    SITE_LAST_UPDATED_ISO: getSiteLastUpdatedIso(),
+  },
   turbopack: {
     resolveAlias: {
       react: reactTurbopack,
@@ -22,6 +40,18 @@ const nextConfig = {
     },
   },
   outputFileTracingRoot: path.join(__dirname),
+  async headers() {
+    return [
+      {
+        source: '/:path*',
+        headers: [
+          { key: 'X-Content-Type-Options', value: 'nosniff' },
+          { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
+          { key: 'Permissions-Policy', value: 'camera=(), microphone=(), geolocation=()' },
+        ],
+      },
+    ]
+  },
   async redirects() {
     return [
       { source: '/works', destination: '/work', permanent: true },
@@ -59,6 +89,7 @@ const nextConfig = {
   },
   images: {
     formats: ['image/avif', 'image/webp'],
+    qualities: [75, 85],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
   },

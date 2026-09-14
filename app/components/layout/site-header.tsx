@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
-import { useEffect, useLayoutEffect, useRef, type MouseEvent } from 'react'
+import { useEffect, useRef, type MouseEvent } from 'react'
 import { ExternalLink } from '@/components/content/external-link'
 
 const LOGO_SPLIT_MS = 1100
@@ -40,13 +40,6 @@ export function SiteHeader() {
   const rightPieceRef = useRef<HTMLSpanElement>(null)
   const animationsRef = useRef<Animation[]>([])
 
-  useLayoutEffect(() => {
-    if ('scrollRestoration' in window.history) {
-      window.history.scrollRestoration = 'manual'
-    }
-    window.scrollTo(0, 0)
-  }, [pathname])
-
   useEffect(() => {
     return () => {
       if (navigateTimerRef.current) window.clearTimeout(navigateTimerRef.current)
@@ -54,9 +47,9 @@ export function SiteHeader() {
     }
   }, [])
 
-  const playSplit = () => {
+  const playSplit = (): boolean => {
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    if (reduceMotion) return
+    if (reduceMotion) return false
 
     animationsRef.current.forEach((a) => a.cancel())
     animationsRef.current = []
@@ -65,6 +58,8 @@ export function SiteHeader() {
       [leftPieceRef.current, -1],
       [rightPieceRef.current, 1],
     ]
+
+    let animationStarted = false
 
     for (const [el, sign] of targets) {
       if (!el) continue
@@ -78,9 +73,18 @@ export function SiteHeader() {
         if (k.easing) frame.easing = k.easing
         return frame
       })
-      const anim = el.animate(keyframes, { duration: LOGO_SPLIT_MS, fill: 'none' })
-      animationsRef.current.push(anim)
+      try {
+        const anim = el.animate(keyframes, { duration: LOGO_SPLIT_MS, fill: 'none' })
+        animationsRef.current.push(anim)
+        animationStarted = true
+      } catch {
+        animationsRef.current.forEach((animation) => animation.cancel())
+        animationsRef.current = []
+        return false
+      }
     }
+
+    return animationStarted
   }
 
   const handleLogoClick = (event: MouseEvent<HTMLAnchorElement>) => {
@@ -94,16 +98,23 @@ export function SiteHeader() {
       return
     }
 
-    event.preventDefault()
     if (navigateTimerRef.current) window.clearTimeout(navigateTimerRef.current)
 
-    playSplit()
+    const animationStarted = playSplit()
 
-    if (pathname !== '/') {
-      navigateTimerRef.current = window.setTimeout(() => {
-        router.push('/')
-      }, LOGO_SPLIT_MS)
+    if (pathname === '/') {
+      event.preventDefault()
+      return
     }
+
+    // When animation is unavailable or reduced motion is requested, retain
+    // the native Link navigation rather than adding an invisible delay.
+    if (!animationStarted) return
+
+    event.preventDefault()
+    navigateTimerRef.current = window.setTimeout(() => {
+      router.push('/')
+    }, LOGO_SPLIT_MS)
   }
 
   const navClass = (href: string) => {
@@ -134,7 +145,7 @@ export function SiteHeader() {
         <span ref={rightPieceRef} className="site-header-logo__piece site-header-logo__piece--right" aria-hidden="true" />
       </Link>
       <div className="flex w-full flex-col gap-4">
-        <nav className="flex flex-wrap gap-6">
+        <nav className="site-header-nav flex flex-wrap gap-6">
           <Link href="/" className={navClass('/')} aria-current={ariaCurrent('/')}>
             About
           </Link>

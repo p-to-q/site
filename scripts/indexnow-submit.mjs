@@ -8,7 +8,7 @@
  * If no URLs provided, submits all sitemap URLs.
  */
 
-const SITE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://ptoq.io'
+const SITE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.ptoq.io'
 const INDEXNOW_KEY = '565d375ed0c2ecbf770bba85ee337d57'
 const INDEXNOW_ENDPOINT = 'https://api.indexnow.org/indexnow'
 

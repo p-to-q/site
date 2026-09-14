@@ -10,7 +10,9 @@ const SITE_PRIMARY_PRODUCTION_ORIGIN = 'https://www.ptoq.io'
 
 function tryParseOrigin(raw: string): string | null {
   try {
-    return new URL(raw).href
+    const url = new URL(raw)
+    if (!['http:', 'https:'].includes(url.protocol) || url.username || url.password) return null
+    return `${url.origin}/`
   } catch {
     return null
   }
@@ -21,6 +23,7 @@ function resolveSiteUrl(): string {
   if (fromEnv) {
     const parsed = tryParseOrigin(fromEnv)
     if (parsed) return parsed
+    throw new Error('NEXT_PUBLIC_BASE_URL must be an http(s) origin without credentials')
   }
 
   if (process.env.VERCEL_ENV === 'production') {

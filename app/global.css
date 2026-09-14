@@ -1,8 +1,16 @@
 @import 'tailwindcss';
 
-/* Gated by `FontDisplayGate` until `document.fonts.ready` (see app/components/layout/font-display-gate.tsx). */
+/* Short brand-font gate. The zero-duration CSS animation is an independent
+   fail-safe: content reveals even when hydration or the font API fails. */
+@keyframes font-gate-failsafe {
+  to {
+    visibility: visible;
+  }
+}
+
 .font-gate-pending {
   visibility: hidden;
+  animation: font-gate-failsafe 0s linear 2500ms forwards;
 }
 
 @theme {
@@ -108,7 +116,6 @@
 }
 
 html {
-  min-width: 360px;
   font-size: 16px;
   font-family: 'CamingoMono', monospace;
   color-scheme: light;
@@ -159,6 +166,47 @@ a.is-active {
   color: var(--site-link-hover);
   text-decoration-color: var(--site-link-underline-hover);
   font-weight: 600 !important;
+}
+
+a:focus-visible,
+button:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--site-text);
+  outline-offset: 3px;
+}
+
+.skip-link {
+  position: fixed;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 1000;
+  padding: 0.45rem 0.65rem;
+  transform: translateY(calc(-100% - 1.5rem));
+  background: var(--site-bg);
+  color: var(--site-text);
+  transition: transform 120ms ease;
+}
+
+.skip-link:focus-visible {
+  transform: translateY(0);
+}
+
+.error-retry {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--site-link);
+  text-decoration: underline;
+  text-decoration-color: var(--site-link-underline);
+  text-decoration-thickness: 0.1rem;
+  text-underline-offset: 2px;
+  cursor: pointer;
+}
+
+.error-retry:hover,
+.error-retry:focus-visible {
+  color: var(--site-link-hover);
+  text-decoration-color: var(--site-link-underline-hover);
 }
 
 .external-link-arrow {
@@ -707,7 +755,6 @@ table {
 @media (max-width: 639px) {
   html {
     font-size: 16px;
-    min-width: 360px;
   }
 
   body {
@@ -764,6 +811,14 @@ table {
   .prose pre {
     font-size: 1rem !important;
     line-height: 1.55 !important;
+  }
+}
+
+/* Keep the original single-row navigation on narrow 320–359px screens without
+   forcing a 360px document or introducing horizontal scrolling. */
+@media (max-width: 359px) {
+  .site-header-nav {
+    column-gap: 1.25rem;
   }
 }
 
@@ -936,7 +991,7 @@ html[data-theme='dark'] .forest-photo-carousel__caption {
   margin: 0 0.15rem;
 }
 
-@media (min-width: 960px) {
+@media (min-width: 1200px) {
   .forest-photo-carousel {
     /* 延伸到右侧 margin note 底部 — 正文宽度 100% + 间距 3.5rem + note 宽度 13rem */
     width: calc(100% + 3.5rem + 13rem);
@@ -1282,7 +1337,7 @@ html[data-theme='dark'] .forest-photo-carousel__caption {
 }
 
 /* Show margin figures only when there is gutter space */
-@media (min-width: 960px) {
+@media (min-width: 1200px) {
   .writing-margin-figure {
     display: block;
   }
@@ -1347,9 +1402,24 @@ html[data-theme='dark'] .forest-photo-carousel__caption {
   width: 14rem;
 }
 
-@media (min-width: 960px) {
+@media (min-width: 1200px) {
   .writing-margin-figure--captioned {
     display: flex !important;
+  }
+
+  .writing-article .writing-margin-figure--diagram {
+    width: min(12.5rem, calc((100vw - 42rem) / 2 - 3.5rem));
+  }
+
+  .writing-article .writing-margin-figure--diagram svg {
+    width: 100%;
+    height: auto;
+  }
+
+  .writing-article .writing-margin-figure--captioned.writing-margin-figure--mycorrhizal-network,
+  .writing-article .writing-margin-note--roots,
+  .writing-article .writing-margin-note--trail {
+    width: min(14rem, calc((100vw - 42rem) / 2 - 3.5rem));
   }
 }
 
@@ -1366,6 +1436,12 @@ html[data-theme='dark'] .forest-photo-carousel__caption {
   display: block;
   width: 100%;
   max-width: 160px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: inherit;
   cursor: pointer;
 }
 
@@ -1478,10 +1554,18 @@ html[data-theme='dark'] .forest-photo-carousel__caption {
   --thumb-ty: 0;
 }
 
-.work-row:has(a:hover) .work-thumb,
-.work-row:has(a:focus-visible) .work-thumb {
+.work-preview-link:hover > .work-thumb,
+.work-preview-link:focus-visible > .work-thumb {
   opacity: 1;
   transform: translateY(var(--thumb-ty)) translateX(0);
+}
+
+/* Pointer intent wins while present. This prevents a previously focused link
+   from leaving a second preview underneath the link currently being hovered. */
+.work-list:has(.work-preview-link:hover)
+  .work-preview-link:focus-visible:not(:hover) > .work-thumb {
+  opacity: 0;
+  transform: translateY(var(--thumb-ty)) translateX(0.5rem);
 }
 
 /* Left gutter only exists once the body centers (lg: mx-auto) */
@@ -1493,9 +1577,9 @@ html[data-theme='dark'] .forest-photo-carousel__caption {
 
 @media (prefers-reduced-motion: reduce) {
   .work-thumb,
-  .work-row:has(a:hover) .work-thumb,
-  .work-row:has(a:focus-visible) .work-thumb {
-    transform: translateY(-50%);
+  .work-preview-link:hover > .work-thumb,
+  .work-preview-link:focus-visible > .work-thumb {
+    transform: translateY(var(--thumb-ty));
     transition: opacity 220ms ease;
   }
 }
@@ -1529,7 +1613,23 @@ html[data-theme='dark'] .forest-photo-carousel__caption {
 .claude-spinner::before {
   content: '·';
   /* step-end: hold each keyframe value for its full interval before jumping */
-  animation: claude-spinner 0.72s step-end infinite;
+  animation: claude-spinner 0.72s step-end 7 forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .font-gate-pending {
+    animation-delay: 0s;
+  }
+
+  .skip-link,
+  .claude-spinner::before {
+    transition: none;
+  }
+
+  .claude-spinner::before {
+    content: '✢';
+    animation: none;
+  }
 }
 
 /* Classical Chinese margin quote — vertical right-to-left typesetting.
@@ -1612,6 +1712,74 @@ html[data-theme='dark'] .forest-photo-carousel__caption {
 .writing-sidebar__link.is-active {
   color: var(--site-text);
   font-weight: 600;
+}
+
+/* At the original 960px reveal point the right gutter exists but is narrower
+   than the full 13rem annotation column. Scale only that column to the space
+   that actually exists, preserving the desktop composition without overflow
+   or turning every annotation into an extra block of article content. */
+@media (min-width: 960px) and (max-width: 1199px) {
+  .writing-article .writing-margin-figure {
+    left: calc(100% + 2rem);
+    display: block;
+  }
+
+  .writing-article .writing-margin-figure--diagram {
+    width: min(12.5rem, calc((100vw - 42rem) / 2 - 2rem));
+  }
+
+  .writing-article .writing-margin-figure--diagram svg {
+    width: 100%;
+    height: auto;
+  }
+
+  .writing-article .writing-margin-figure--captioned {
+    display: flex !important;
+    width: min(10rem, calc((100vw - 42rem) / 2 - 2rem));
+  }
+
+  .writing-article .writing-margin-figure--captioned.writing-margin-figure--mycorrhizal-network {
+    width: min(14rem, calc((100vw - 42rem) / 2 - 2rem));
+  }
+
+  .writing-article .writing-margin-photo,
+  .writing-article .writing-margin-photo-toggle {
+    max-width: 100%;
+  }
+
+  .writing-article .writing-margin-caption__hint {
+    max-width: 100%;
+    flex-wrap: wrap;
+    white-space: normal;
+  }
+
+  .writing-article .writing-margin-note {
+    position: absolute;
+    left: calc(100% + 2rem);
+    top: 0.5rem;
+    width: min(13rem, calc((100vw - 42rem) / 2 - 2rem));
+    margin-top: 0;
+    border-left: 0;
+    padding-left: 0;
+  }
+
+  .writing-article .writing-margin-note--photo {
+    top: 22rem;
+  }
+
+  .writing-article .writing-margin-note--roots,
+  .writing-article .writing-margin-note--trail {
+    width: min(14rem, calc((100vw - 42rem) / 2 - 2rem));
+  }
+
+  .writing-article .writing-margin-note--game-note {
+    top: 5.75rem;
+  }
+
+  .writing-article .writing-margin-note--grug {
+    top: 17.5rem;
+    width: min(12.5rem, calc((100vw - 42rem) / 2 - 2rem));
+  }
 }
 
 @media (max-width: 639px) {

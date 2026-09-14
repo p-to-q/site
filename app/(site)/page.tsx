@@ -40,7 +40,7 @@ export default function Page() {
 
         {/* Hero copy */}
         <div className="flex flex-col gap-6">
-          <p className="heading-text home-page-heading home-page-tagline">if p, then q</p>
+          <h1 className="heading-text home-page-heading home-page-tagline">if p, then q</h1>
 
           <p className="body-text">We&apos;re interested in the arrow.</p>
 
