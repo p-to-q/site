@@ -114,7 +114,7 @@ function PosterLink({ project, preview }: {
 }) {
   return (
     <WorkPreviewLink
-      href={`/work/${project}-poster.jpg`}
+      href={`/pitches/${project}`}
       preview={preview}
       target="_blank"
       rel="noopener noreferrer"
