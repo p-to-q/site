@@ -8,7 +8,7 @@ gutter. Mobile and tablet layouts do not request or display these previews.
 
 - Canonical project link: `public/work/<project>.<ext>`
 - Pitch PDF link: `public/work/<project>-pitch.jpg`
-- Other secondary artifact: `public/work/<project>-<artifact>.jpg`
+- Other secondary artifact: `public/work/<project>-<artifact>.<ext>`
 
 The build scans `public/work` by basename, so extensions may change without a code
 update. Basenames must remain unique.
@@ -22,7 +22,7 @@ update. Basenames must remain unique.
 
 - `wittgenstein-pitch.jpg`: pitch PDF page 1
 - `jiko-pitch.jpg`: pitch PDF page 1
-- `see-me-see-u-poster.jpg`: poster image
+- `see-me-see-u-poster.pdf`: poster PDF
 - `matter-pitch.jpg`: high-quality web export of Matter's official
   [`slate-bone-master-1024.png`](https://github.com/p-to-q/matter/blob/main/features/matter/brand/assets/slate-bone-master-1024.png)
 - `murmur-pitch.jpg`: supplied Murmur title artwork

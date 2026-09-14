@@ -92,7 +92,7 @@ function WorkPreviewLink({ preview, children, className = '', ...props }: WorkPr
 }
 
 function PitchLink({ project, preview }: {
-  project: 'jiko' | 'matter' | 'murmur' | 'wittgenstein' | 'see-me-see-u'
+  project: 'jiko' | 'matter' | 'murmur' | 'wittgenstein'
   preview: string
 }) {
   return (
@@ -114,13 +114,13 @@ function PosterLink({ project, preview }: {
 }) {
   return (
     <WorkPreviewLink
-      href={`/pitches/${project}`}
+      href={`/work/${project}-poster.pdf`}
       preview={preview}
       target="_blank"
       rel="noopener noreferrer"
       aria-label={`${project} poster`}
     >
-      [Poster]
+      [POSTER]
     </WorkPreviewLink>
   )
 }
