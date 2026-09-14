@@ -114,7 +114,7 @@ function PosterLink({ project, preview }: {
 }) {
   return (
     <WorkPreviewLink
-      href={`/work/${project}-poster.pdf`}
+      href={encodeURI(`/pitches/${project}_[p→q]_hack_poster.pdf`)}
       preview={preview}
       target="_blank"
       rel="noopener noreferrer"

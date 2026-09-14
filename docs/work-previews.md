@@ -22,7 +22,7 @@ update. Basenames must remain unique.
 
 - `wittgenstein-pitch.jpg`: pitch PDF page 1
 - `jiko-pitch.jpg`: pitch PDF page 1
-- `see-me-see-u-poster.pdf`: poster PDF
+- `see-me-see-u-poster.jpg`: poster PDF page 1
 - `matter-pitch.jpg`: high-quality web export of Matter's official
   [`slate-bone-master-1024.png`](https://github.com/p-to-q/matter/blob/main/features/matter/brand/assets/slate-bone-master-1024.png)
 - `murmur-pitch.jpg`: supplied Murmur title artwork
