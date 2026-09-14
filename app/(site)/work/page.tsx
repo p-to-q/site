@@ -11,14 +11,14 @@ const TRANSPARENT_PIXEL =
 export const metadata: Metadata = {
   title: 'Work',
   description:
-    'Selected projects from our practice: wittgenstein, sonde, autoclicker, flatus, carburetor, centrifuge-sort, aleph, agent lifeRestart, murmur, jiko, via, and matter.',
+    'Selected projects from our practice: wittgenstein, sonde, autoclicker, flatus, carburetor, centrifuge-sort, aleph, agent lifeRestart, murmur, jiko, via, matter, and see-me-see-u.',
   alternates: {
     canonical: '/work',
   },
   openGraph: {
     title: 'Work',
     description:
-      'Selected projects from our practice: wittgenstein, sonde, autoclicker, flatus, carburetor, centrifuge-sort, aleph, agent lifeRestart, murmur, jiko, via, and matter.',
+      'Selected projects from our practice: wittgenstein, sonde, autoclicker, flatus, carburetor, centrifuge-sort, aleph, agent lifeRestart, murmur, jiko, via, matter, and see-me-see-u.',
     url: '/work',
     images: [
       {
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Work',
     description:
-      'Selected projects from our practice: wittgenstein, sonde, autoclicker, flatus, carburetor, centrifuge-sort, aleph, agent lifeRestart, murmur, jiko, via, and matter.',
+      'Selected projects from our practice: wittgenstein, sonde, autoclicker, flatus, carburetor, centrifuge-sort, aleph, agent lifeRestart, murmur, jiko, via, matter, and see-me-see-u.',
     images: ['/og?title=Work'],
   },
 }
@@ -217,6 +217,13 @@ export default function WorkPage() {
           {' - '}
           make thought matter (as a BCI).{' '}
           <PitchLink project="matter" preview={thumb('matter-pitch')} />
+        </WorkItem>
+        <WorkItem>
+          <WorkPreviewLink href="https://useeme.ptoq.io/" preview={thumb('see-me-see-u')}>
+            see-me-see-u
+          </WorkPreviewLink>
+          {' - '}
+          what kinds of bodies can a self inhabit？
         </WorkItem>
       </section>
     </SiteStickyQedPage>

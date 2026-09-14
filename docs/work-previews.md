@@ -16,6 +16,7 @@ update. Basenames must remain unique.
 ## Curated canonical previews
 
 - `matter.jpg`: supplied screenshot of the current Matter interface
+- `see-me-see-u.jpg`: supplied screenshot of the current See Me See You interface
 
 ## Current secondary previews
 
