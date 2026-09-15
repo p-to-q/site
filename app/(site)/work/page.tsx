@@ -241,7 +241,7 @@ export default function WorkPage() {
           </WorkPreviewLink>
           {' - '}
           what kinds of bodies can a self inhabit{' '}
-           <PosterLink project="see-me-see-u" preview={thumb('wdvcev')} />
+           <PosterLink project="see-me-see-u" preview={thumb('see-me-see-u-poster')} />
         </WorkItem>
       </section>
     </SiteStickyQedPage>
