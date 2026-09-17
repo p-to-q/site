@@ -1529,6 +1529,14 @@ html[data-theme='dark'] .forest-photo-carousel__caption {
   display: block;
 }
 
+/* Wide poster artwork is a compact identity strip, not a five-row screenshot.
+   Preserve its full composition and cap its footprint inside the left gutter. */
+.work-thumb--banner img {
+  width: min(24rem, max(9rem, calc((100vw - 42rem) / 2 - 2rem)));
+  height: auto;
+  max-width: none;
+}
+
 /* Rule: the photo is 5 rows tall and centred on the hovered row, but it must
    never spill past the top of the first project or the bottom of the last.
    First/second rows pin to the list top, last/second-last pin to the list

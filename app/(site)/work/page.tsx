@@ -1,12 +1,9 @@
 import { readdirSync } from 'node:fs'
 import { join } from 'node:path'
 import type { Metadata } from 'next'
-import type { ComponentProps, ReactNode } from 'react'
-import { ExternalLink } from '@/components/content/external-link'
+import type { ReactNode } from 'react'
+import { WorkPreviewLink } from '@/components/content/work-preview-link'
 import { SiteStickyQedPage } from '@/components/layout/site-sticky-qed-page'
-
-const TRANSPARENT_PIXEL =
-  'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='
 
 export const metadata: Metadata = {
   title: 'Work',
@@ -69,58 +66,23 @@ function WorkItem({ children }: { children: ReactNode }) {
   )
 }
 
-type WorkPreviewLinkProps = ComponentProps<typeof ExternalLink> & {
-  preview: string
-}
-
-function WorkPreviewLink({ preview, children, className = '', ...props }: WorkPreviewLinkProps) {
-  return (
-    <ExternalLink {...props} className={`work-preview-link ${className}`.trim()}>
-      {children}
-      {preview ? (
-        <span className="work-thumb" aria-hidden="true">
-          <picture>
-            <source media="(min-width: 1024px)" srcSet={preview} />
-            {/* The fallback prevents hidden desktop previews from being fetched on small screens. */}
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={TRANSPARENT_PIXEL} alt="" loading="lazy" decoding="async" />
-          </picture>
-        </span>
-      ) : null}
-    </ExternalLink>
-  )
-}
-
-function PitchLink({ project, preview }: {
-  project: 'jiko' | 'matter' | 'murmur' | 'wittgenstein'
+function ArtifactLink({ project, artifact, preview }: {
+  project: 'jiko' | 'matter' | 'murmur' | 'see-me-see-u' | 'wittgenstein'
+  artifact: 'pitch' | 'poster'
   preview: string
 }) {
-  return (
-    <WorkPreviewLink
-      href={encodeURI(`/pitches/${project}_[p→q]_hack_pitch.pdf`)}
-      preview={preview}
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label={`${project} [p→q] hackathon pitch PDF`}
-    >
-      [PDF]
-    </WorkPreviewLink>
-  )
-}
+  const label = artifact === 'poster' ? 'POSTER' : 'PDF'
 
-function PosterLink({ project, preview }: {
-  project: 'see-me-see-u'
-  preview: string
-}) {
   return (
     <WorkPreviewLink
-      href={encodeURI(`/pitches/${project}_[p→q]_hack_poster.pdf`)}
+      href={encodeURI(`/pitches/${project}_[p→q]_hack_${artifact}.pdf`)}
       preview={preview}
+      previewVariant={artifact === 'poster' ? 'banner' : 'standard'}
       target="_blank"
       rel="noopener noreferrer"
-      aria-label={`${project} poster`}
+      aria-label={`${project} [p→q] hackathon ${artifact} PDF`}
     >
-      [POSTER]
+      [{label}]
     </WorkPreviewLink>
   )
 }
@@ -138,7 +100,11 @@ export default function WorkPage() {
           </WorkPreviewLink>
           {' - '}
           a modality harness for text-first LLMs.{' '}
-          <PitchLink project="wittgenstein" preview={thumb('wittgenstein-pitch')} />
+          <ArtifactLink
+            project="wittgenstein"
+            artifact="pitch"
+            preview={thumb('wittgenstein-pitch')}
+          />
         </WorkItem>
         <WorkItem>
           <WorkPreviewLink href="https://github.com/moapacha/sonde" preview={thumb('sonde')}>
@@ -210,7 +176,7 @@ export default function WorkPage() {
           </WorkPreviewLink>
           {' - '}
           get the melody out of your head.{' '}
-          <PitchLink project="murmur" preview={thumb('murmur-pitch')} />
+          <ArtifactLink project="murmur" artifact="pitch" preview={thumb('murmur-pitch')} />
         </WorkItem>
         <WorkItem>
           <WorkPreviewLink href="https://jiko.ptoq.io" preview={thumb('jiko')}>
@@ -218,7 +184,7 @@ export default function WorkPage() {
           </WorkPreviewLink>
           {' - '}
           instant decision making instrument.{' '}
-          <PitchLink project="jiko" preview={thumb('jiko-pitch')} />
+          <ArtifactLink project="jiko" artifact="pitch" preview={thumb('jiko-pitch')} />
         </WorkItem>
         <WorkItem>
           <WorkPreviewLink href="https://github.com/p-to-q/via" preview={thumb('via')}>
@@ -232,8 +198,8 @@ export default function WorkPage() {
             matter
           </WorkPreviewLink>
           {' - '}
-           make thought matter (as a BCI){' '}
-          <PitchLink project="matter" preview={thumb('matter-pitch')} />
+          make thought matter (as a BCI){' '}
+          <ArtifactLink project="matter" artifact="pitch" preview={thumb('matter-pitch')} />
         </WorkItem>
         <WorkItem>
           <WorkPreviewLink href="https://useeme.ptoq.io/" preview={thumb('see-me-see-u')}>
@@ -241,7 +207,11 @@ export default function WorkPage() {
           </WorkPreviewLink>
           {' - '}
           what kinds of bodies can a self inhabit{' '}
-           <PosterLink project="see-me-see-u" preview={thumb('see-me-see-u-poster')} />
+          <ArtifactLink
+            project="see-me-see-u"
+            artifact="poster"
+            preview={thumb('see-me-see-u-poster')}
+          />
         </WorkItem>
       </section>
     </SiteStickyQedPage>
