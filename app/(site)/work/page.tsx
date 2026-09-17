@@ -1,9 +1,8 @@
-import { readdirSync } from 'node:fs'
-import { join } from 'node:path'
 import type { Metadata } from 'next'
 import type { ReactNode } from 'react'
 import { WorkPreviewLink } from '@/components/content/work-preview-link'
 import { SiteStickyQedPage } from '@/components/layout/site-sticky-qed-page'
+import { getWorkPreviewMap, preloadWorkPreviews } from '@/lib/work-previews'
 
 export const metadata: Metadata = {
   title: 'Work',
@@ -33,22 +32,6 @@ export const metadata: Metadata = {
       'Selected projects from our practice: wittgenstein, sonde, autoclicker, flatus, carburetor, centrifuge-sort, aleph, agent lifeRestart, murmur, jiko, via, matter, and see-me-see-u.',
     images: ['/og?title=Work'],
   },
-}
-
-/** Map preview basenames to files in public/work at build time.
- *  Project links use `<slug>`; secondary artifacts use a descriptive suffix. */
-function readWorkThumbs(): Record<string, string> {
-  const map: Record<string, string> = {}
-  for (const file of readdirSync(join(process.cwd(), 'public', 'work')).sort()) {
-    const dot = file.lastIndexOf('.')
-    if (dot <= 0) continue
-    const base = file.slice(0, dot).toLowerCase()
-    if (map[base]) {
-      throw new Error(`Duplicate Work preview basename: ${base}`)
-    }
-    map[base] = `/work/${file}`
-  }
-  return map
 }
 
 function requireWorkThumb(thumbs: Record<string, string>, basename: string): string {
@@ -88,7 +71,9 @@ function ArtifactLink({ project, artifact, preview }: {
 }
 
 export default function WorkPage() {
-  const thumbs = readWorkThumbs()
+  // Direct visits still load the full preview set before any hover interaction.
+  preloadWorkPreviews()
+  const thumbs = getWorkPreviewMap()
   const thumb = (basename: string) => requireWorkThumb(thumbs, basename)
   return (
     <SiteStickyQedPage>

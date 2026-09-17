@@ -4,6 +4,7 @@ import { SITE_CONFIG } from '@/lib/constants'
 import { SiteDivider } from '@/components/layout/site-divider'
 import { SiteHeader } from '@/components/layout/site-header'
 import { SiteQedFooter } from '@/components/layout/site-sticky-qed-page'
+import { preloadWorkPreviews } from '@/lib/work-previews'
 
 /** `absolute` bypasses root `title.template` so the tab is exactly `[p → q]`. */
 export const metadata: Metadata = {
@@ -32,6 +33,10 @@ const ARROW_ROWS: [string, string][] = [
 ]
 
 export default function Page() {
+  // Warm Work in the background from the site's main entry page so the first
+  // preview is already available when the visitor later navigates there.
+  preloadWorkPreviews()
+
   return (
     <>
       <SiteHeader />

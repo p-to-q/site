@@ -2,7 +2,14 @@
 
 The Work page keeps its text-only layout at rest. At desktop widths, hovering or
 keyboard-focusing a link reveals the image for that exact destination in the left
-gutter. Mobile and tablet layouts do not request or display these previews.
+gutter. Mobile and tablet layouts do not display these previews.
+
+All Work previews are intentionally preloaded at low priority from both the home
+page and Work itself. The home page warms the browser cache before navigation;
+Work covers direct visits. This guarantees that the first hover does not wait for
+an image request without placing the transfer on unrelated Writing pages. The
+bandwidth cost is a deliberate part of the interaction design; do not replace
+this with hover-triggered loading without revisiting that decision.
 
 ## Naming
 
@@ -37,8 +44,8 @@ update. Basenames must remain unique.
 - For raster previews, export a static 1200px-wide JPEG at approximately 85 quality.
 - Keep each preview below 500KB unless the source makes that impractical.
 - PDF previews are rendered offline; hovering must never load the PDF itself.
-- Desktop previews are source-gated and must not be requested until their exact
-  link receives pointer or keyboard intent.
+- Preview images keep their real source in Work in addition to the site-wide
+  preload; both paths must continue to resolve to the same canonical asset URL.
 - Do not change the visible Work copy or add cards, badges, or persistent imagery.
 
 Before publishing, verify at 1280px that every multi-link row changes image when
