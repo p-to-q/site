@@ -1,18 +1,22 @@
 {
   "private": true,
+  "packageManager": "npm@10.9.3",
   "scripts": {
     "clean": "rm -rf .next",
     "dev": "env -u NODE_PATH WATCHPACK_POLLING=true node ./node_modules/next/dist/bin/next dev",
     "build": "env -u NODE_PATH node ./node_modules/next/dist/bin/next build",
     "start": "env -u NODE_PATH node ./node_modules/next/dist/bin/next start",
     "test": "vitest run",
+    "typecheck": "tsc --noEmit",
+    "check": "npm test && npm run typecheck && npm run build",
+    "audit:production": "npm audit --omit=dev --audit-level=high",
     "push:retry": "./scripts/push-with-retry.sh"
   },
   "dependencies": {
     "@tailwindcss/postcss": "^4.2.4",
     "@vercel/analytics": "^1.1.3",
     "@vercel/speed-insights": "^1.0.9",
-    "next": "16.2.12",
+    "next": "16.3.5",
     "postcss": "8.5.26",
     "postcss-import": "^16.0.1",
     "postcss-value-parser": "^4.2.0",
@@ -22,7 +26,7 @@
   },
   "overrides": {
     "postcss": "8.5.26",
-    "sharp": "0.35.3",
+    "sharp": "0.35.4",
     "nanoid": "3.3.18",
     "vite": "7.3.6",
     "esbuild": "0.28.2",
@@ -34,6 +38,6 @@
     "@types/react": "19.2.14",
     "@types/react-dom": "19.2.5",
     "typescript": "6.0.3",
-    "vitest": "3.2.7"
+    "vitest": "4.1.11"
   }
 }

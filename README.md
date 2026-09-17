@@ -38,13 +38,20 @@ p-to-q.com [[click](https://www.p-to-q.com)]
 Install dependencies:
 
 ```bash
-npm install
+npm ci
 ```
 
 Run locally:
 
 ```bash
 npm run dev
+```
+
+Before opening a pull request, run the same checks used by CI:
+
+```bash
+npm run audit:production
+npm run check
 ```
 
 Production builds derive the public last-updated timestamp from Git without
