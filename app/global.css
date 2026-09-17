@@ -1530,9 +1530,13 @@ html[data-theme='dark'] .forest-photo-carousel__caption {
 }
 
 /* Wide poster artwork is a compact identity strip, not a five-row screenshot.
-   Preserve its full composition and cap its footprint inside the left gutter. */
+   Preserve its full composition and let it use more of the left gutter. */
+.work-thumb--banner {
+  right: calc(100% + 0.75rem);
+}
+
 .work-thumb--banner img {
-  width: min(24rem, max(9rem, calc((100vw - 42rem) / 2 - 2rem)));
+  width: min(32rem, max(10rem, calc((100vw - 42rem) / 2 - 0.75rem)));
   height: auto;
   max-width: none;
 }
