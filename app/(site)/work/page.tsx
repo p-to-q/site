@@ -84,7 +84,7 @@ export default function WorkPage() {
             wittgenstein
           </WorkPreviewLink>
           {' - '}
-          a modality harness for text-first LLMs.{' '}
+          a modality harness for text-first LLMs{' '}
           <ArtifactLink
             project="wittgenstein"
             artifact="pitch"
@@ -168,7 +168,7 @@ export default function WorkPage() {
             [jiko]
           </WorkPreviewLink>
           {' - '}
-          instant decision making instrument.{' '}
+          instant decision making instrument{' '}
           <ArtifactLink project="jiko" artifact="pitch" preview={thumb('jiko-pitch')} />
         </WorkItem>
         <WorkItem>
