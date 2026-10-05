@@ -48,13 +48,7 @@ export default function Page() {
         <div className="flex flex-col gap-6">
           <h1 className="heading-text home-page-heading home-page-tagline">if p, then q</h1>
 
-          <p className="body-text">
-            We&apos;re{' '}
-            <Link href="/commercial-bio" className="quiet-link" aria-label="interested — commercial bio">
-              interested
-            </Link>{' '}
-            in the arrow.
-          </p>
+          <p className="body-text">We&apos;re interested in the arrow.</p>
 
           <div className="flex flex-col">
             {ARROW_ROWS.map(([sym, desc]) => (
@@ -83,7 +77,11 @@ export default function Page() {
         {/* Closing */}
         <div className="flex flex-col gap-3">
           <p className="body-text">
-            Talk to us if you are interested in the arrow <span className="arr">→</span>{' '}
+            Talk to us if you are{' '}
+            <Link href="/commercial-bio" className="quiet-link" aria-label="interested — commercial bio">
+              interested
+            </Link>{' '}
+            in the arrow <span className="arr">→</span>{' '}
             <ExternalLink href="mailto:hi@ptoq.io">hi@ptoq.io</ExternalLink>
           </p>
         </div>

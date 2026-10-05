@@ -1623,13 +1623,16 @@ html[data-theme='dark'] .forest-photo-carousel__caption {
 }
 
 /* A link that stays inside its sentence — the underline is the only thing that
-   would break the line, so it is dropped at rest and on hover. Everything else
-   is the site's ordinary link grammar: darker ink + 600 on hover, focus ring on
-   keyboard. Same idea as the invisible spinner link above, but a real link, so
-   it stays tabbable and announced. */
+   would break the line, so it is dropped at rest and on hover. At rest it also
+   drops back to the body's own ink, so a link woven into a sentence reads as
+   part of that sentence rather than as a lighter, greyer word sitting in it;
+   hover keeps the site's 600 weight and focus keeps the keyboard ring. Same idea
+   as the invisible spinner link above, but a real link, so it stays tabbable and
+   announced. */
 .quiet-link,
 .quiet-link:hover,
 .quiet-link:focus {
+  color: var(--site-text);
   text-decoration: none;
 }
 
