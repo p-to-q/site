@@ -1940,7 +1940,10 @@ html[data-theme='dark'] .forest-photo-carousel__caption {
 }
 
 .commercial-bio-lang:hover .commercial-bio-lang__sep {
-  color: var(--site-text);
+  /* Keep separator muted while hovering the control group; only the active
+     language label should change colour. This matches the intent: the slash
+     never "joins" the hover colour change. */
+  color: var(--site-muted);
 }
 
 /* Belt-and-braces: the inactive language must leave the box flow entirely. */
