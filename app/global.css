@@ -1622,6 +1622,17 @@ html[data-theme='dark'] .forest-photo-carousel__caption {
   text-align: center;
 }
 
+/* A link that stays inside its sentence — the underline is the only thing that
+   would break the line, so it is dropped at rest and on hover. Everything else
+   is the site's ordinary link grammar: darker ink + 600 on hover, focus ring on
+   keyboard. Same idea as the invisible spinner link above, but a real link, so
+   it stays tabbable and announced. */
+.quiet-link,
+.quiet-link:hover,
+.quiet-link:focus {
+  text-decoration: none;
+}
+
 .claude-spinner::before {
   content: '·';
   /* step-end: hold each keyframe value for its full interval before jumping */
@@ -1871,5 +1882,98 @@ html[data-theme='dark'] .forest-photo-carousel__caption {
   .writing-article__body .writing-article__pullquote {
     font-size: 1.2rem !important;
     line-height: 1.35 !important;
+  }
+}
+
+/* ── Commercial Bio: EN/中 switch + bilingual body ───────────────────────── */
+
+/* The switch is the first row of the content block, so it inherits the site's
+   0.75rem gap rhythm and the header's spacing to the rule — identical to the
+   first row on /work and /writing. No page-specific optical offset. The 0.375rem
+   gap and baseline alignment keep the three marks reading as one unit. */
+.commercial-bio-lang {
+  display: flex;
+  align-items: baseline;
+  gap: 0.375rem;
+  font-family: 'CamingoMono', monospace;
+}
+
+/* Muted by default; only the language being read carries ink, so the control
+   reads as a label rather than as two competing links. Size and leading are
+   inherited so the line tracks the site's mobile type step. */
+.commercial-bio-lang__option {
+  font: inherit;
+  background: transparent;
+  border: 0;
+  /* 1px vertical clears the 24px minimum target without moving the ink. */
+  padding: 1px 0;
+  cursor: pointer;
+  color: var(--site-muted);
+  text-decoration: none;
+  /* Deliberately no easing on a language swap: fading both labels at once makes
+     the ink read as darkness sliding across the slash. Hover alone is eased,
+     so the swap itself is a clean relocation and the copy carries the motion. */
+  transition: none;
+}
+
+.commercial-bio-lang__option:hover {
+  color: var(--site-text);
+  transition: color 120ms ease;
+}
+
+.commercial-bio-lang__option[aria-pressed='true'] {
+  color: var(--site-text);
+  font-weight: 600;
+}
+
+/* The slash is a separator, not a target: it never takes ink from a language
+   swap, never swallows a click meant for the label beside it, and cannot be
+   selected by a stray double-click. It does carry the same colour transition
+   as the labels and joins them on hover / keyboard focus, so the three marks
+   resolve as one control instead of three separate words. */
+.commercial-bio-lang__sep {
+  color: var(--site-muted);
+  line-height: 1;
+  user-select: none;
+  pointer-events: none;
+  transition: color 120ms ease;
+}
+
+.commercial-bio-lang:hover .commercial-bio-lang__sep {
+  color: var(--site-text);
+}
+
+/* Belt-and-braces: the inactive language must leave the box flow entirely. */
+.commercial-bio [hidden] {
+  display: none;
+}
+
+/* The incoming copy settles straight down into place — a short vertical fade,
+   never a lateral one. `data-entered` keeps this off the first paint. */
+@keyframes commercial-bio-enter {
+  from {
+    opacity: 0;
+    transform: translateY(3px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.commercial-bio-body[data-entered]:not([hidden]) {
+  animation: commercial-bio-enter 200ms ease;
+}
+
+/* Chinese keeps the same face as the switch above it — CamingoMono for Latin,
+   the system CJK face for everything else, exactly as the `中` label renders.
+   Only the leading loosens: CJK glyphs are denser than this site's mono. */
+.commercial-bio-zh p {
+  line-height: 1.75 !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .commercial-bio-body[data-entered]:not([hidden]) {
+    animation: none;
   }
 }

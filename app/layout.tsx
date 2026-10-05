@@ -104,6 +104,12 @@ export default function RootLayout({
         />
       </head>
       <body
+        /* Read-it-later and grammar extensions inject their own attributes onto
+           <body> before React hydrates (e.g. data-gr-ext-installed), which React
+           reports as an attribute mismatch it cannot patch. Nothing on this
+           element is dynamic, so the warning is noise rather than a real fault —
+           the same reasoning as suppressHydrationWarning on <html> above. */
+        suppressHydrationWarning
         className="antialiased mx-4 mt-8 max-w-[36rem] font-sans sm:mx-6 sm:max-w-2xl lg:mx-auto"
         style={{
           backgroundColor: 'var(--site-bg)',

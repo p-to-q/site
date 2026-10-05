@@ -10,6 +10,7 @@ const llms = `# [p → q]
 
 ## Pages
 - About: ${siteUrl}/
+- Commercial Bio: ${siteUrl}/commercial-bio
 - Work: ${siteUrl}/work
 - Writing: ${siteUrl}/writing
   - Strange Tools: ${siteUrl}/writing/strange-tools
