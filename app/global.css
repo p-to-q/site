@@ -1943,6 +1943,13 @@ html[data-theme='dark'] .forest-photo-carousel__caption {
   color: var(--site-muted);
 }
 
+/* The slash joins the copy's 200ms switch so the control reads as one moving
+   unit: it takes ink for the length of that transition and settles back to
+   muted. At rest — and on hover — it stays muted, so it never looks selected. */
+.commercial-bio-lang[data-switching] .commercial-bio-lang__sep {
+  color: var(--site-text);
+}
+
 /* Belt-and-braces: the inactive language must leave the box flow entirely. */
 .commercial-bio [hidden] {
   display: none;
