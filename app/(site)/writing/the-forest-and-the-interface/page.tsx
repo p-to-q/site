@@ -497,7 +497,7 @@ export default function ForestInterfacePage() {
             <MarginNote className="writing-margin-note--grug">
               <GrugIcon />
               <p>
-                Alex pointed me to <MarginLink href="https://www.grug.so/">grug</MarginLink>: open, read a small truth, maybe draw how it feels. A tool that gets out of the way.
+                Alex pointed me to <MarginLink href="https://www.grug.so/">grug</MarginLink>: open, read a small truth, maybe draw how it feels. A modern tool that gets out of the way.
               </p>
             </MarginNote>
             <p>
