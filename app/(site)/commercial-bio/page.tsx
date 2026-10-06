@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { SiteStickyQedPage } from '@/components/layout/site-sticky-qed-page'
 import { LanguageSwitch } from './language-switch'
+import './alternative.css'
 
 const DESCRIPTION =
   'An independent research practice concerned with the path between AI, tools, and the real world.'

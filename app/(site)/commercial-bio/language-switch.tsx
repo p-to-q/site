@@ -125,7 +125,17 @@ export function LanguageSwitch({ en, zh }: { en: ReactNode; zh: ReactNode }) {
         </button>
       </div>
 
-      <div className="commercial-bio-panels" data-managed={managed || undefined}>
+      {/* Inline grid layout is the cache-proof floor: this page must never
+          render both languages stacked, even if the stylesheet — or the site's
+          long-cached global chunk — arrives stale. The rules also live in
+          alternative.css, but an inline `display: grid` on the wrapper and
+          `grid-area`/`visibility` on each panel cannot be defeated by a cached
+          stylesheet, so EN/中 can never appear side by side again. */}
+      <div
+        className="commercial-bio-panels"
+        style={{ display: 'grid' }}
+        data-managed={managed || undefined}
+      >
         <div
           lang="en"
           hidden={!managed && off('en')}
@@ -133,6 +143,7 @@ export function LanguageSwitch({ en, zh }: { en: ReactNode; zh: ReactNode }) {
           data-entered={armed('en') || undefined}
           data-leaving={leaving === 'en' || undefined}
           className="commercial-bio-body flex flex-col gap-3"
+          style={{ gridArea: '1 / 1', visibility: managed && off('en') ? 'hidden' : undefined }}
         >
           {en}
         </div>
@@ -144,6 +155,7 @@ export function LanguageSwitch({ en, zh }: { en: ReactNode; zh: ReactNode }) {
           data-entered={armed('zh') || undefined}
           data-leaving={leaving === 'zh' || undefined}
           className="commercial-bio-body commercial-bio-zh flex flex-col gap-3"
+          style={{ gridArea: '1 / 1', visibility: managed && off('zh') ? 'hidden' : undefined }}
         >
           {zh}
         </div>

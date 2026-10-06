@@ -1,0 +1,136 @@
+/* ── Commercial Bio: EN/中 switch + bilingual body ───────────────────────── */
+
+/* Page-scoped stylesheet (alternative.css): owns the /commercial-bio switch
+   and bilingual stack. Kept out of app/global.css so the pair's layout does
+   not ride the site's long-cached immutable global chunk — TurboPack/Vercel
+   reuse that chunk's URL across deploys and the edge kept serving the old
+   body, which shipped new markup (panels) with old styles (no grid, no hide),
+   making both languages visible at once. This file stands apart, so the new
+   content arrives under a fresh asset URL on the next deploy. The grid stack
+   is also enforced inline in language-switch.tsx as a cache-proof floor. */
+
+/* The switch is the first row of the content block, so it inherits the site's
+   0.75rem gap rhythm and the header's spacing to the rule — identical to the
+   first row on /work and /writing. No page-specific optical offset. The 0.375rem
+   gap and baseline alignment keep the three marks reading as one unit. */
+.commercial-bio-lang {
+  display: flex;
+  align-items: baseline;
+  gap: 0.375rem;
+  font-family: 'CamingoMono', monospace;
+}
+
+/* Muted by default; only the language being read carries ink, so the control
+   reads as a label rather than as two competing links. Size and leading are
+   inherited so the line tracks the site's mobile type step. */
+.commercial-bio-lang__option {
+  font: inherit;
+  background: transparent;
+  border: 0;
+  /* 1px vertical clears the 24px minimum target without moving the ink. */
+  padding: 1px 0;
+  cursor: pointer;
+  color: var(--site-muted);
+  text-decoration: none;
+  /* No easing on the swap: aria-pressed flips once, at the handoff's swap beat,
+     so the ink relocates cleanly instead of smearing across the slash. Hover
+     alone is eased; the copy carries the motion. */
+  transition: none;
+}
+
+.commercial-bio-lang__option:hover {
+  color: var(--site-text);
+  transition: color 120ms ease;
+}
+
+.commercial-bio-lang__option[aria-pressed='true'] {
+  color: var(--site-text);
+  font-weight: 600;
+}
+
+/* The slash is a separator, not a target: it never swallows a click meant for
+   the label beside it, and cannot be selected by a stray double-click. It sits
+   muted at rest and on hover — only `data-switching` gives it ink, so it never
+   looks selected. */
+.commercial-bio-lang__sep {
+  color: var(--site-muted);
+  line-height: 1;
+  user-select: none;
+  pointer-events: none;
+  transition: color 120ms ease;
+}
+
+/* The slash holds ink for the whole handoff — the outgoing fade, the swap, and
+   the incoming settle — so control and copy read as one moving unit. It settles
+   back to muted once the copy has landed. Set alongside the JS timings at the
+   top of language-switch.tsx. */
+.commercial-bio-lang[data-switching] .commercial-bio-lang__sep {
+  color: var(--site-text);
+}
+
+/* Both languages live in one grid cell, so the block always reserves the
+   taller language's height: switching never resizes the document, and a deep
+   scroll position has nothing to clamp. Once hydrated the pair is `data-managed`
+   and the off language carries `data-inactive` instead of `hidden` — hiding it
+   with plain visibility, so no preflight `display: none !important` needs
+   outranking. The SSR `hidden` stays a no-JS fallback only. (Same rules are
+   inlined on the wrapper in language-switch.tsx so this layout holds even if
+   this stylesheet arrives late.) */
+.commercial-bio-panels {
+  display: grid;
+}
+
+.commercial-bio-panels > * {
+  grid-area: 1 / 1;
+}
+
+.commercial-bio-panels > *[data-inactive] {
+  visibility: hidden;
+}
+
+/* The handoff is pure opacity, two beats: the outgoing copy fades out, the
+   state swaps, the incoming copy fades in. No transform — the settled page
+   stays still, like the rest of the site. `data-entered` (armed per active
+   panel) keeps this off the first paint; `data-leaving` runs on the outgoing
+   copy and must come after the enter rule, being of equal specificity, to win. */
+@keyframes commercial-bio-enter {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes commercial-bio-leave {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.commercial-bio-body[data-entered]:not([hidden]) {
+  animation: commercial-bio-enter 160ms ease;
+}
+
+/* Fill forwards so the outgoing copy stays at zero for the ~20ms between the
+   fade and the swap, instead of flashing back to full opacity. */
+.commercial-bio-body[data-leaving]:not([hidden]) {
+  animation: commercial-bio-leave 100ms ease forwards;
+}
+
+/* Chinese keeps the same face as the switch above it — CamingoMono for Latin,
+   the system CJK face for everything else, exactly as the `中` label renders.
+   Only the leading loosens: CJK glyphs are denser than this site's mono. */
+.commercial-bio-zh p {
+  line-height: 1.75 !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .commercial-bio-body[data-entered]:not([hidden]),
+  .commercial-bio-body[data-leaving]:not([hidden]) {
+    animation: none;
+  }
+}
