@@ -1913,9 +1913,9 @@ html[data-theme='dark'] .forest-photo-carousel__caption {
   cursor: pointer;
   color: var(--site-muted);
   text-decoration: none;
-  /* Deliberately no easing on a language swap: fading both labels at once makes
-     the ink read as darkness sliding across the slash. Hover alone is eased,
-     so the swap itself is a clean relocation and the copy carries the motion. */
+  /* No easing on the swap: aria-pressed flips once, at the handoff's swap beat,
+     so the ink relocates cleanly instead of smearing across the slash. Hover
+     alone is eased; the copy carries the motion. */
   transition: none;
 }
 
@@ -1929,11 +1929,10 @@ html[data-theme='dark'] .forest-photo-carousel__caption {
   font-weight: 600;
 }
 
-/* The slash is a separator, not a target: it never takes ink from a language
-   swap, never swallows a click meant for the label beside it, and cannot be
-   selected by a stray double-click. It does carry the same colour transition
-   as the labels and joins them on hover / keyboard focus, so the three marks
-   resolve as one control instead of three separate words. */
+/* The slash is a separator, not a target: it never swallows a click meant for
+   the label beside it, and cannot be selected by a stray double-click. It sits
+   muted at rest and on hover — only `data-switching` gives it ink, so it never
+   looks selected. */
 .commercial-bio-lang__sep {
   color: var(--site-muted);
   line-height: 1;
@@ -1942,37 +1941,63 @@ html[data-theme='dark'] .forest-photo-carousel__caption {
   transition: color 120ms ease;
 }
 
-.commercial-bio-lang:hover .commercial-bio-lang__sep {
-  color: var(--site-muted);
-}
-
-/* The slash joins the copy's 200ms switch so the control reads as one moving
-   unit: it takes ink for the length of that transition and settles back to
-   muted. At rest — and on hover — it stays muted, so it never looks selected. */
+/* The slash holds ink for the whole handoff — the outgoing fade, the swap, and
+   the incoming settle — so control and copy read as one moving unit. It settles
+   back to muted once the copy has landed. Set alongside the JS timings at the
+   top of language-switch.tsx. */
 .commercial-bio-lang[data-switching] .commercial-bio-lang__sep {
   color: var(--site-text);
 }
 
-/* Belt-and-braces: the inactive language must leave the box flow entirely. */
-.commercial-bio [hidden] {
-  display: none;
+/* Both languages live in one grid cell, so the block always reserves the
+   taller language's height: switching never resizes the document, and a deep
+   scroll position has nothing to clamp. Once hydrated the pair is `data-managed`
+   and the off language carries `data-inactive` instead of `hidden` — hiding it
+   with plain visibility, so no preflight `display: none !important` needs
+   outranking. The SSR `hidden` stays a no-JS fallback only. */
+.commercial-bio-panels {
+  display: grid;
 }
 
-/* The incoming copy settles straight down into place — a short vertical fade,
-   never a lateral one. `data-entered` keeps this off the first paint. */
+.commercial-bio-panels > * {
+  grid-area: 1 / 1;
+}
+
+.commercial-bio-panels > *[data-inactive] {
+  visibility: hidden;
+}
+
+/* The handoff is pure opacity, two beats: the outgoing copy fades out, the
+   state swaps, the incoming copy fades in. No transform — the settled page
+   stays still, like the rest of the site. `data-entered` (armed per active
+   panel) keeps this off the first paint; `data-leaving` runs on the outgoing
+   copy and must come after the enter rule, being of equal specificity, to win. */
 @keyframes commercial-bio-enter {
   from {
     opacity: 0;
-    transform: translateY(3px);
   }
   to {
     opacity: 1;
-    transform: none;
+  }
+}
+
+@keyframes commercial-bio-leave {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
   }
 }
 
 .commercial-bio-body[data-entered]:not([hidden]) {
-  animation: commercial-bio-enter 200ms ease;
+  animation: commercial-bio-enter 160ms ease;
+}
+
+/* Fill forwards so the outgoing copy stays at zero for the ~20ms between the
+   fade and the swap, instead of flashing back to full opacity. */
+.commercial-bio-body[data-leaving]:not([hidden]) {
+  animation: commercial-bio-leave 100ms ease forwards;
 }
 
 /* Chinese keeps the same face as the switch above it — CamingoMono for Latin,
@@ -1983,7 +2008,8 @@ html[data-theme='dark'] .forest-photo-carousel__caption {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .commercial-bio-body[data-entered]:not([hidden]) {
+  .commercial-bio-body[data-entered]:not([hidden]),
+  .commercial-bio-body[data-leaving]:not([hidden]) {
     animation: none;
   }
 }
