@@ -46,16 +46,16 @@ export default function CommercialBioPage() {
                 tools, and the real world. We do research, and we make products. We build serious
                 foundational tools, as well as playful little things that may not be useful yet, or
                 at all. Some of them solve practical problems; others exist simply because of
-                curiosity. Keeping them together is our way of working: not rushing to define
-                ourselves, not in a hurry to grow up, each one done before the next. We keep finding
-                things modern technology has hidden from view, and let them return in a form that is
-                both absurd and sacred.
+                curiosity. Holding them together is the way of our working: not rushing to define
+                ourselves, not in hurry to grow up. Along the way, we try to find things modern
+                technology has hidden from view, and let them return in a form that is both absurd
+                and sacred.
               </p>
               <p className="body-text">
                 We are drawn to high aesthetics, high discipline, and high uncertainty, using small
-                projects to shelter large questions at the right scale. We have built a pure-text
-                LLM capable of multimodal output, a phone you refuel, a brain-computer interface on
-                a screen, and an instrument played with satellite orbits.
+                projects to shelter large questions at the right scale. We have built a modality
+                harness for text-first LLMs, a phone you refuel, a screen as a brain-computer
+                interface, and an orbital sequencer for low-res earth.
               </p>
               <p className="body-text">
                 Our tools have gained unprecedented generative power yet an unprecedented shortage
