@@ -24,6 +24,8 @@ update. Basenames must remain unique.
 
 - `matter.jpg`: supplied screenshot of the current Matter interface
 - `see-me-see-u.jpg`: supplied screenshot of the current See Me See You interface
+- `ants.svg`: official banner.svg from the ants repository (wide strip;
+  rendered with the banner preview variant)
 
 ## Current secondary previews
 

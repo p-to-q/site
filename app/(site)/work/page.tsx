@@ -199,7 +199,11 @@ export default function WorkPage() {
           />
         </WorkItem>
         <WorkItem>
-          <WorkPreviewLink href="https://github.com/p-to-q/ants" preview={thumb('ants')}>
+          <WorkPreviewLink
+            href="https://github.com/p-to-q/ants"
+            preview={thumb('ants')}
+            previewVariant="banner"
+          >
             ants
           </WorkPreviewLink>
           {' - '}
