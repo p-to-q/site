@@ -7,14 +7,14 @@ import { getWorkPreviewMap, preloadWorkPreviews } from '@/lib/work-previews'
 export const metadata: Metadata = {
   title: 'Work',
   description:
-    'Selected projects from our practice: wittgenstein, sonde, autoclicker, flatus, carburetor, centrifuge-sort, aleph, agent lifeRestart, murmur, jiko, via, matter, and see-me-see-u.',
+    'Selected projects from our practice: wittgenstein, sonde, autoclicker, flatus, carburetor, centrifuge-sort, aleph, agent lifeRestart, murmur, jiko, via, matter, see-me-see-u, and ants.',
   alternates: {
     canonical: '/work',
   },
   openGraph: {
     title: 'Work',
     description:
-      'Selected projects from our practice: wittgenstein, sonde, autoclicker, flatus, carburetor, centrifuge-sort, aleph, agent lifeRestart, murmur, jiko, via, matter, and see-me-see-u.',
+      'Selected projects from our practice: wittgenstein, sonde, autoclicker, flatus, carburetor, centrifuge-sort, aleph, agent lifeRestart, murmur, jiko, via, matter, see-me-see-u, and ants.',
     url: '/work',
     images: [
       {
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Work',
     description:
-      'Selected projects from our practice: wittgenstein, sonde, autoclicker, flatus, carburetor, centrifuge-sort, aleph, agent lifeRestart, murmur, jiko, via, matter, and see-me-see-u.',
+      'Selected projects from our practice: wittgenstein, sonde, autoclicker, flatus, carburetor, centrifuge-sort, aleph, agent lifeRestart, murmur, jiko, via, matter, see-me-see-u, and ants.',
     images: ['/og?title=Work'],
   },
 }
@@ -197,6 +197,13 @@ export default function WorkPage() {
             artifact="poster"
             preview={thumb('see-me-see-u-poster')}
           />
+        </WorkItem>
+        <WorkItem>
+          <WorkPreviewLink href="https://github.com/p-to-q/ants" preview={thumb('ants')}>
+            ants
+          </WorkPreviewLink>
+          {' - '}
+          cheap autonomous research loop
         </WorkItem>
       </section>
     </SiteStickyQedPage>
