@@ -54,8 +54,8 @@ export default function CommercialBioPage() {
               <p className="body-text">
                 We are drawn to high aesthetics, high discipline, and high uncertainty, using small
                 projects to shelter large questions at the right scale. We have built a modality
-                harness for text-first LLMs, a phone you refuel, a screen as a brain-computer
-                interface, and an orbital sequencer for low-res earth.
+                harness for text-first LLMs, a phone you refuel, a screen app as BCI, and an
+                orbital sequencer for low-res earth.
               </p>
               <p className="body-text">
                 Our tools have gained unprecedented generative power yet an unprecedented shortage
