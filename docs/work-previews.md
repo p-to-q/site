@@ -29,8 +29,8 @@ update. Basenames must remain unique.
 
 - `matter.jpg`: supplied screenshot of the current Matter interface
 - `see-me-see-u.jpg`: supplied screenshot of the current See Me See You interface
-- `ants.svg`: official banner.svg from the ants repository (wide strip;
-  rendered with the banner preview variant)
+- `ants.svg`: official banner.svg from the ants repository (standard preview
+  variant, scaled to 0.75 via `previewScale`)
 
 ## Current secondary previews
 
@@ -39,11 +39,25 @@ update. Basenames must remain unique.
 - `see-me-see-u-poster.svg`: optimized, self-contained SEE-ME SEE-U title artwork
 - `matter-pitch.jpg`: high-quality web export of Matter's official
   [`slate-bone-master-1024.png`](https://github.com/p-to-q/matter/blob/main/features/matter/brand/assets/slate-bone-master-1024.png)
-- `matter-demo-poster.jpg`: frame extracted from `matter-demo.mp4` (at ~12s,
-  scaled to 1200px wide) so the hover preview always matches the video
+- `matter-demo-poster.jpg`: frame extracted from `matter-demo.mp4` at ~12s,
+  1280x720 (kept at the previously deployed dimensions) so the hover preview
+  always matches the video
 - `murmur-pitch.jpg`: supplied Murmur title artwork
 - `aleph-benchmark.jpg`: Aleph benchmark interface
 - `liferestart-upstream.jpg`: original lifeRestart interface
+
+## Preview scaling
+
+A few artworks are wider or taller than the standard five-row preview, so they
+are shrunk by a per-link `previewScale` on `WorkPreviewLink`. It is one number
+per link, applied through the `--preview-scale` CSS variable to the image's own
+box (height for the standard layout, width for the banner layout), so the thumb
+shrinks as a unit and the existing centre/pin rules stay correct. It touches
+neither the artwork nor the size specs, and adds no new variants.
+
+- `ants` (standard): 0.75
+- `see-me-see-u` poster (banner): 0.85
+- everything else: 1 (full size)
 
 ## Asset standard
 
