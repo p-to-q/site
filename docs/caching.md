@@ -17,17 +17,22 @@ before diagnosing "the deploy didn't take" or adding cache headers.
 
 ## Rules of thumb
 
-- **CSS/JS chunks are content-named.** Editing `app/global.css` (or any CSS)
-  ships under a new chunk URL; the old URL is never reused. Verified by editing
-  global.css and seeing the new rules in the live chunk immediately after the
-  deploy. "Stale CSS after deploy" is therefore almost always a stale local
-  `.next` dev build (`npm run clean`) or a browser cache, not the CDN.
+- **CSS/JS chunks are content-named per build.** A local build emits a new
+  chunk name whenever CSS changes. On 2026-10-22 a deploy (a0eec8b) still
+  shipped the *previous* global CSS chunk, same name and old rules, next to
+  the new HTML: the build had compiled stale CSS from the restored Vercel
+  build cache (this is also what defd977 ran into). Since b3f4e6a,
+  `npm run build` deletes `.next/cache` before `next build`, and the next
+  deploy shipped the new chunk immediately. Keep that step.
+- **After a CSS change, verify the chunk, not just the page.** curl the page,
+  take the `.css` URL, and grep it for a rule you just added. If the name did
+  not change, the deploy compiled stale CSS; edge caches are not the cause,
+  because a new name is a new URL.
 - **HTML is never cached at the edge**, so a deploy is visible on the next
-  request. To confirm a deploy, curl the page and look for the new markup or
-  the new chunk name.
+  request.
 - **Files in `public/` keep their URL when replaced**, so they are only cached
   for hours and revalidated. Anything that should be cached forever must carry
   a content hash in its name (as `/work-derived/*` does). Do not mark
   un-hashed `public/` paths `immutable`.
 - Cloudflare sits in front of Vercel: a purge on Vercel alone does not purge
-  Cloudflare. With the rules above no purge should ever be needed.
+  Cloudflare. With the rules above no purge should be needed.

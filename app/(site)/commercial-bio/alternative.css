@@ -5,13 +5,12 @@
    in every page's global stylesheet. The grid stack is also enforced inline
    in language-switch.tsx as a defensive floor.
 
-   History: this split was made after production once showed new markup with
-   old styles, attributed at the time to the global CSS chunk keeping its URL
-   across deploys. That cause was later disproved — Next names CSS chunks by
-   content (a global.css edit ships under a new immutable URL, verified
-   2026-10-22) — so the stale styles were most likely a cached dev build or
-   browser cache. The split stays because route scoping is the better design,
-   not because global.css is unsafe to edit. See docs/caching.md. */
+   History: this split was made after production showed new markup with old
+   styles: the deploy kept the previous global CSS chunk URL *and* contents.
+   The cause, found 2026-10-22, was the Vercel build cache yielding a stale
+   CSS compile (a local build always emits a new, content-named chunk); the
+   build now starts from an empty .next/cache. The split stays because route
+   scoping is the better design. See docs/caching.md. */
 
 /* The switch is the first row of the content block, so it inherits the site's
    0.75rem gap rhythm and the header's spacing to the rule — identical to the
