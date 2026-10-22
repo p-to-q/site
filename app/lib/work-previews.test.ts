@@ -18,14 +18,12 @@ describe('work previews', () => {
     const images = readdirSync(join(process.cwd(), 'public', 'work')).filter((file) => IMAGE.test(file))
     const previews = Object.values(getWorkPreviewMap())
 
-    expect(previews.map((preview) => preview.original).sort()).toEqual(
+    expect(previews.map((preview) => preview.src).sort()).toEqual(
       images.map((file) => `/work/${file}`).sort()
     )
     for (const preview of previews) {
       expect(preview.width).toBeGreaterThan(0)
       expect(preview.height).toBeGreaterThan(0)
-      // Either the original or a hashed build-time derivative.
-      expect(preview.src === preview.original || preview.src.startsWith('/work-derived/')).toBe(true)
     }
   })
 

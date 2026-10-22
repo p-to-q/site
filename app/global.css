@@ -1496,10 +1496,11 @@ html[data-theme='dark'] .forest-photo-carousel__caption {
 /* ── Work: full project photo, revealed in the left gutter on link hover ──
 
    Working principle (see docs/work-previews.md):
-   - Size: every thumb has one explicit image height, --thumb-img-h, derived
-     from CSS alone (standard: five body rows; banner: gutter width divided by
-     the artwork's aspect ratio, passed inline as --preview-ar). previewScale
-     (inline --preview-scale) multiplies the whole preview, frame and artwork.
+   - Size (unchanged from the original design): standard thumbs are five body
+     rows tall, banner thumbs span the gutter. previewScale (inline
+     --preview-scale) multiplies that height (standard) or width (banner).
+     Every thumb exposes its image height as --thumb-img-h, computed in CSS
+     alone (banner: width / the artwork's aspect ratio, inline --preview-ar).
    - Place: the thumb is centred on its row, then clamped so it never spills
      past the first or last project. The clamp uses the thumb's real height,
      so short (banner/scaled) previews stay centred where a five-row preview
@@ -1530,13 +1531,8 @@ html[data-theme='dark'] .forest-photo-carousel__caption {
   /* Inputs set inline by WorkPreviewLink */
   --preview-scale: 1;
   --preview-ar: 1;
-  /* Rendered image height: five rows, or less when the artwork would be
-     wider than one gutter (then the frame hugs the artwork instead of
-     letterboxing it). The 1px frame adds 2px to the thumb. */
-  --thumb-img-h: calc(
-    min(var(--work-thumb-height), (var(--work-gutter) - 2rem) / var(--preview-ar))
-      * var(--preview-scale)
-  );
+  /* Rendered image height; the 1px frame adds 2px to the thumb */
+  --thumb-img-h: calc(var(--work-thumb-height) * var(--preview-scale));
   position: absolute;
   right: calc(100% + 2rem);
   /* clamp(list top, centred on this row, list bottom); 100% = row height */
@@ -1554,14 +1550,14 @@ html[data-theme='dark'] .forest-photo-carousel__caption {
   pointer-events: none;
 }
 
-/* Whole image, never cropped: explicit height, natural width (from the
-   width/height attributes, so it is known before the image loads). The
-   wrapper shrink-wraps this. max-width is a safety net; --thumb-img-h already
-   keeps the width inside one gutter. */
+/* Whole image, never cropped: fixed height, natural width (from the width/
+   height attributes, so it is known before the image loads). The wrapper
+   shrink-wraps this. max-width keeps a very wide image inside one gutter on
+   narrower desktops (letterboxed within the fixed height). */
 .work-thumb img {
   height: var(--thumb-img-h);
   width: auto;
-  max-width: calc((var(--work-gutter) - 2rem) * var(--preview-scale));
+  max-width: calc(var(--work-gutter) - 2rem);
   object-fit: contain;
   display: block;
 }

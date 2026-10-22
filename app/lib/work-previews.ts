@@ -1,12 +1,9 @@
-import { createHash } from 'node:crypto'
 import { existsSync, readFileSync, readdirSync } from 'node:fs'
 import { extname, join } from 'node:path'
 import { preload } from 'react-dom'
 import { readImageSize } from '@/lib/image-size'
 
-const PUBLIC_DIRECTORY = join(process.cwd(), 'public')
-const WORK_PREVIEW_DIRECTORY = join(PUBLIC_DIRECTORY, 'work')
-const DERIVED_MANIFEST = join(PUBLIC_DIRECTORY, 'work-derived', 'manifest.json')
+const WORK_PREVIEW_DIRECTORY = join(process.cwd(), 'public', 'work')
 
 /**
  * Previews only exist where the left gutter does (global.css shows
@@ -24,37 +21,19 @@ export const WORK_PREVIEW_MEDIA = '(min-width: 1024px)'
 const PREVIEW_IMAGE_EXTENSIONS = new Set(['.jpg', '.jpeg', '.png', '.gif', '.webp', '.svg'])
 
 export type WorkPreview = {
-  /** URL actually served: the build-time WebP derivative when valid, else the original. */
+  /** The original file in public/work, served as is (full quality). */
   src: string
-  /** The untouched file in public/work. */
-  original: string
-  /** Intrinsic display size of the original (EXIF orientation applied). */
+  /** Intrinsic display size (EXIF orientation applied), read at build time. */
   width: number
   height: number
-}
-
-type DerivedManifest = {
-  entries?: Record<string, { sourceHash: string; src: string }>
-}
-
-/** Must match sourceHash() in scripts/build-work-previews.mjs. */
-const sourceHash = (buffer: Buffer) => createHash('sha1').update(buffer).digest('hex').slice(0, 16)
-
-function readDerivedManifest(): DerivedManifest {
-  try {
-    return JSON.parse(readFileSync(DERIVED_MANIFEST, 'utf8')) as DerivedManifest
-  } catch {
-    return {} // no derivatives built (yet): every preview uses its original
-  }
 }
 
 /**
  * Work preview assets are deliberately discovered from the public directory so
  * an extension can change without requiring a second manifest to be updated.
- * Each preview is resolved once, at build time, to its served URL and size.
+ * Each preview's intrinsic size is read once, at build time.
  */
 function discoverWorkPreviews() {
-  const manifest = readDerivedManifest()
   const previews = new Map<string, WorkPreview>()
 
   for (const file of readdirSync(WORK_PREVIEW_DIRECTORY).sort()) {
@@ -66,24 +45,11 @@ function discoverWorkPreviews() {
       throw new Error(`Duplicate Work preview basename: ${basename}`)
     }
 
-    const original = `/work/${file}`
-    const buffer = readFileSync(join(WORK_PREVIEW_DIRECTORY, file))
-    const size = readImageSize(buffer, ext)
-    if (!size) throw new Error(`Cannot read the dimensions of public${original}`)
+    const src = `/work/${file}`
+    const size = readImageSize(readFileSync(join(WORK_PREVIEW_DIRECTORY, file)), ext)
+    if (!size) throw new Error(`Cannot read the dimensions of public${src}`)
 
-    // Use the derivative only if it was built from exactly this source and exists.
-    const derived = manifest.entries?.[file]
-    const derivedValid =
-      derived !== undefined &&
-      derived.sourceHash === sourceHash(buffer) &&
-      existsSync(join(PUBLIC_DIRECTORY, derived.src))
-
-    previews.set(basename, {
-      src: derivedValid ? derived.src : original,
-      original,
-      width: size.width,
-      height: size.height,
-    })
+    previews.set(basename, { src, width: size.width, height: size.height })
   }
 
   return previews

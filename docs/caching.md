@@ -12,7 +12,6 @@ before diagnosing "the deploy didn't take" or adding cache headers.
 | --- | --- | --- |
 | HTML (`/`, `/work`, …) | `public, max-age=0, must-revalidate` | `DYNAMIC` (not cached) |
 | `/_next/static/immutable/chunks/*.css/js` | `public, max-age=31536000, immutable` | `HIT` |
-| `/work-derived/*` (preview derivatives) | `public, max-age=31536000, immutable` (next.config.js) | cached |
 | other `public/` files (`/work/*`, `/fonts/*`, `/pitches/*`) | `public, max-age=14400, must-revalidate` | `REVALIDATED` |
 
 ## Rules of thumb
@@ -32,7 +31,7 @@ before diagnosing "the deploy didn't take" or adding cache headers.
   request.
 - **Files in `public/` keep their URL when replaced**, so they are only cached
   for hours and revalidated. Anything that should be cached forever must carry
-  a content hash in its name (as `/work-derived/*` does). Do not mark
+  a content hash in its name. Do not mark
   un-hashed `public/` paths `immutable`.
 - Cloudflare sits in front of Vercel: a purge on Vercel alone does not purge
   Cloudflare. With the rules above no purge should be needed.

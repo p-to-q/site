@@ -15,10 +15,10 @@ type WorkPreviewLinkProps = ComponentProps<typeof ExternalLink> & {
   preview: WorkPreview
   previewVariant?: 'standard' | 'banner'
   /**
-   * Uniform size factor for this link's preview (0.8 = 80%). The whole preview
-   * (frame and artwork) becomes exactly `previewScale` x its unscaled size at
-   * every viewport; placement (centred on the row, pinned inside the list)
-   * is recomputed from the scaled size, so alignment never drifts.
+   * Size factor for this link's preview (0.8 = 80%): multiplies the frame
+   * height (standard) or width (banner). Placement (centred on the row,
+   * clamped inside the list) is computed from the scaled size, so alignment
+   * never drifts.
    */
   previewScale?: number
 }

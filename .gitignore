@@ -15,9 +15,6 @@
 # production
 /build
 
-# build-time Work preview derivatives (scripts/build-work-previews.mjs)
-/public/work-derived/
-
 # misc
 .DS_Store
 *.pem

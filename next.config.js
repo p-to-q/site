@@ -50,13 +50,6 @@ const nextConfig = {
           { key: 'Permissions-Policy', value: 'camera=(), microphone=(), geolocation=()' },
         ],
       },
-      {
-        // Build-time preview derivatives are content-hashed
-        // (scripts/build-work-previews.mjs): a changed source gets a new URL,
-        // so browsers and the CDN may keep each file forever.
-        source: '/work-derived/:path*',
-        headers: [{ key: 'Cache-Control', value: 'public, max-age=31536000, immutable' }],
-      },
     ]
   },
   async redirects() {
