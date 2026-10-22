@@ -2,6 +2,7 @@ import './global.css'
 import type { Metadata } from 'next'
 import { preload } from 'react-dom'
 import { FontDisplayGate } from '@/components/layout/font-display-gate'
+import { GoogleFontsFallback } from '@/components/layout/google-fonts-fallback'
 import SiteChrome from '@/components/layout/site-chrome'
 import { SITE_CONFIG } from '@/lib/constants'
 import { getSiteSchemaOrgGraph } from '@/lib/schema-org-json-ld'
@@ -61,7 +62,13 @@ export const metadata: Metadata = {
   },
 }
 
-/** Keep the complete local Camingo family warm before the site's all-at-once reveal. */
+/**
+ * Keep the complete local Camingo family warm. The reveal waits only for the
+ * faces a page uses (FontDisplayGate); the rarely used light faces load at
+ * low priority so they never compete with those.
+ */
+const LOW_PRIORITY_FACES = new Set(['CamingoMono-Light.woff2', 'CamingoMono-ExtraLightItalic.woff2'])
+
 const CAMINGO_PRELOAD_WOFF2 = [
   'CamingoMono-Regular.woff2',
   'CamingoMono-Light.woff2',
@@ -85,7 +92,7 @@ export default function RootLayout({
       as: 'font',
       type: 'font/woff2',
       crossOrigin: 'anonymous',
-      fetchPriority: index === 0 ? 'high' : undefined,
+      fetchPriority: index === 0 ? 'high' : LOW_PRIORITY_FACES.has(file) ? 'low' : undefined,
     })
   })
 
@@ -95,12 +102,6 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: schemaOrgJsonLd }}
-        />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,700&family=Noto+Serif+SC:wght@400&display=swap"
-          rel="stylesheet"
         />
       </head>
       <body
@@ -124,6 +125,8 @@ export default function RootLayout({
             __html: '<style>.font-gate-pending{visibility:visible!important}</style>',
           }}
         />
+        {/* Inter / Noto Serif SC are self-hosted (google-fonts.css); Google is only a fallback. */}
+        <GoogleFontsFallback />
         <FontDisplayGate>
           <SiteChrome>{children}</SiteChrome>
         </FontDisplayGate>

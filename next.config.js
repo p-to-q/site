@@ -60,6 +60,12 @@ const nextConfig = {
           { key: 'Cache-Control', value: 'public, max-age=14400, stale-while-revalidate=604800' },
         ],
       },
+      {
+        // Self-hosted Google Fonts: versioned, content-unique file names
+        // (scripts/fetch-google-fonts.mjs), so they can be cached forever.
+        source: '/fonts/google/:path+',
+        headers: [{ key: 'Cache-Control', value: 'public, max-age=31536000, immutable' }],
+      },
     ]
   },
   async redirects() {

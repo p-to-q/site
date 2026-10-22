@@ -1,4 +1,6 @@
 @import 'tailwindcss';
+/* Self-hosted Inter + Noto Serif SC (generated; scripts/fetch-google-fonts.mjs) */
+@import './google-fonts.css';
 
 /* Short brand-font gate. The zero-duration CSS animation is an independent
    fail-safe: content reveals even when hydration or the font API fails. */
@@ -1077,7 +1079,7 @@ html[data-theme='dark'] .forest-photo-carousel__caption {
 }
 
 /* Pull quotes — substantial statements in Inter Bold (contrasts with CamingoMono body).
-   Inter is loaded via Google Fonts in app/layout.tsx.
+   Inter is self-hosted (app/google-fonts.css, scripts/fetch-google-fonts.mjs).
    Selector specificity must beat `.writing-article__body p`. */
 .writing-article__body p.writing-article__pullquote,
 .writing-article__body .writing-article__pullquote {
