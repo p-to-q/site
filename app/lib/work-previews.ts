@@ -7,7 +7,22 @@ const WORK_PREVIEW_DIRECTORY = join(process.cwd(), 'public', 'work')
 /**
  * Work preview assets are deliberately discovered from the public directory so
  * an extension can change without requiring a second manifest to be updated.
+ *
+ * public/work also holds download artifacts (e.g. a project's .mp4 demo
+ * video). Those are not preview images and must never be preloaded as such —
+ * a 76 MB video preloaded `as: image` on the home and Work pages would
+ * silently wreck every page load. Only raster/vector previews get preloaded.
  */
+const PREVIEW_IMAGE_EXTENSIONS = new Set([
+  '.jpg',
+  '.jpeg',
+  '.png',
+  '.gif',
+  '.webp',
+  '.svg',
+  '.avif',
+])
+
 const workPreviewEntries = readdirSync(WORK_PREVIEW_DIRECTORY)
   .sort()
   .map((file) => {
@@ -16,15 +31,18 @@ const workPreviewEntries = readdirSync(WORK_PREVIEW_DIRECTORY)
 
     return {
       basename: file.slice(0, dot).toLowerCase(),
+      ext: file.slice(dot).toLowerCase(),
       url: `/work/${file}`,
     }
   })
-  .filter((entry): entry is { basename: string; url: string } => entry !== null)
+  .filter((entry): entry is { basename: string; ext: string; url: string } => entry !== null)
 
 export const WORK_PREVIEW_URLS = workPreviewEntries.map(({ url }) => url)
 
 export function preloadWorkPreviews() {
-  for (const url of WORK_PREVIEW_URLS) {
+  for (const { url, ext } of workPreviewEntries) {
+    if (!PREVIEW_IMAGE_EXTENSIONS.has(ext)) continue
+
     preload(url, {
       as: 'image',
       fetchPriority: 'low',

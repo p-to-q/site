@@ -3,13 +3,18 @@
 The Work page keeps its text-only layout at rest. At desktop widths, hovering or
 keyboard-focusing a link reveals the image for that exact destination in the left
 gutter. Mobile and tablet layouts do not display these previews.
+All Work previews are intentionally preloaded at low priority from both the
+home page and Work itself. The home page warms the browser cache before
+navigation; Work covers direct visits. This guarantees that the first hover
+does not wait for an image request without placing the transfer on unrelated
+Writing pages. The bandwidth cost is a deliberate part of the interaction
+design; do not replace this with hover-triggered loading without revisiting
+that decision.
 
-All Work previews are intentionally preloaded at low priority from both the home
-page and Work itself. The home page warms the browser cache before navigation;
-Work covers direct visits. This guarantees that the first hover does not wait for
-an image request without placing the transfer on unrelated Writing pages. The
-bandwidth cost is a deliberate part of the interaction design; do not replace
-this with hover-triggered loading without revisiting that decision.
+Only raster/vector preview images are preloaded. `public/work` may also hold
+download artifacts (a project's `.mp4` demo video); those are **not**
+preloaded as images, so a large video can never silently slow a page load —
+it is fetched only when its link is opened.
 
 ## Naming
 
@@ -34,9 +39,8 @@ update. Basenames must remain unique.
 - `see-me-see-u-poster.svg`: optimized, self-contained SEE-ME SEE-U title artwork
 - `matter-pitch.jpg`: high-quality web export of Matter's official
   [`slate-bone-master-1024.png`](https://github.com/p-to-q/matter/blob/main/features/matter/brand/assets/slate-bone-master-1024.png)
-- `matter-demo-poster.jpg`: poster frame for Matter's demo video
-  (`matter-demo.mp4`, 1280x720 h264, fetched from
-  `public/matter-ui/shadows-loop.mp4` in the matter repository)
+- `matter-demo-poster.jpg`: frame extracted from `matter-demo.mp4` (at ~12s,
+  scaled to 1200px wide) so the hover preview always matches the video
 - `murmur-pitch.jpg`: supplied Murmur title artwork
 - `aleph-benchmark.jpg`: Aleph benchmark interface
 - `liferestart-upstream.jpg`: original lifeRestart interface
