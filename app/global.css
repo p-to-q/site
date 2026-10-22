@@ -1493,43 +1493,75 @@ html[data-theme='dark'] .forest-photo-carousel__caption {
   mix-blend-mode: multiply;
 }
 
-/* ── Work: full project photo, revealed in the left gutter on link hover ── */
+/* ── Work: full project photo, revealed in the left gutter on link hover ──
+
+   Working principle (see docs/work-previews.md):
+   - Size: every thumb has one explicit image height, --thumb-img-h, derived
+     from CSS alone (standard: five body rows; banner: gutter width divided by
+     the artwork's aspect ratio, passed inline as --preview-ar). previewScale
+     (inline --preview-scale) multiplies the whole preview, frame and artwork.
+   - Place: the thumb is centred on its row, then clamped so it never spills
+     past the first or last project. The clamp uses the thumb's real height,
+     so short (banner/scaled) previews stay centred where a five-row preview
+     would be pinned, and pinned previews sit flush with the list edge. */
 .work-row {
   position: relative;
+  /* Rows of room above/below this row inside the list, for the clamp. Only
+     the first and last three rows can be limited by the list edge (a preview
+     up to 1.4x, which WorkPreviewLink enforces, reaches at most three rows
+     beyond its own), so every other row is effectively unbounded. */
+  --rows-above: 99;
+  --rows-below: 99;
 }
+.work-row:nth-child(1) { --rows-above: 0; }
+.work-row:nth-child(2) { --rows-above: 1; }
+.work-row:nth-child(3) { --rows-above: 2; }
+.work-row:nth-last-child(1) { --rows-below: 0; }
+.work-row:nth-last-child(2) { --rows-below: 1; }
+.work-row:nth-last-child(3) { --rows-below: 2; }
 
 .work-thumb {
   /* Fixed height = five body-text rows (current ± 2): 5 lines + 4 gaps */
   --work-thumb-height: calc(5 * 1.45rem + 4 * 0.75rem);
   /* One body-text row plus the flex gap below it */
   --work-row-step: calc(1.45rem + 0.75rem);
-  /* Vertical anchor: centred on the hovered row by default; the list-edge
-     rules below pin it to the list top/bottom and switch this to 0 */
-  --thumb-ty: -50%;
-  /* Unified per-link preview scaling (set inline by WorkPreviewLink).
-     Applied to the image's own box, so the thumb shrinks as a unit and the
-     existing centre/pin rules stay correct. One number per link, no new
-     variants, touches neither the artwork nor the size specs. */
+  /* One side gutter: content is max-w-2xl = 42rem, centred at ≥1024 */
+  --work-gutter: calc((100vw - 42rem) / 2);
+  /* Inputs set inline by WorkPreviewLink */
   --preview-scale: 1;
+  --preview-ar: 1;
+  /* Rendered image height: five rows, or less when the artwork would be
+     wider than one gutter (then the frame hugs the artwork instead of
+     letterboxing it). The 1px frame adds 2px to the thumb. */
+  --thumb-img-h: calc(
+    min(var(--work-thumb-height), (var(--work-gutter) - 2rem) / var(--preview-ar))
+      * var(--preview-scale)
+  );
   position: absolute;
   right: calc(100% + 2rem);
-  top: 50%;
+  /* clamp(list top, centred on this row, list bottom); 100% = row height */
+  top: clamp(
+    calc(-1 * var(--rows-above) * var(--work-row-step)),
+    calc((100% - var(--thumb-img-h)) / 2 - 1px),
+    calc(100% + var(--rows-below) * var(--work-row-step) - var(--thumb-img-h) - 2px)
+  );
   display: none;
   border: 1px solid var(--site-code-border);
   background: var(--site-card-bg);
   opacity: 0;
-  transform: translateY(var(--thumb-ty)) translateX(0.5rem);
+  transform: translateX(0.5rem);
   transition: opacity 220ms ease, transform 220ms ease;
   pointer-events: none;
 }
 
-/* Whole image, never cropped: fixed height, natural width. The wrapper
-   shrink-wraps this. max-width keeps a very wide image inside one gutter
-   (content is max-w-2xl = 42rem, centred at ≥1024) on narrower desktops. */
+/* Whole image, never cropped: explicit height, natural width (from the
+   width/height attributes, so it is known before the image loads). The
+   wrapper shrink-wraps this. max-width is a safety net; --thumb-img-h already
+   keeps the width inside one gutter. */
 .work-thumb img {
-  height: calc(var(--work-thumb-height) * var(--preview-scale, 1));
+  height: var(--thumb-img-h);
   width: auto;
-  max-width: calc((100vw - 42rem) / 2 - 2rem);
+  max-width: calc((var(--work-gutter) - 2rem) * var(--preview-scale));
   object-fit: contain;
   display: block;
 }
@@ -1538,43 +1570,20 @@ html[data-theme='dark'] .forest-photo-carousel__caption {
    Preserve its full composition and let it use more of the left gutter. */
 .work-thumb--banner {
   right: calc(100% + 0.75rem);
+  --thumb-img-w: calc(min(32rem, max(10rem, calc(var(--work-gutter) - 0.75rem))) * var(--preview-scale));
+  --thumb-img-h: calc(var(--thumb-img-w) / var(--preview-ar));
 }
 
 .work-thumb--banner img {
-  width: calc(min(32rem, max(10rem, calc((100vw - 42rem) / 2 - 0.75rem))) * var(--preview-scale, 1));
-  height: auto;
+  width: var(--thumb-img-w);
+  height: var(--thumb-img-h);
   max-width: none;
-}
-
-/* Rule: the photo is 5 rows tall and centred on the hovered row, but it must
-   never spill past the top of the first project or the bottom of the last.
-   First/second rows pin to the list top, last/second-last pin to the list
-   bottom; every row in between stays centred. */
-.work-row:first-child .work-thumb {
-  top: 0;
-  bottom: auto;
-  --thumb-ty: 0;
-}
-.work-row:nth-child(2) .work-thumb {
-  top: calc(-1 * var(--work-row-step));
-  bottom: auto;
-  --thumb-ty: 0;
-}
-.work-row:nth-last-child(2) .work-thumb {
-  top: auto;
-  bottom: calc(-1 * var(--work-row-step));
-  --thumb-ty: 0;
-}
-.work-row:last-child .work-thumb {
-  top: auto;
-  bottom: 0;
-  --thumb-ty: 0;
 }
 
 .work-preview-link:hover > .work-thumb,
 .work-preview-link:focus-visible > .work-thumb {
   opacity: 1;
-  transform: translateY(var(--thumb-ty)) translateX(0);
+  transform: translateX(0);
 }
 
 /* Pointer intent wins while present. This prevents a previously focused link
@@ -1582,10 +1591,11 @@ html[data-theme='dark'] .forest-photo-carousel__caption {
 .work-list:has(.work-preview-link:hover)
   .work-preview-link:focus-visible:not(:hover) > .work-thumb {
   opacity: 0;
-  transform: translateY(var(--thumb-ty)) translateX(0.5rem);
+  transform: translateX(0.5rem);
 }
 
-/* Left gutter only exists once the body centers (lg: mx-auto) */
+/* Left gutter only exists once the body centers (lg: mx-auto). Keep in sync
+   with WORK_PREVIEW_MEDIA in app/lib/work-previews.ts (preload media query). */
 @media (min-width: 1024px) {
   .work-thumb {
     display: block;
@@ -1596,7 +1606,7 @@ html[data-theme='dark'] .forest-photo-carousel__caption {
   .work-thumb,
   .work-preview-link:hover > .work-thumb,
   .work-preview-link:focus-visible > .work-thumb {
-    transform: translateY(var(--thumb-ty));
+    transform: none;
     transition: opacity 220ms ease;
   }
 }

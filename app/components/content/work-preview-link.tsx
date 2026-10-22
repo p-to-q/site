@@ -1,24 +1,49 @@
 import type { ComponentProps, CSSProperties } from 'react'
 import { ExternalLink } from '@/components/content/external-link'
+import type { WorkPreview } from '@/lib/work-previews'
+
+/**
+ * Allowed previewScale range. The upper bound keeps every preview inside the
+ * list: global.css only tracks the list edges for the first and last three
+ * rows, and a centred five-row preview scaled to 1.4x reaches at most three
+ * rows beyond its own.
+ */
+const MIN_PREVIEW_SCALE = 0.25
+const MAX_PREVIEW_SCALE = 1.4
 
 type WorkPreviewLinkProps = ComponentProps<typeof ExternalLink> & {
-  preview: string
+  preview: WorkPreview
   previewVariant?: 'standard' | 'banner'
-  /** Shrink the preview toward the link (e.g. 0.6 = 60%). Unified scaling:
-      one number per link, applied through a CSS variable, works for both the
-      standard and banner layouts without touching the artwork or the size
-      specs. */
+  /**
+   * Uniform size factor for this link's preview (0.8 = 80%). The whole preview
+   * (frame and artwork) becomes exactly `previewScale` x its unscaled size at
+   * every viewport; placement (centred on the row, pinned inside the list)
+   * is recomputed from the scaled size, so alignment never drifts.
+   */
   previewScale?: number
 }
 
 export function WorkPreviewLink({
   preview,
   previewVariant = 'standard',
-  previewScale,
+  previewScale = 1,
   children,
   className = '',
   ...props
 }: WorkPreviewLinkProps) {
+  if (!(previewScale >= MIN_PREVIEW_SCALE && previewScale <= MAX_PREVIEW_SCALE)) {
+    throw new Error(
+      `previewScale must be between ${MIN_PREVIEW_SCALE} and ${MAX_PREVIEW_SCALE} (got ${previewScale})`
+    )
+  }
+
+  // Inline custom properties feed the sizing/placement math in global.css.
+  // The aspect ratio lets CSS know a banner's height before the image loads.
+  const style = {
+    '--preview-ar': (preview.width / preview.height).toFixed(4),
+    ...(previewScale !== 1 ? { '--preview-scale': previewScale } : {}),
+  } as CSSProperties
+
   return (
     <ExternalLink
       {...props}
@@ -28,12 +53,14 @@ export function WorkPreviewLink({
       <span
         className={`work-thumb work-thumb--${previewVariant}`}
         aria-hidden="true"
-        style={previewScale ? ({ '--preview-scale': previewScale } as CSSProperties) : undefined}
+        style={style}
       >
         {/* Page-level preload warms every source; lazy avoids duplicate React hints. */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src={preview}
+          src={preview.src}
+          width={preview.width}
+          height={preview.height}
           alt=""
           loading="lazy"
           decoding="async"

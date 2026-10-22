@@ -2,19 +2,26 @@ import type { Metadata } from 'next'
 import type { ReactNode } from 'react'
 import { WorkPreviewLink } from '@/components/content/work-preview-link'
 import { SiteStickyQedPage } from '@/components/layout/site-sticky-qed-page'
-import { getWorkPreviewMap, preloadWorkPreviews } from '@/lib/work-previews'
+import {
+  getWorkPreviewMap,
+  preloadWorkPreviews,
+  requireWorkFile,
+  type WorkPreview,
+} from '@/lib/work-previews'
+
+// One sentence shared by the page, Open Graph and Twitter metadata.
+const WORK_DESCRIPTION =
+  'Selected projects from our practice: wittgenstein, sonde, autoclicker, flatus, carburetor, centrifuge-sort, aleph, agent lifeRestart, murmur, jiko, via, matter, see-me-see-u, and ants.'
 
 export const metadata: Metadata = {
   title: 'Work',
-  description:
-    'Selected projects from our practice: wittgenstein, sonde, autoclicker, flatus, carburetor, centrifuge-sort, aleph, agent lifeRestart, murmur, jiko, via, matter, see-me-see-u, and ants.',
+  description: WORK_DESCRIPTION,
   alternates: {
     canonical: '/work',
   },
   openGraph: {
     title: 'Work',
-    description:
-      'Selected projects from our practice: wittgenstein, sonde, autoclicker, flatus, carburetor, centrifuge-sort, aleph, agent lifeRestart, murmur, jiko, via, matter, see-me-see-u, and ants.',
+    description: WORK_DESCRIPTION,
     url: '/work',
     images: [
       {
@@ -28,13 +35,12 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Work',
-    description:
-      'Selected projects from our practice: wittgenstein, sonde, autoclicker, flatus, carburetor, centrifuge-sort, aleph, agent lifeRestart, murmur, jiko, via, matter, see-me-see-u, and ants.',
+    description: WORK_DESCRIPTION,
     images: ['/og?title=Work'],
   },
 }
 
-function requireWorkThumb(thumbs: Record<string, string>, basename: string): string {
+function requireWorkThumb(thumbs: Record<string, WorkPreview>, basename: string): WorkPreview {
   const thumb = thumbs[basename]
   if (!thumb) throw new Error(`Missing Work preview: public/work/${basename}.*`)
   return thumb
@@ -49,23 +55,53 @@ function WorkItem({ children }: { children: ReactNode }) {
   )
 }
 
+type Project = 'jiko' | 'matter' | 'murmur' | 'see-me-see-u' | 'wittgenstein'
+type Artifact = 'pitch' | 'poster' | 'demo'
+
+/** Bracketed secondary links ([PDF] / [POSTER] / [DEMO]): files served from this site. */
+type ArtifactSpec = {
+  label: string
+  describe: (project: Project) => string
+  href: (project: Project) => string
+}
+
+const ARTIFACTS: Record<Artifact, ArtifactSpec> = {
+  pitch: {
+    label: 'PDF',
+    describe: (project) => `${project} [p→q] hackathon pitch PDF`,
+    href: (project) => encodeURI(`/pitches/${project}_[p→q]_hack_pitch.pdf`),
+  },
+  poster: {
+    label: 'POSTER',
+    describe: (project) => `${project} [p→q] hackathon poster PDF`,
+    href: (project) => encodeURI(`/pitches/${project}_[p→q]_hack_poster.pdf`),
+  },
+  demo: {
+    label: 'DEMO',
+    describe: (project) => `${project} demo video (MP4)`,
+    href: (project) => requireWorkFile(`${project}-demo.mp4`),
+  },
+}
+
 function ArtifactLink({ project, artifact, preview, previewScale }: {
-  project: 'jiko' | 'matter' | 'murmur' | 'see-me-see-u' | 'wittgenstein'
-  artifact: 'pitch' | 'poster'
-  preview: string
+  project: Project
+  artifact: Artifact
+  preview: WorkPreview
   previewScale?: number
 }) {
-  const label = artifact === 'poster' ? 'POSTER' : 'PDF'
+  const { label, describe, href } = ARTIFACTS[artifact]
 
+  // Same-site files still open in a new tab, like every other Work link, so
+  // a PDF or a large video never replaces the list.
   return (
     <WorkPreviewLink
-      href={encodeURI(`/pitches/${project}_[p→q]_hack_${artifact}.pdf`)}
+      href={href(project)}
       preview={preview}
       previewVariant={artifact === 'poster' ? 'banner' : 'standard'}
       previewScale={previewScale}
       target="_blank"
       rel="noopener noreferrer"
-      aria-label={`${project} [p→q] hackathon ${artifact} PDF`}
+      aria-label={describe(project)}
     >
       [{label}]
     </WorkPreviewLink>
@@ -188,9 +224,7 @@ export default function WorkPage() {
           make thought matter (as a BCI){' '}
           <ArtifactLink project="matter" artifact="pitch" preview={thumb('matter-pitch')} />
           {' '}
-          <WorkPreviewLink href="/work/matter-demo.mp4" preview={thumb('matter-demo-poster')}>
-            [DEMO]
-          </WorkPreviewLink>
+          <ArtifactLink project="matter" artifact="demo" preview={thumb('matter-demo-poster')} />
         </WorkItem>
         <WorkItem>
           <WorkPreviewLink href="https://useeme.ptoq.io/" preview={thumb('see-me-see-u')}>
