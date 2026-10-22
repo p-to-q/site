@@ -18,7 +18,7 @@ const links = [...html.matchAll(/<a\s[^>]*>/g)].map(([tag]) => tag)
 const previewSrcs = [...html.matchAll(/<span[^>]*class="work-thumb[^"]*"[^>]*><img\s[^>]*>/g)].map(
   ([tag]) => attr(tag, 'src')
 )
-const decode = (href: string) => decodeURI(href.replace(/&amp;/g, '&'))
+const decode = (href: string) => decodeURI(href.replace(/&amp;/g, '&').split('?')[0])
 
 describe('Work page (rendered)', () => {
   it('renders one preview per link, in WORK_PREVIEW_ORDER (top to bottom, left to right)', () => {
@@ -45,7 +45,7 @@ describe('Work page (rendered)', () => {
   })
 
   it('never uses a video as a preview', () => {
-    expect(previewSrcs.some((src) => /\.(mp4|webm|mov)$/i.test(src ?? ''))).toBe(false)
+    expect(previewSrcs.some((src) => /\.(mp4|webm|mov)(\?|$)/i.test(src ?? ''))).toBe(false)
   })
 
   it('keeps the preview media query identical in CSS and preloads', () => {

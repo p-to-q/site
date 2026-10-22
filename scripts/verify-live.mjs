@@ -10,7 +10,8 @@
  * - CSS is current: the live stylesheet bytes equal the local production
  *   build in .next (build first: `npm run build`, or the pre-push check).
  *   This catches the "new HTML, old CSS" deploy (docs/caching.md).
- * - Work preview preloads: desktop media query, on-page order, no videos.
+ * - Work preview preloads: desktop media query, on-page order, no videos;
+ *   each preview URL's ?v= matches the local file (a replaced image is live).
  * - Every preview image and same-site file linked from Work answers 200.
  * - Work links open in a new tab; same-site files carry an aria-label.
  * - Cache headers: HTML is not cached; previews use stale-while-revalidate.
@@ -30,7 +31,7 @@ const root = process.cwd()
 const mediaSource = readFileSync(join(root, 'app/lib/work-previews.ts'), 'utf8')
 const EXPECTED_MEDIA = /WORK_PREVIEW_MEDIA = '([^']+)'/.exec(mediaSource)?.[1]
 
-const sha = (text) => createHash('sha1').update(text).digest('hex')
+const sha = (data) => createHash('sha1').update(data).digest('hex')
 const bust = (path) => `${base}${path}${path.includes('?') ? '&' : '?'}verify=${Date.now()}`
 const attr = (tag, name) => new RegExp(`\\s${name}="([^"]*)"`).exec(tag)?.[1]
 const unescape = (s) => s.replace(/&amp;/g, '&')
@@ -84,6 +85,15 @@ async function checkPage(failures) {
     unescape(attr(tag, 'src') ?? '')
   )
   if (previews.length === 0) failures.push('/work renders no previews')
+  // Each preview URL carries the content hash of the local file (?v=).
+  for (const src of previews) {
+    const [path, query] = src.split('?')
+    const file = join(root, 'public', decodeURI(path))
+    const version = new URLSearchParams(query ?? '').get('v')
+    if (existsSync(file) && version !== sha(readFileSync(file)).slice(0, 10)) {
+      failures.push(`${path}: live version ${version} is not the local file`)
+    }
+  }
 
   for (const [name, html] of [['/', home], ['/work', work]]) {
     const preloads = [...html.matchAll(/<link\s[^>]*rel="preload"[^>]*>/g)]

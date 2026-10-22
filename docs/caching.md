@@ -38,8 +38,12 @@ before diagnosing "the deploy didn't take" or adding cache headers.
 - **HTML is never cached at the edge**, so a deploy is visible on the next
   request.
 - **Files in `public/` keep their URL when replaced**, so they are only cached
-  for hours and revalidated. Anything that should be cached forever must carry
-  a content hash in its name. Do not mark
+  for hours and revalidated: a replaced file can keep showing for up to that
+  long. Work previews avoid this: their URLs carry the file's content hash
+  (`/work/x.jpg?v=<sha1:10>`, `app/lib/work-previews.ts`), so a replaced image
+  is a new URL at once (seen 2026-10-22: the new [DEMO] poster was deployed,
+  but the edge kept serving the old file under the bare URL). Anything that
+  should be cached forever must carry a content hash in its name. Do not mark
   un-hashed `public/` paths `immutable`.
 - Cloudflare sits in front of Vercel: a purge on Vercel alone does not purge
   Cloudflare. With the rules above no purge should be needed.

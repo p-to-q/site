@@ -1,3 +1,4 @@
+import { createHash } from 'node:crypto'
 import { existsSync, readFileSync, readdirSync } from 'node:fs'
 import { extname, join } from 'node:path'
 import { preload } from 'react-dom'
@@ -55,7 +56,11 @@ export const WORK_PREVIEW_ORDER = [
 const PREVIEW_IMAGE_EXTENSIONS = new Set(['.jpg', '.jpeg', '.png', '.gif', '.webp', '.svg'])
 
 export type WorkPreview = {
-  /** The original file in public/work, served as is (full quality). */
+  /**
+   * The original file in public/work, served as is (full quality), with a
+   * content hash as `?v=`: replacing a file changes its URL, so no browser or
+   * CDN can keep showing the old image (public/ files are cached for hours).
+   */
   src: string
   /** Intrinsic display size (EXIF orientation applied), read at build time. */
   width: number
@@ -79,9 +84,11 @@ function discoverWorkPreviews() {
       throw new Error(`Duplicate Work preview basename: ${basename}`)
     }
 
-    const src = `/work/${file}`
-    const size = readImageSize(readFileSync(join(WORK_PREVIEW_DIRECTORY, file)), ext)
-    if (!size) throw new Error(`Cannot read the dimensions of public${src}`)
+    const bytes = readFileSync(join(WORK_PREVIEW_DIRECTORY, file))
+    const size = readImageSize(bytes, ext)
+    if (!size) throw new Error(`Cannot read the dimensions of public/work/${file}`)
+    const version = createHash('sha1').update(bytes).digest('hex').slice(0, 10)
+    const src = `/work/${file}?v=${version}`
 
     previews.set(basename, { src, width: size.width, height: size.height })
   }

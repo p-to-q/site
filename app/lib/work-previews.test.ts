@@ -19,10 +19,12 @@ describe('work previews', () => {
     const images = readdirSync(join(process.cwd(), 'public', 'work')).filter((file) => IMAGE.test(file))
     const previews = Object.values(getWorkPreviewMap())
 
-    expect(previews.map((preview) => preview.src).sort()).toEqual(
+    expect(previews.map((preview) => preview.src.split('?')[0]).sort()).toEqual(
       images.map((file) => `/work/${file}`).sort()
     )
     for (const preview of previews) {
+      // Content-hash version: a replaced file gets a new URL.
+      expect(preview.src).toMatch(/\?v=[0-9a-f]{10}$/)
       expect(preview.width).toBeGreaterThan(0)
       expect(preview.height).toBeGreaterThan(0)
     }
@@ -30,7 +32,7 @@ describe('work previews', () => {
 
   it('never offers a video as a preview', () => {
     const map = getWorkPreviewMap()
-    expect(Object.values(map).some((preview) => /\.mp4$/i.test(preview.src))).toBe(false)
+    expect(Object.values(map).some((preview) => /\.mp4(\?|$)/i.test(preview.src))).toBe(false)
     expect(map['matter-demo']).toBeUndefined()
   })
 
