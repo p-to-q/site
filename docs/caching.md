@@ -12,6 +12,7 @@ before diagnosing "the deploy didn't take" or adding cache headers.
 | --- | --- | --- |
 | HTML (`/`, `/work`, …) | `public, max-age=0, must-revalidate` | `DYNAMIC` (not cached) |
 | `/_next/static/immutable/chunks/*.css/js` | `public, max-age=31536000, immutable` | `HIT` |
+| `/fonts/google/*` (self-hosted Google Fonts, versioned names) | `public, max-age=31536000, immutable` (next.config.js) | cached |
 | `/work/*`, `/fonts/*` | `public, max-age=14400, stale-while-revalidate=604800` (next.config.js) | cached |
 | other `public/` files (`/pitches/*`, …) | `public, max-age=14400, must-revalidate` | `REVALIDATED` |
 
@@ -42,3 +43,26 @@ before diagnosing "the deploy didn't take" or adding cache headers.
   un-hashed `public/` paths `immutable`.
 - Cloudflare sits in front of Vercel: a purge on Vercel alone does not purge
   Cloudflare. With the rules above no purge should be needed.
+
+## Fonts
+
+- **Camingo Mono** (brand, local): all six faces are preloaded; Light and
+  ExtraLightItalic at low priority. `FontDisplayGate` keeps the page hidden
+  until the faces the page *uses* have loaded, plus the SemiBold face of every
+  style in use, because links turn SemiBold on hover (`a:hover, a.is-active`);
+  the first hover never shows a synthesized bold or a late swap. Cap: 1.5s
+  (JS timer and the CSS fail-safe), then fallback faces show and swap later.
+- **Inter** (pull quotes, 700 with the optical-size axis) and **Noto Serif
+  SC** (Chinese margin quotes, 400 and 600 for hover) are self-hosted,
+  byte-identical to Google's files: `scripts/fetch-google-fonts.mjs` writes
+  `public/fonts/google/` and `app/google-fonts.css` (imported by global.css).
+  Same origin, no render-blocking third-party stylesheet, unicode-range slices
+  kept, so a page downloads only the slices for its characters. Re-run the
+  script only to change the selection (keep its URL in sync with
+  `google-fonts-fallback.tsx`). next/font cannot request opsz with a single
+  weight, hence the script.
+- **Fallback:** if a self-hosted Inter/Noto face fails to load,
+  `GoogleFontsFallback` adds the original Google Fonts stylesheet (same family
+  names), never render-blocking. Verified by blocking `/fonts/google/*`.
+- Where a link is set in Inter or Noto Serif SC, the gate warms that family's
+  hover weight in the background after the reveal, for the page's characters.

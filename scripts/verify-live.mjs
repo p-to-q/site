@@ -14,6 +14,7 @@
  * - Every preview image and same-site file linked from Work answers 200.
  * - Work links open in a new tab; same-site files carry an aria-label.
  * - Cache headers: HTML is not cached; previews use stale-while-revalidate.
+ * - No render-blocking third-party font stylesheet (fonts are self-hosted).
  */
 import { createHash } from 'node:crypto'
 import { existsSync, readFileSync } from 'node:fs'
@@ -70,6 +71,10 @@ async function checkCss(failures, notes) {
 async function checkPage(failures) {
   const [{ res: workRes, text: work }, { text: home }] = await Promise.all([get('/work'), get('/')])
   if (!workRes.ok) return failures.push(`/work answered ${workRes.status}`)
+
+  for (const [name, html] of [['/', home], ['/work', work]]) {
+    if (/<link[^>]+fonts\.googleapis\.com/.test(html)) failures.push(`${name}: links a Google Fonts stylesheet (render-blocking)`)
+  }
 
   const cacheControl = workRes.headers.get('cache-control') ?? ''
   if (/max-age=(?!0\b)\d+/.test(cacheControl)) failures.push(`/work HTML is cacheable: ${cacheControl}`)
