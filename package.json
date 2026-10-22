@@ -4,7 +4,7 @@
   "scripts": {
     "clean": "rm -rf .next",
     "dev": "node scripts/build-work-previews.mjs && env -u NODE_PATH WATCHPACK_POLLING=true node ./node_modules/next/dist/bin/next dev",
-    "build": "node scripts/build-work-previews.mjs && env -u NODE_PATH node ./node_modules/next/dist/bin/next build",
+    "build": "node scripts/build-work-previews.mjs && node -e \"require('fs').rmSync('.next/cache',{recursive:true,force:true})\" && env -u NODE_PATH node ./node_modules/next/dist/bin/next build",
     "start": "env -u NODE_PATH node ./node_modules/next/dist/bin/next start",
     "previews": "node scripts/build-work-previews.mjs",
     "test": "vitest run",
