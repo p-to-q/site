@@ -10,7 +10,7 @@ describe('readImageSize', () => {
   it.each([
     ['flatus.png', 1612, 1532],
     ['sonde.gif', 640, 384],
-    ['matter-demo-poster.jpg', 1280, 720],
+    ['matter-demo-poster.jpg', 800, 640],
     ['wittgenstein.jpeg', 5963, 2159],
     ['ants.svg', 1200, 380], // width + viewBox only
     ['see-me-see-u-poster.svg', 851, 132],

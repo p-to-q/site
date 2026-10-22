@@ -62,9 +62,11 @@ update. Basenames must remain unique.
 - `see-me-see-u-poster.svg`: optimized, self-contained SEE-ME SEE-U title artwork
 - `matter-pitch.jpg`: high-quality web export of Matter's official
   [`slate-bone-master-1024.png`](https://github.com/p-to-q/matter/blob/main/features/matter/brand/assets/slate-bone-master-1024.png)
-- `matter-demo-poster.jpg`: frame extracted from `matter-demo.mp4` at ~12s,
-  1280x720 (kept at the previously deployed dimensions) so the hover preview
-  always matches the video
+- `matter-demo-poster.jpg`: supplied own artwork for the Matter demo
+  (2026-10-22), monochrome; 800x640 JPEG (q85, 55 KB) from a 1402x1122 PNG
+  master. It shows at most 207x166 CSS px, so 800px stays sharp up to 3x
+  displays; the 1200px default would add ~60 KB to every desktop preload for
+  no visible gain. It replaced a frame extracted from `matter-demo.mp4`
 - `murmur-pitch.jpg`: supplied Murmur title artwork
 - `aleph-benchmark.jpg`: Aleph benchmark interface
 - `liferestart-upstream.jpg`: original lifeRestart interface
