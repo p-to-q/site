@@ -49,10 +49,11 @@ function WorkItem({ children }: { children: ReactNode }) {
   )
 }
 
-function ArtifactLink({ project, artifact, preview }: {
+function ArtifactLink({ project, artifact, preview, previewScale }: {
   project: 'jiko' | 'matter' | 'murmur' | 'see-me-see-u' | 'wittgenstein'
   artifact: 'pitch' | 'poster'
   preview: string
+  previewScale?: number
 }) {
   const label = artifact === 'poster' ? 'POSTER' : 'PDF'
 
@@ -61,6 +62,7 @@ function ArtifactLink({ project, artifact, preview }: {
       href={encodeURI(`/pitches/${project}_[p→q]_hack_${artifact}.pdf`)}
       preview={preview}
       previewVariant={artifact === 'poster' ? 'banner' : 'standard'}
+      previewScale={previewScale}
       target="_blank"
       rel="noopener noreferrer"
       aria-label={`${project} [p→q] hackathon ${artifact} PDF`}
@@ -200,10 +202,15 @@ export default function WorkPage() {
             project="see-me-see-u"
             artifact="poster"
             preview={thumb('see-me-see-u-poster')}
+            previewScale={0.7}
           />
         </WorkItem>
         <WorkItem>
-          <WorkPreviewLink href="https://github.com/p-to-q/ants" preview={thumb('ants')}>
+          <WorkPreviewLink
+            href="https://github.com/p-to-q/ants"
+            preview={thumb('ants')}
+            previewScale={0.6}
+          >
             ants
           </WorkPreviewLink>
           {' - '}

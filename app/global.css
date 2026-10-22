@@ -1506,6 +1506,10 @@ html[data-theme='dark'] .forest-photo-carousel__caption {
   /* Vertical anchor: centred on the hovered row by default; the list-edge
      rules below pin it to the list top/bottom and switch this to 0 */
   --thumb-ty: -50%;
+  /* Unified per-link preview scaling (set inline by WorkPreviewLink).
+     Defaults to 1 (full size); a value < 1 shrinks the preview toward its
+     right edge, keeping it next to the link. One mechanism, no new variants. */
+  --preview-scale: 1;
   position: absolute;
   right: calc(100% + 2rem);
   top: 50%;
@@ -1513,7 +1517,8 @@ html[data-theme='dark'] .forest-photo-carousel__caption {
   border: 1px solid var(--site-code-border);
   background: var(--site-card-bg);
   opacity: 0;
-  transform: translateY(var(--thumb-ty)) translateX(0.5rem);
+  transform: translateY(var(--thumb-ty)) translateX(0.5rem) scale(var(--preview-scale, 1));
+  transform-origin: right center;
   transition: opacity 220ms ease, transform 220ms ease;
   pointer-events: none;
 }
@@ -1569,7 +1574,7 @@ html[data-theme='dark'] .forest-photo-carousel__caption {
 .work-preview-link:hover > .work-thumb,
 .work-preview-link:focus-visible > .work-thumb {
   opacity: 1;
-  transform: translateY(var(--thumb-ty)) translateX(0);
+  transform: translateY(var(--thumb-ty)) translateX(0) scale(var(--preview-scale, 1));
 }
 
 /* Pointer intent wins while present. This prevents a previously focused link
@@ -1577,7 +1582,7 @@ html[data-theme='dark'] .forest-photo-carousel__caption {
 .work-list:has(.work-preview-link:hover)
   .work-preview-link:focus-visible:not(:hover) > .work-thumb {
   opacity: 0;
-  transform: translateY(var(--thumb-ty)) translateX(0.5rem);
+  transform: translateY(var(--thumb-ty)) translateX(0.5rem) scale(var(--preview-scale, 1));
 }
 
 /* Left gutter only exists once the body centers (lg: mx-auto) */
