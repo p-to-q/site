@@ -6,7 +6,7 @@ type BioLanguage = 'en' | 'zh'
 
 /* The copy handoff runs on two beats: the old language fades out (leave), then
    the swap happens and the new language fades in (enter). These JS timings sit
-   ~20ms past the matching CSS durations (see global.css), so state never
+   ~20ms past the matching CSS durations (see alternative.css), so state never
    changes mid-paint: SWAP is leave(100) + cushion, SETTLE is swap + enter(160)
    + cushion. Tied to the CSS — change one, change both. */
 const SWAP_MS = 120
@@ -125,12 +125,11 @@ export function LanguageSwitch({ en, zh }: { en: ReactNode; zh: ReactNode }) {
         </button>
       </div>
 
-      {/* Inline grid layout is the cache-proof floor: this page must never
-          render both languages stacked, even if the stylesheet — or the site's
-          long-cached global chunk — arrives stale. The rules also live in
-          alternative.css, but an inline `display: grid` on the wrapper and
-          `grid-area`/`visibility` on each panel cannot be defeated by a cached
-          stylesheet, so EN/中 can never appear side by side again. */}
+      {/* Inline grid layout is a defensive floor: this page must never render
+          both languages at once, whatever state a stylesheet arrives in. The
+          rules also live in alternative.css; the inline `display: grid` on the
+          wrapper and `grid-area`/`visibility` on each panel keep the stack
+          intact even without it. */}
       <div
         className="commercial-bio-panels"
         style={{ display: 'grid' }}
