@@ -10,6 +10,14 @@ low_speed_time="${PUSH_LOW_SPEED_TIME:-30}"
 
 attempt=1
 
+# Run the pre-push check once up front: a failing check is not a network
+# problem, so it must stop here instead of being retried.
+if [ -z "${SKIP_PRE_PUSH:-}" ]; then
+  echo "[push-with-retry] npm run check"
+  npm run check || exit $?
+fi
+export SKIP_PRE_PUSH=1
+
 echo "Starting git push with auto-retry."
 echo "Retry delay: ${sleep_seconds}s | max attempts: ${max_attempts} | lowSpeedLimit=${low_speed_limit} | lowSpeedTime=${low_speed_time}s"
 echo "Stop anytime with Ctrl+C."

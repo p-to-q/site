@@ -12,7 +12,8 @@ before diagnosing "the deploy didn't take" or adding cache headers.
 | --- | --- | --- |
 | HTML (`/`, `/work`, …) | `public, max-age=0, must-revalidate` | `DYNAMIC` (not cached) |
 | `/_next/static/immutable/chunks/*.css/js` | `public, max-age=31536000, immutable` | `HIT` |
-| other `public/` files (`/work/*`, `/fonts/*`, `/pitches/*`) | `public, max-age=14400, must-revalidate` | `REVALIDATED` |
+| `/work/*`, `/fonts/*` | `public, max-age=14400, stale-while-revalidate=604800` (next.config.js) | cached |
+| other `public/` files (`/pitches/*`, …) | `public, max-age=14400, must-revalidate` | `REVALIDATED` |
 
 ## Rules of thumb
 
@@ -23,10 +24,16 @@ before diagnosing "the deploy didn't take" or adding cache headers.
   build cache (this is also what defd977 ran into). Since b3f4e6a,
   `npm run build` deletes `.next/cache` before `next build`, and the next
   deploy shipped the new chunk immediately. Keep that step.
-- **After a CSS change, verify the chunk, not just the page.** curl the page,
-  take the `.css` URL, and grep it for a rule you just added. If the name did
-  not change, the deploy compiled stale CSS; edge caches are not the cause,
-  because a new name is a new URL.
+- **Verify every deploy: `npm run verify:live -- --wait`.** It compares the
+  live stylesheet byte for byte with the local production build (the pre-push
+  hook just made one), and checks preloads, links, assets and cache headers
+  (`scripts/verify-live.mjs`). A CSS mismatch after the deploy finished means
+  a stale compile; edge caches are not the cause, because a new chunk name is
+  a new URL.
+- **Pushes are checked first.** `.githooks/pre-push` runs `npm run check`
+  (installed by `npm install` through the `prepare` script; skip once with
+  `git push --no-verify`). `npm run push:retry` runs the check once, then
+  retries only the network part.
 - **HTML is never cached at the edge**, so a deploy is visible on the next
   request.
 - **Files in `public/` keep their URL when replaced**, so they are only cached

@@ -50,6 +50,16 @@ const nextConfig = {
           { key: 'Permissions-Policy', value: 'camera=(), microphone=(), geolocation=()' },
         ],
       },
+      {
+        // Work previews and fonts keep their URL when replaced, so they are not
+        // immutable; but a returning visitor should never wait on revalidation:
+        // serve the cached copy at once and refresh it in the background.
+        // `:path+` (not `*`) so the /work page itself is never matched.
+        source: '/:dir(work|fonts)/:path+',
+        headers: [
+          { key: 'Cache-Control', value: 'public, max-age=14400, stale-while-revalidate=604800' },
+        ],
+      },
     ]
   },
   async redirects() {

@@ -54,6 +54,10 @@ npm run audit:production
 npm run check
 ```
 
+`npm ci` installs a pre-push hook that runs `npm run check` before every push
+(skip once with `git push --no-verify`). After a push to `main`, confirm the
+deploy with `npm run verify:live -- --wait` (see `docs/caching.md`).
+
 Production builds derive the public last-updated timestamp from Git without
 rewriting tracked source files. Set `SITE_LAST_UPDATED_ISO` only when a release
 needs an explicit ISO-8601 override.

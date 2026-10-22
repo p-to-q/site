@@ -1,0 +1,8 @@
+#!/bin/sh
+# Full check (tests, typecheck, production build) before every push, so CI
+# and Vercel never get a commit that fails locally.
+# Installed by `npm install` (package.json "prepare" sets core.hooksPath).
+# Skip once: git push --no-verify   (or SKIP_PRE_PUSH=1 git push)
+[ -n "${SKIP_PRE_PUSH:-}" ] && exit 0
+echo "[pre-push] npm run check (skip once with --no-verify)"
+exec npm run check
