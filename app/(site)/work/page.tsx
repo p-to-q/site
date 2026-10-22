@@ -202,14 +202,14 @@ export default function WorkPage() {
             project="see-me-see-u"
             artifact="poster"
             preview={thumb('see-me-see-u-poster')}
-            previewScale={0.7}
+            previewScale={0.85}
           />
         </WorkItem>
         <WorkItem>
           <WorkPreviewLink
             href="https://github.com/p-to-q/ants"
             preview={thumb('ants')}
-            previewScale={0.6}
+            previewScale={0.75}
           >
             ants
           </WorkPreviewLink>

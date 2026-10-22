@@ -1507,8 +1507,9 @@ html[data-theme='dark'] .forest-photo-carousel__caption {
      rules below pin it to the list top/bottom and switch this to 0 */
   --thumb-ty: -50%;
   /* Unified per-link preview scaling (set inline by WorkPreviewLink).
-     Defaults to 1 (full size); a value < 1 shrinks the preview toward its
-     right edge, keeping it next to the link. One mechanism, no new variants. */
+     Applied to the image's own box, so the thumb shrinks as a unit and the
+     existing centre/pin rules stay correct. One number per link, no new
+     variants, touches neither the artwork nor the size specs. */
   --preview-scale: 1;
   position: absolute;
   right: calc(100% + 2rem);
@@ -1517,8 +1518,7 @@ html[data-theme='dark'] .forest-photo-carousel__caption {
   border: 1px solid var(--site-code-border);
   background: var(--site-card-bg);
   opacity: 0;
-  transform: translateY(var(--thumb-ty)) translateX(0.5rem) scale(var(--preview-scale, 1));
-  transform-origin: right center;
+  transform: translateY(var(--thumb-ty)) translateX(0.5rem);
   transition: opacity 220ms ease, transform 220ms ease;
   pointer-events: none;
 }
@@ -1527,7 +1527,7 @@ html[data-theme='dark'] .forest-photo-carousel__caption {
    shrink-wraps this. max-width keeps a very wide image inside one gutter
    (content is max-w-2xl = 42rem, centred at ≥1024) on narrower desktops. */
 .work-thumb img {
-  height: var(--work-thumb-height);
+  height: calc(var(--work-thumb-height) * var(--preview-scale, 1));
   width: auto;
   max-width: calc((100vw - 42rem) / 2 - 2rem);
   object-fit: contain;
@@ -1541,7 +1541,7 @@ html[data-theme='dark'] .forest-photo-carousel__caption {
 }
 
 .work-thumb--banner img {
-  width: min(32rem, max(10rem, calc((100vw - 42rem) / 2 - 0.75rem)));
+  width: calc(min(32rem, max(10rem, calc((100vw - 42rem) / 2 - 0.75rem))) * var(--preview-scale, 1));
   height: auto;
   max-width: none;
 }
@@ -1574,7 +1574,7 @@ html[data-theme='dark'] .forest-photo-carousel__caption {
 .work-preview-link:hover > .work-thumb,
 .work-preview-link:focus-visible > .work-thumb {
   opacity: 1;
-  transform: translateY(var(--thumb-ty)) translateX(0) scale(var(--preview-scale, 1));
+  transform: translateY(var(--thumb-ty)) translateX(0);
 }
 
 /* Pointer intent wins while present. This prevents a previously focused link
@@ -1582,7 +1582,7 @@ html[data-theme='dark'] .forest-photo-carousel__caption {
 .work-list:has(.work-preview-link:hover)
   .work-preview-link:focus-visible:not(:hover) > .work-thumb {
   opacity: 0;
-  transform: translateY(var(--thumb-ty)) translateX(0.5rem) scale(var(--preview-scale, 1));
+  transform: translateY(var(--thumb-ty)) translateX(0.5rem);
 }
 
 /* Left gutter only exists once the body centers (lg: mx-auto) */
