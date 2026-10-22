@@ -1,8 +1,11 @@
 # Work preview assets
 
-The Work page keeps its text-only layout at rest. At desktop widths (≥1024px),
-hovering or keyboard-focusing a link reveals the image for that exact destination
-in the left gutter. Mobile and tablet layouts do not display these previews.
+The Work page keeps its text-only layout at rest. On desktops with a mouse or
+trackpad and a viewport of at least 66rem (1056px), hovering or keyboard-focusing
+a link reveals the image for that exact destination in the left gutter. Below
+66rem the gutter is too narrow for a useful preview (under 10rem wide), and touch
+screens cannot hover, so phones and tablets (including a landscape iPad) show no
+previews.
 
 ## Loading
 
@@ -16,9 +19,17 @@ without revisiting that decision.
 Desktop gets every preview as the original file, at full quality; nothing is
 resized or re-encoded. The transfer is spent only where previews exist:
 
-- **Desktop only.** Every preload carries `media="(min-width: 1024px)"`
-  (`WORK_PREVIEW_MEDIA` in `app/lib/work-previews.ts`, matching the CSS
-  breakpoint that shows `.work-thumb`). Phones and tablets download nothing.
+- **Only where previews show.** Every preload carries
+  `media="(min-width: 66rem) and (hover: hover) and (pointer: fine)"`
+  (`WORK_PREVIEW_MEDIA` in `app/lib/work-previews.ts`, identical to the CSS
+  media query that shows `.work-thumb`; a test enforces it). Phones and
+  tablets download nothing.
+- **Top first.** Previews are preloaded in on-page order, top to bottom, then
+  left to right (`WORK_PREVIEW_ORDER`), so the first rows are ready first and
+  the large GIFs further down do not hold them up. A test renders Work and
+  checks the list against the page; add a new preview to it in place.
+- **Returning visitors** get previews (and fonts) from cache at once:
+  `stale-while-revalidate` refreshes them in the background (`next.config.js`).
 - **Only images are previews.** `public/work` may also hold download artifacts
   (a project's `.mp4` demo video); those are never preloaded and never offered
   as previews. They are linked by path through `requireWorkFile()` (the build
@@ -76,6 +87,15 @@ thumb's real height (`--thumb-img-h`), so a five-row preview on an edge row
 sits flush with the list edge exactly as before, while a short banner on the
 same row stays centred on its own row instead of hanging beside another one.
 
+The room each row has is measured, not assumed: `WorkList`
+(`app/components/content/work-list.tsx`) writes every row's real distance to
+the list top and bottom (`--space-above/--space-below`) and keeps it current
+with a ResizeObserver, so a row that wraps to two lines (browser zoom, a larger
+default font, a fallback font, longer copy) does not push previews out of the
+list. Before hydration or without JS, the CSS falls back to counting rows.
+`WorkList` also hides a preview whose image fails to load, rather than showing
+an empty frame.
+
 ## Preview scaling
 
 `previewScale` on `WorkPreviewLink` multiplies the frame height (standard) or
@@ -100,5 +120,6 @@ the build). One number per link; no variants.
 - Do not change the visible Work copy or add cards, badges, or persistent imagery.
 
 Before publishing, verify at 1280px that every multi-link row changes image when
-moving focus between its links. Also verify that no preview appears below 1024px,
+moving focus between its links. Also verify that no preview appears below 66rem
+(1056px) or on a touch device,
 keyboard focus matches hover, and reduced-motion mode fades without translating.

@@ -6,11 +6,45 @@ import { readImageSize } from '@/lib/image-size'
 const WORK_PREVIEW_DIRECTORY = join(process.cwd(), 'public', 'work')
 
 /**
- * Previews only exist where the left gutter does (global.css shows
- * `.work-thumb` from 1024px). Preloads carry the same media query, so phones
- * and tablets never download artwork they cannot see.
+ * Where previews are shown, and therefore preloaded. Must match the
+ * `.work-thumb` media query in global.css (a test enforces it):
+ * - 66rem (1056px): one gutter is at least 12rem, so a standard preview is at
+ *   least 10rem wide; below that it would be a stamp-sized thumbnail;
+ * - hover + fine pointer: touch screens (phones, tablets, a landscape iPad
+ *   wider than 66rem) cannot hover, so they never show or download previews.
  */
-export const WORK_PREVIEW_MEDIA = '(min-width: 1024px)'
+export const WORK_PREVIEW_MEDIA = '(min-width: 66rem) and (hover: hover) and (pointer: fine)'
+
+/**
+ * Preload order: the order previews appear on Work, top to bottom, then left
+ * to right within a row, so the previews nearest the top are ready first.
+ * A test renders Work and checks this list against it. Previews missing from
+ * the list are still preloaded, after these.
+ */
+export const WORK_PREVIEW_ORDER = [
+  'wittgenstein',
+  'wittgenstein-pitch',
+  'sonde',
+  'autoclicker',
+  'flatus',
+  'carburetor',
+  'centrifuge-sort',
+  'aleph',
+  'aleph-benchmark',
+  'liferestart',
+  'liferestart-upstream',
+  'murmur',
+  'murmur-pitch',
+  'jiko',
+  'jiko-pitch',
+  'via',
+  'matter',
+  'matter-pitch',
+  'matter-demo-poster',
+  'see-me-see-u',
+  'see-me-see-u-poster',
+  'ants',
+] as const
 
 /**
  * Formats whose intrinsic size image-size.ts can read. public/work also holds
@@ -57,13 +91,23 @@ function discoverWorkPreviews() {
 
 const workPreviews = discoverWorkPreviews()
 
+const rank = (basename: string) => {
+  const index = (WORK_PREVIEW_ORDER as readonly string[]).indexOf(basename)
+  return index === -1 ? WORK_PREVIEW_ORDER.length : index
+}
+
+/** Served URLs in preload order (see WORK_PREVIEW_ORDER). */
+const preloadQueue = [...workPreviews.entries()]
+  .sort(([a], [b]) => rank(a) - rank(b) || a.localeCompare(b))
+  .map(([, preview]) => preview.src)
+
 /**
  * Warms every preview at low priority (desktop only) so the first hover never
  * waits on the network. Called from both the home page and Work: home warms
  * the cache before the client-side navigation, Work covers direct visits.
  */
 export function preloadWorkPreviews() {
-  for (const { src } of workPreviews.values()) {
+  for (const src of preloadQueue) {
     preload(src, {
       as: 'image',
       fetchPriority: 'low',

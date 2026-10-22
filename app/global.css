@@ -10,7 +10,7 @@
 
 .font-gate-pending {
   visibility: hidden;
-  animation: font-gate-failsafe 0s linear 2500ms forwards;
+  animation: font-gate-failsafe 0s linear 1500ms forwards; /* = REVEAL_TIMEOUT_MS */
 }
 
 @theme {
@@ -1504,13 +1504,17 @@ html[data-theme='dark'] .forest-photo-carousel__caption {
    - Place: the thumb is centred on its row, then clamped so it never spills
      past the first or last project. The clamp uses the thumb's real height,
      so short (banner/scaled) previews stay centred where a five-row preview
-     would be pinned, and pinned previews sit flush with the list edge. */
+     would be pinned, and pinned previews sit flush with the list edge.
+   - Room: WorkList (work-list.tsx) measures each row's real distance to the
+     list top/bottom (--space-above/--space-below), so rows that wrap to two
+     lines (zoom, larger default font, longer copy) stay exact. Without JS the
+     clamp falls back to counting rows (--rows-above/--rows-below). */
 .work-row {
   position: relative;
-  /* Rows of room above/below this row inside the list, for the clamp. Only
-     the first and last three rows can be limited by the list edge (a preview
-     up to 1.4x, which WorkPreviewLink enforces, reaches at most three rows
-     beyond its own), so every other row is effectively unbounded. */
+  /* Fallback room, in rows. Only the first and last three rows can be
+     limited by the list edge (a preview up to 1.4x, which WorkPreviewLink
+     enforces, reaches at most three rows beyond its own), so every other row
+     is effectively unbounded. */
   --rows-above: 99;
   --rows-below: 99;
 }
@@ -1537,9 +1541,12 @@ html[data-theme='dark'] .forest-photo-carousel__caption {
   right: calc(100% + 2rem);
   /* clamp(list top, centred on this row, list bottom); 100% = row height */
   top: clamp(
-    calc(-1 * var(--rows-above) * var(--work-row-step)),
+    calc(-1 * var(--space-above, calc(var(--rows-above) * var(--work-row-step)))),
     calc((100% - var(--thumb-img-h)) / 2 - 1px),
-    calc(100% + var(--rows-below) * var(--work-row-step) - var(--thumb-img-h) - 2px)
+    calc(
+      100% + var(--space-below, calc(var(--rows-below) * var(--work-row-step)))
+        - var(--thumb-img-h) - 2px
+    )
   );
   display: none;
   border: 1px solid var(--site-code-border);
@@ -1590,12 +1597,17 @@ html[data-theme='dark'] .forest-photo-carousel__caption {
   transform: translateX(0.5rem);
 }
 
-/* Left gutter only exists once the body centers (lg: mx-auto). Keep in sync
-   with WORK_PREVIEW_MEDIA in app/lib/work-previews.ts (preload media query). */
-@media (min-width: 1024px) {
+/* Shown only with a usable gutter and a real hover (see WORK_PREVIEW_MEDIA
+   in app/lib/work-previews.ts, which must stay identical; a test checks). */
+@media (min-width: 66rem) and (hover: hover) and (pointer: fine) {
   .work-thumb {
     display: block;
   }
+}
+
+/* An image that failed to load (WorkList marks it) never shows an empty frame. */
+.work-thumb[data-broken] {
+  display: none;
 }
 
 @media (prefers-reduced-motion: reduce) {

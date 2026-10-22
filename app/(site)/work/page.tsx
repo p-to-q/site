@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import type { ReactNode } from 'react'
+import { WorkList } from '@/components/content/work-list'
 import { WorkPreviewLink } from '@/components/content/work-preview-link'
 import { SiteStickyQedPage } from '@/components/layout/site-sticky-qed-page'
 import {
@@ -116,7 +117,7 @@ export default function WorkPage() {
   return (
     <SiteStickyQedPage>
       <h1 className="sr-only">Work</h1>
-      <section className="work-list flex flex-col gap-3">
+      <WorkList>
         <WorkItem>
           <WorkPreviewLink href="https://www.wittgenstein.wtf/" preview={thumb('wittgenstein')}>
             wittgenstein
@@ -250,7 +251,7 @@ export default function WorkPage() {
           {' - '}
           cheap autonomous research loop
         </WorkItem>
-      </section>
+      </WorkList>
     </SiteStickyQedPage>
   )
 }

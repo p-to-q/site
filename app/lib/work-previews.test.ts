@@ -5,7 +5,8 @@ import { beforeEach, describe, expect, it, vi } from 'vitest'
 const { preload } = vi.hoisted(() => ({ preload: vi.fn() }))
 vi.mock('react-dom', () => ({ preload }))
 
-const { getWorkPreviewMap, preloadWorkPreviews, requireWorkFile, WORK_PREVIEW_MEDIA } = await import(
+const { getWorkPreviewMap, preloadWorkPreviews, requireWorkFile, WORK_PREVIEW_MEDIA, WORK_PREVIEW_ORDER } =
+  await import(
   '@/lib/work-previews'
 )
 
@@ -40,7 +41,18 @@ describe('work previews', () => {
       expect(href).not.toMatch(/\.mp4$/i)
       expect(options).toEqual({ as: 'image', fetchPriority: 'low', media: WORK_PREVIEW_MEDIA })
     }
-    expect(WORK_PREVIEW_MEDIA).toBe('(min-width: 1024px)')
+    // Desktop with a real pointer only: touch screens cannot hover.
+    expect(WORK_PREVIEW_MEDIA).toMatch(/min-width/)
+    expect(WORK_PREVIEW_MEDIA).toMatch(/\(hover: hover\)/)
+    expect(WORK_PREVIEW_MEDIA).toMatch(/\(pointer: fine\)/)
+  })
+
+  it('preloads in on-page order, top to bottom', () => {
+    preloadWorkPreviews()
+    const map = getWorkPreviewMap()
+    expect(preload.mock.calls.map(([href]) => href)).toEqual(
+      WORK_PREVIEW_ORDER.map((basename) => map[basename].src)
+    )
   })
 
   it('resolves non-preview files by path and fails loudly when missing', () => {
