@@ -34,6 +34,9 @@ update. Basenames must remain unique.
 - `see-me-see-u-poster.svg`: optimized, self-contained SEE-ME SEE-U title artwork
 - `matter-pitch.jpg`: high-quality web export of Matter's official
   [`slate-bone-master-1024.png`](https://github.com/p-to-q/matter/blob/main/features/matter/brand/assets/slate-bone-master-1024.png)
+- `matter-demo-poster.jpg`: poster frame for Matter's demo video
+  (`matter-demo.mp4`, 1280x720 h264, fetched from
+  `public/matter-ui/shadows-loop.mp4` in the matter repository)
 - `murmur-pitch.jpg`: supplied Murmur title artwork
 - `aleph-benchmark.jpg`: Aleph benchmark interface
 - `liferestart-upstream.jpg`: original lifeRestart interface

@@ -185,6 +185,10 @@ export default function WorkPage() {
           {' - '}
           make thought matter (as a BCI){' '}
           <ArtifactLink project="matter" artifact="pitch" preview={thumb('matter-pitch')} />
+          {' '}
+          <WorkPreviewLink href="/work/matter-demo.mp4" preview={thumb('matter-demo-poster')}>
+            [DEMO]
+          </WorkPreviewLink>
         </WorkItem>
         <WorkItem>
           <WorkPreviewLink href="https://useeme.ptoq.io/" preview={thumb('see-me-see-u')}>
