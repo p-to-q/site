@@ -2,7 +2,10 @@
 
 import { useLayoutEffect, useRef } from 'react'
 
-const REVEAL_TIMEOUT_MS = 2_500
+/** Worst case before revealing with fallback faces; matches .font-gate-pending in global.css. */
+const REVEAL_TIMEOUT_MS = 1_500
+const BRAND_FAMILY = 'CamingoMono'
+/** Used only when the browser cannot report which faces the page uses. */
 const BRAND_FONT_PROBES = [
   ['400 1em CamingoMono', '[p→q] Aa'],
   ['300 1em CamingoMono', '[p→q] Aa'],
@@ -13,9 +16,13 @@ const BRAND_FONT_PROBES = [
 ] as const
 
 /**
- * Preserves the site's original all-at-once reveal while warming the complete local
- * Camingo Mono family. The matching CSS class independently reveals at 2.5s, so a
- * failed font request or hydration never leaves the page blank.
+ * Preserves the site's all-at-once reveal (no flash of fallback text) while
+ * waiting only for the Camingo Mono faces this page actually uses: after a
+ * forced layout, the browser has started loading exactly those faces, so a
+ * page set in Regular does not wait for Bold or the italics. Faces already in
+ * cache reveal on the next frame. The matching CSS class independently
+ * reveals at 1.5s, so a slow or failed font request or hydration never leaves
+ * the page blank for long.
  */
 export function FontDisplayGate({ children }: { children: React.ReactNode }) {
   const rootRef = useRef<HTMLDivElement>(null)
@@ -45,9 +52,19 @@ export function FontDisplayGate({ children }: { children: React.ReactNode }) {
     timer = window.setTimeout(reveal, REVEAL_TIMEOUT_MS)
 
     if (document.fonts?.load) {
-      void Promise.all(
-        BRAND_FONT_PROBES.map(([font, text]) => document.fonts.load(font, text))
-      ).then(revealAfterPaint, reveal)
+      // Style + layout of the (hidden) page starts the loads of the faces it uses.
+      el.getBoundingClientRect()
+      const inUse: FontFace[] = []
+      document.fonts.forEach((face) => {
+        const family = face.family.replace(/["']/g, '')
+        if (family === BRAND_FAMILY && (face.status === 'loading' || face.status === 'loaded')) {
+          inUse.push(face)
+        }
+      })
+      const ready = inUse.length
+        ? Promise.all(inUse.map((face) => face.loaded))
+        : Promise.all(BRAND_FONT_PROBES.map(([font, text]) => document.fonts.load(font, text)))
+      void ready.then(revealAfterPaint, reveal)
     } else {
       window.clearTimeout(timer)
       reveal()
