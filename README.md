@@ -41,6 +41,10 @@ Install dependencies:
 npm ci
 ```
 
+`npm ci` (not `npm install`) also keeps `node_modules` identical to CI and the
+deployment: a stale local install silently verifies a different framework
+version than the one that ships.
+
 Run locally:
 
 ```bash
