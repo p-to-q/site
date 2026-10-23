@@ -43,7 +43,10 @@ npm ci
 
 `npm ci` (not `npm install`) also keeps `node_modules` identical to CI and the
 deployment: a stale local install silently verifies a different framework
-version than the one that ships.
+version than the one that ships. `npm run check` starts with
+`scripts/check-install.mjs`, which fails (naming the package and telling you to
+run `npm ci`) when `node_modules`, `package-lock.json` and `package.json`
+disagree, so drift cannot reach a commit.
 
 Run locally:
 

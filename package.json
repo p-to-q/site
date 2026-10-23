@@ -8,7 +8,7 @@
     "start": "env -u NODE_PATH node ./node_modules/next/dist/bin/next start",
     "test": "vitest run",
     "typecheck": "tsc --noEmit",
-    "check": "npm test && npm run typecheck && npm run build",
+    "check": "node scripts/check-install.mjs && npm test && npm run typecheck && npm run build",
     "audit:production": "npm audit --omit=dev --audit-level=high",
     "push:retry": "./scripts/push-with-retry.sh",
     "verify:live": "node scripts/verify-live.mjs",
