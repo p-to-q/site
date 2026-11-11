@@ -119,6 +119,11 @@ export function ForestPhotoCarousel() {
     return () => container.removeEventListener('scroll', syncScroll)
   }, [])
 
+  // 播放线捕获（按旧机制恢复，并做加固）：纵向滚动经过相框时，先把照片
+  // 播完，页面再继续。监听挂在 window 的 capture 阶段，指针在页面任何位
+  // 置都能触发——这是 8816a05 之前的行为；那次把监听改挂到相框元素上，
+  // 结果正常阅读（指针在正文上）时相框永远不触发。这里保留 body 锁定
+  // 的同时，加上了缩放/原生横向手势豁免与边界重入保护。
   useEffect(() => {
     const carousel = carouselRef.current
     const container = scrollContainerRef.current
@@ -126,33 +131,113 @@ export function ForestPhotoCarousel() {
 
     const edgeTolerance = 3
     const playbackSpeed = 1.15
+    let isPlaying = false
+    let lockedScrollY: number | null = null
+    let previousBodyPosition = ''
+    let previousBodyTop = ''
+    let previousBodyLeft = ''
+    let previousBodyRight = ''
+    let previousBodyWidth = ''
+    let previousBodyPaddingRight = ''
+    let previousHtmlOverscrollBehavior = ''
+
+    const lockPage = () => {
+      if (lockedScrollY !== null) return
+
+      const body = document.body
+      const html = document.documentElement
+      const scrollbarWidth = window.innerWidth - html.clientWidth
+
+      lockedScrollY = window.scrollY
+      previousBodyPosition = body.style.position
+      previousBodyTop = body.style.top
+      previousBodyLeft = body.style.left
+      previousBodyRight = body.style.right
+      previousBodyWidth = body.style.width
+      previousBodyPaddingRight = body.style.paddingRight
+      previousHtmlOverscrollBehavior = html.style.overscrollBehavior
+
+      html.style.overscrollBehavior = 'none'
+      body.style.position = 'fixed'
+      body.style.top = `-${lockedScrollY}px`
+      body.style.left = '0'
+      body.style.right = '0'
+      body.style.width = '100%'
+      if (scrollbarWidth > 0) {
+        body.style.paddingRight = `${scrollbarWidth}px`
+      }
+    }
+
+    const unlockPage = () => {
+      if (lockedScrollY === null) return
+
+      const body = document.body
+      const html = document.documentElement
+      const scrollY = lockedScrollY
+
+      body.style.position = previousBodyPosition
+      body.style.top = previousBodyTop
+      body.style.left = previousBodyLeft
+      body.style.right = previousBodyRight
+      body.style.width = previousBodyWidth
+      body.style.paddingRight = previousBodyPaddingRight
+      html.style.overscrollBehavior = previousHtmlOverscrollBehavior
+
+      lockedScrollY = null
+      window.scrollTo(0, scrollY)
+    }
 
     const handleWheel = (e: WheelEvent) => {
-      // Browser zoom and native horizontal gestures always keep their defaults.
+      // 浏览器缩放和原生横向手势永远保持默认行为。
       if (e.ctrlKey || e.metaKey || Math.abs(e.deltaX) >= Math.abs(e.deltaY)) return
 
+      const rect = carousel.getBoundingClientRect()
+      const vh = window.innerHeight
       const max = container.scrollWidth - container.clientWidth
+
       if (max <= edgeTolerance) return
 
       const current = container.scrollLeft
       const isScrollingDown = e.deltaY > 0
       const isScrollingUp = e.deltaY < 0
+      const playbackLine = vh * 0.49
       const atStart = current <= edgeTolerance
       const atEnd = current >= max - edgeTolerance
 
+      const willCrossLineDown =
+        isScrollingDown && rect.top > playbackLine && rect.top - e.deltaY <= playbackLine && rect.bottom > playbackLine
+      const willCrossLineUp =
+        isScrollingUp && rect.top < playbackLine && rect.top - e.deltaY >= playbackLine && rect.bottom > playbackLine
+      const isPastLineDown =
+        isScrollingDown && rect.top <= playbackLine && rect.bottom > playbackLine
+      const isPastLineUp =
+        isScrollingUp && rect.top >= playbackLine && rect.top < vh && rect.bottom > playbackLine
+      const shouldStartPlaying = willCrossLineDown || willCrossLineUp || isPastLineDown || isPastLineUp
+
+      if (!isPlaying && !shouldStartPlaying) return
+
+      // 播到头/尾后解锁，滚动惯性自然交给页面，继续向后。
       if ((isScrollingDown && atEnd) || (isScrollingUp && atStart)) {
+        isPlaying = false
+        unlockPage()
         return
       }
 
       e.preventDefault()
+
+      if (!isPlaying) {
+        isPlaying = true
+        lockPage()
+        return
+      }
+
       container.scrollLeft = Math.max(0, Math.min(max, current + e.deltaY * playbackSpeed))
     }
 
-    // Scope wheel translation to the carousel itself. The page is never fixed,
-    // and scrolling naturally returns to the article at either edge.
-    carousel.addEventListener('wheel', handleWheel, { passive: false })
+    window.addEventListener('wheel', handleWheel, { passive: false, capture: true })
     return () => {
-      carousel.removeEventListener('wheel', handleWheel)
+      unlockPage()
+      window.removeEventListener('wheel', handleWheel, { capture: true })
     }
   }, [])
 
@@ -251,7 +336,8 @@ export function ForestPhotoCarousel() {
               width={1800}
               height={815}
               className="forest-photo-carousel__image"
-              priority={index === 0}
+              priority={index < 3}
+              loading="eager"
               sizes="(max-width: 639px) 300px, (max-width: 1199px) 400px, 440px"
               quality={85}
             />
